@@ -1,5 +1,5 @@
 const express = require('express');
-
+const path = require('path');
 //express app
 const app = express();
 
@@ -8,7 +8,7 @@ app.set('view engine', 'ejs');
 
 // middleware & static files
 app.use(express.static('public'));
-app.use("/public", express.static('public'))
+app.use('/public', express.static('public'));
 
 //listen for requests
 app.listen(3000);
@@ -27,7 +27,7 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/courses-single', (req, res) => {
-    res.render('course-single');
+    res.render('courses-single');
 });
 
 app.get('/forget', (req, res) => {
