@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+
 //express app
 const app = express();
 
@@ -9,7 +10,6 @@ app.set('view engine', 'ejs');
 // middleware & static files
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use('/public', express.static('public'));
 
 //listen for requests
 app.listen(3000);
