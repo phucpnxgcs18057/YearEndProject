@@ -5,11 +5,13 @@ const path = require('path');
 const app = express();
 
 //register view engine
+app.set("views", path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
 
 // middleware & static files
 app.use(express.static('public'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/css', express.static(__dirname + 'public/css'))
+app.use('/js', express.static(__dirname + 'public/js'))
 
 //listen for requests
 app.listen(3000);
