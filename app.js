@@ -1,20 +1,54 @@
 const express = require('express');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
 const path = require('path');
+const Resource = require('./models/resource');
 
 //express app
 const app = express();
+
+//connect to mongodb
+const dbURI = 'mongodb+srv://admin:test123456@projectcluster.g4aec.mongodb.net/project?retryWrites=true&w=majority';
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then((result) => app.listen(3000))
+    .catch((err) => console.log(err));
 
 //register view engine
 app.set("views", path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
 
 // middleware & static files
+app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/js', express.static(__dirname + 'public/js'))
 
-//listen for requests
-app.listen(3000);
+//mongoose and mongo sandbox routes
+app.get('/add-resource', (req,res) => {
+    const resource = new Resource({
+        ResourceName: 'Test Resource 2',
+        ResourceContent: 'This is the content of the test resource!',
+        ResourceType: 'Document'
+    });
+
+    resource.save()
+     .then((result) => {
+        res.send(result)
+     })
+     .catch((err) => {
+         console.log(err);
+     });
+});
+
+app.get('/all-resources', (req,res) => {
+    Resource.find()
+     .then((result) => {
+         res.send(result);
+     })
+     .catch((err) => {
+        console.log(err);
+    });
+})
 
 //routing
 app.get('/', (req, res) => {
