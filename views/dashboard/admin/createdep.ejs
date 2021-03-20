@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en"
+      dir="ltr">
+
+    <head>
+        <%- include("../partials/head.ejs") %>
+    </head>
+
+    <body class="layout-compact layout-compact">
+
+        <div class="preloader">
+            <div class="sk-chase">
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+            </div>
+        </div>
+
+        <!-- Drawer Layout -->
+
+        <div class="mdk-drawer-layout js-mdk-drawer-layout"
+             data-push
+             data-responsive-width="992px">
+            <div class="mdk-drawer-layout__content page-content">
+
+                <!-- Header -->
+
+                <!-- Navbar -->
+
+                <%- include("../partials/modulars/navbar.ejs") %>
+
+                <!-- // END Navbar -->
+
+                <!-- // END Header -->
+
+                <div class="pt-32pt">
+                    <div class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left">
+                        <div class="flex d-flex flex-column flex-sm-row align-items-center">
+
+                            <div class="mb-24pt mb-sm-0 mr-sm-24pt">
+                                <h2 class="mb-0">Create a New Department</h2>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- BEFORE Page Content -->
+
+                <!-- // END BEFORE Page Content -->
+
+                <!-- Page Content -->
+
+                <div class="container page__container page-section">
+
+                    <div class="row mb-32pt">
+
+                        <div class= "col-lg-8 d-flex align-items-center"> 
+
+                            <div class="flex" style="max-width: 100%">
+
+                                <div class="was-validated">
+
+                                    <div class="form-group">
+
+                                        <label class="form-label"
+                                               for="exampleInputPassword1">Department Name</label>
+
+                                        <input type="text"
+                                                   class="form-control"
+                                                   id="validationSample03"
+                                                   placeholder="Name"
+                                                   required="">
+
+                                            <div class="invalid-feedback">Please provide a valid name.</div>
+
+                                            <div class="valid-feedback">Looks good!</div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label class="form-label"
+                                               for="exampleInputPassword1">Assign to a School</label>
+
+                                        <input type="text"
+                                                   class="form-control"
+                                                   id="validationSample03"
+                                                   placeholder="School"
+                                                   required="">
+
+                                            <div class="invalid-feedback">Please provide a valid School.</div>
+
+                                            <div class="valid-feedback">Looks good!</div>
+                                    </div>
+                                    
+                                </div>
+
+                                
+
+                                <button class="btn btn-primary" type="submit">Submit</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- // END Page Content -->
+
+                <!-- Footer -->
+
+                <%- include("../partials/footer.ejs") %>
+
+
+                <!-- // END Footer -->
+
+            </div>
+
+            <!-- // END drawer-layout__content -->
+
+            <!-- drawer -->
+
+            <div class="mdk-drawer js-mdk-drawer layout-compact__drawer"
+                 id="default-drawer">
+                <div class="mdk-drawer__content js-sidebar-mini"
+                     data-responsive-width="992px"
+                     data-layout="compact">
+
+                     <%- include("../partials/modulars/rnav.ejs") %>
+                     
+                     <%- include("../partials/modulars/rnavsec.ejs") %>
+
+                </div>
+            </div>
+
+            <!-- // END drawer -->
+
+        </div>
+
+        <!-- // END Drawer Layout -->
+
+        <!-- Dashboard js start here -->
+
+        <%- include("../partials/dsjs.ejs") %>
+
+        <!-- Dashboard js end here -->
+
+    </body>
+
+</html>

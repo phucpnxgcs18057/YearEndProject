@@ -14,8 +14,16 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .catch((err) => console.log(err));
 
 //register view engine
-app.set("views", path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
+app.set('views', 
+    [   __dirname + '/views/dashboard/admin',  
+        __dirname + '/views/dashboard/mod',
+        __dirname + '/views/dashboard/student',
+        __dirname + '/views/dashboard/tutor',
+        __dirname + '/views/frontend',
+    ]
+);
+
 
 // middleware & static files
 app.use(morgan('dev'));
@@ -81,6 +89,18 @@ app.get('/resources', (req, res) => {
 
 app.get('/signup', (req, res) => {
     res.render('signup');
+});
+
+app.get('/admin', (req, res) => {
+    res.render('createuser');
+});
+
+app.get('/admin-1', (req, res) => {
+    res.render('viewdonation');
+});
+
+app.get('/student', (req, res) => {
+    res.render('studentindex');
 });
 
 //404 page

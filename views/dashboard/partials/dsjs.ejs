@@ -1,0 +1,111 @@
+ <!-- jQuery -->
+ <script src="../dashboard/vendor/jquery.min.js"></script>
+
+ <!-- Bootstrap -->
+ <script src="../dashboard/vendor/popper.min.js"></script>
+ <script src="../dashboard/vendor/bootstrap.min.js"></script>
+
+ <!-- Perfect Scrollbar -->
+ <script src="../dashboard/vendor/perfect-scrollbar.min.js"></script>
+
+ <!-- DOM Factory -->
+ <script src="../dashboard/vendor/dom-factory.js"></script>
+
+ <!-- MDK -->
+ <script src="../dashboard/vendor/material-design-kit.js"></script>
+
+ <!-- App JS -->
+ <script src="../dashboard/js/app.js"></script>
+
+ <!-- Preloader -->
+ <script src="../dashboard/js/preloader.js"></script>
+
+ <!-- UI Icons Page JS -->
+ <script src="../dashboard/js/app-icons.js"></script>
+
+ <!-- Global Settings -->
+ <script src="../dashboard/js/settings.js"></script>
+
+ <!-- Moment.js -->
+ <script src="../dashboard/vendor/moment.min.js"></script>
+ <script src="../dashboard/vendor/moment-range.js"></script>
+
+ <!-- Chart.js -->
+ <script src="../dashboard/vendor/Chart.min.js"></script>
+ <script src="../dashboard/js/chartjs.js"></script>
+ <script src="../dashboard/js/chartjs-rounded-bar.js"></script>
+
+ <!-- UI Charts Page JS -->
+ <script src="../dashboard/js/chartjs-rounded-bar.js"></script>
+ <script src="../dashboard/js/chartjs.js"></script>
+ 
+ <!-- Chart.js Samples -->
+ <script src="../dashboard/js/page.analytics-2-dashboard.js"></script>
+
+ <!-- DateRangePicker -->
+ <script src="../dashboard/vendor/moment.min.js"></script>
+ <script src="../dashboard/vendor/daterangepicker.js"></script>
+ <script src="../dashboard/js/daterangepicker.js"></script>
+
+ <!-- Dragula -->
+ <script src="../dashboard/vendor/dragula/dragula.min.js"></script>
+
+ <!-- Drag & Drop Page -->
+ <script src="../dashboard/js/dragula.js"></script>
+
+ <!-- Dropzone -->
+ <script src="../dashboard/vendor/dropzone.min.js"></script>
+ <script src="../dashboard/js/dropzone.js"></script>
+
+ <!-- Flatpickr -->
+ <script src="../dashboard/vendor/flatpickr/flatpickr.min.js"></script>
+ <script src="../dashboard/js/flatpickr.js"></script>
+
+ <!-- Highlight.js -->
+ <script src="../dashboard/js/hljs.js"></script>
+
+ <!-- List.js -->
+ <script src="../dashboard/vendor/list.min.js"></script>
+ <script src="../dashboard/js/list.js"></script>
+
+ <!-- Tables -->
+ <script src="../dashboard/js/toggle-check-all.js"></script>
+ <script src="../dashboard/js/check-selected-row.js"></script>
+
+ <!-- TREE JS -->
+ <script src="https://cdn.jsdelivr.net/jquery.ui/1.11.4/jquery-ui.min.js"></script>
+ <script src="../dashboard/vendor/jquery.fancytree-all.min.js"></script>
+
+ <!-- Initialize tree -->
+ <script src="../dashboard/js/fancytree.js"></script>
+
+ <!-- Vendor JS -->
+ <script src="../dashboard/vendor/jquery.nestable.js"></script>
+
+ <!-- Initialize -->
+ <script src="../dashboard/js/nestable.js"></script>
+
+ <!-- Quill -->
+ <script src="../dashboard/vendor/quill.min.js"></script>
+ <script src="../dashboard/js/quill.js"></script>
+
+ <!-- Range Slider -->
+ <script src=".../dashboard/vendor/ion.rangeSlider.min.js"></script>
+ <script src="../dashboard/js/ion-rangeslider.js"></script>
+
+ <!-- Sidebar Mini JS -->
+ <script src="../dashboard/js/sidebar-mini.js"></script>
+ <script>
+     (function() {
+         'use strict';
+         // ENABLE sidebar menu tabs
+         $('.js-sidebar-mini-tabs [data-toggle="tab"]').on('click', function(e) {
+             e.preventDefault()
+             $(this).tab('show')
+         })
+         $('.js-sidebar-mini-tabs').on('show.bs.tab', function(e) {
+             $('.js-sidebar-mini-tabs > .active').removeClass('active')
+             $(e.target).parent().addClass('active')
+         })
+     })()
+ </script>
