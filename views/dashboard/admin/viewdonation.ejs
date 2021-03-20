@@ -56,13 +56,27 @@
 
                 <div class="container page__container page-section">
 
-                    <div class="row mb-32pt">
+                    <!-- User table -->
+                    <div class="page-separator">
+                        <div class="page-separator__text">Users</div>
+                    </div>
 
-                        <div class= "col-lg-8 d-flex align-items-center"> 
+                    <div class="card mb-lg-32pt">
 
-                            <div class="flex" style="max-width: 100%">
+                        <!-- Table Content -->
 
-                                <button class="btn btn-primary" type="submit">Submit</button>
+                        <%- include("../partials/modulars/table/donation.ejs") %>
+
+                        <!-- // END Table Content -->
+                        
+                        <!-- Table footer -->
+
+                        <%- include("../partials/modulars/table/footer.ejs") %>
+                        
+                        <!-- // END Table Footer -->
+
+                    </div>
+                    <!-- // END User table --> 
 
                             </div>
 
