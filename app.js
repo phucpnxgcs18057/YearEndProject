@@ -15,12 +15,12 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 //register view engine
 app.set('view engine', 'ejs');
-app.set('views', 
-    [   __dirname + '/views/dashboard/admin',  
-        __dirname + '/views/dashboard/mod',
-        __dirname + '/views/dashboard/student',
-        __dirname + '/views/dashboard/tutor',
-        __dirname + '/views/frontend',
+app.set('views',
+    [__dirname + '/views/dashboard/admin',
+    __dirname + '/views/dashboard/mod',
+    __dirname + '/views/dashboard/student',
+    __dirname + '/views/dashboard/tutor',
+    __dirname + '/views/frontend',
     ]
 );
 
@@ -32,7 +32,7 @@ app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/js', express.static(__dirname + 'public/js'))
 
 //mongoose and mongo sandbox routes
-app.get('/add-resource', (req,res) => {
+app.get('/add-resource', (req, res) => {
     const resource = new Resource({
         ResourceName: 'Test Resource 2',
         ResourceContent: 'This is the content of the test resource!',
@@ -40,22 +40,22 @@ app.get('/add-resource', (req,res) => {
     });
 
     resource.save()
-     .then((result) => {
-        res.send(result)
-     })
-     .catch((err) => {
-         console.log(err);
-     });
+        .then((result) => {
+            res.send(result)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
-app.get('/all-resources', (req,res) => {
+app.get('/all-resources', (req, res) => {
     Resource.find()
-     .then((result) => {
-         res.send(result);
-     })
-     .catch((err) => {
-        console.log(err);
-    });
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 })
 
 //routing
@@ -91,17 +91,17 @@ app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-app.get('/admin', (req, res) => {
-    res.render('createuser');
-});
+// app.get('/school', (req, res) => {
+//     res.render('create');
+// });
 
-app.get('/admin-1', (req, res) => {
-    res.render('viewdonation');
-});
+// app.get('/school-1', (req, res) => {
+//     res.render('edit');
+// });
 
-app.get('/student', (req, res) => {
-    res.render('studentindex');
-});
+// app.get('/school-2', (req, res) => {
+//     res.render('view');
+// });
 
 //404 page
 app.use((req, res) => {

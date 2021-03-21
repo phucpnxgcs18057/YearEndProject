@@ -18,10 +18,19 @@
   },
   "homepage": "https://github.com/phucpnxgcs18057/YearEndProject#readme",
   "dependencies": {
+    "bootstrap": "^4.6.0",
+    "dom-factory": "^1.1.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "fm-plugin-chartjs": "^1.4.0",
+    "fm-plugin-ion-rangeslider": "^1.0.0",
+    "fm-plugin-listjs": "^1.0.2",
+    "fm-plugin-quill": "^1.0.1",
+    "fm-plugin-select2": "^1.1.1",
+    "jquerry": "^0.0.1-security",
     "lodash": "^4.17.21",
     "mongoose": "^5.12.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "popper": "^1.0.1"
   }
 }

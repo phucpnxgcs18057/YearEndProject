@@ -41,7 +41,7 @@
                         <div class="flex d-flex flex-column flex-sm-row align-items-center">
 
                             <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                                <h2 class="mb-0">Create a New User</h2>
+                                <h2 class="mb-0">Edit the User</h2>
                             </div>
                         </div>
 
@@ -67,11 +67,12 @@
                                     <div class="form-group">
 
                                         <label class="form-label"
-                                                for="validationSample01">Username</label>
+                                                for="username">Username</label>
                                             
                                         <input type="text"
                                                 class="form-control"
-                                                id="validationSample01"
+                                                id="username"
+                                                name="username"
                                                 placeholder="Username"
                                                 value=""
                                                 required="">
@@ -84,11 +85,12 @@
                                     <div class="form-group">
 
                                         <label class="form-label"
-                                                for="validationSample01">Email</label>
+                                                for="useremail">Email</label>
                                             
                                         <input type="text"
                                                 class="form-control"
-                                                id="validationSample01"
+                                                id="useremail"
+                                                name="useremail"
                                                 placeholder="Email"
                                                 value=""
                                                 required="">
@@ -101,11 +103,12 @@
                                     <div class="form-group">
 
                                         <label class="form-label"
-                                               for="exampleInputPassword1">Password</label>
+                                               for="userpassword">Password</label>
 
                                         <input type="password"
                                                    class="form-control"
-                                                   id="validationSample03"
+                                                   id="userpassword"
+                                                   name="userpassword"
                                                    placeholder="Password"
                                                    required="Password">
 
@@ -117,11 +120,12 @@
                                     <div class="form-group">
 
                                         <label class="form-label"
-                                               for="exampleInputPassword1">Confirm Password</label>
+                                               for="userpassword">Confirm Password</label>
 
                                         <input type="password"
                                                    class="form-control"
-                                                   id="validationSample03"
+                                                   id="userpassword"
+                                                   name="userpassword"
                                                    placeholder="Password"
                                                    required="Password">
 
@@ -152,11 +156,12 @@
                                 <div class="form-group">
 
                                     <label class="form-label"
-                                           for="exampleInputEmail1">Assign to a School</label>
+                                           for="schoolname">Assign to a School</label>
                                            
                                     <input type="text"
                                            class="form-control"
-                                           id="exampleInputEmail1"
+                                           id="schoolname"
+                                           name="schoolname"
                                            placeholder="Assign to a School">
 
                                 </div>
@@ -207,7 +212,7 @@
 
         <!-- Dashboard js start here -->
 
-        <%- include("../partials/dsjs.ejs") %>
+        <%- include("../partials/js.ejs") %>
 
         <!-- Dashboard js end here -->
 

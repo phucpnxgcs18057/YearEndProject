@@ -41,7 +41,7 @@
                         <div class="flex d-flex flex-column flex-sm-row align-items-center">
 
                             <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                                <h2 class="mb-0">Edit School</h2>
+                                <h2 class="mb-0">Create a New School</h2>
                             </div>
                         </div>
 
@@ -67,11 +67,12 @@
                                     <div class="form-group">
 
                                         <label class="form-label"
-                                               for="exampleInputPassword1">School Name</label>
+                                               for="schoolname">School Name</label>
 
                                         <input type="text"
                                                    class="form-control"
-                                                   id="validationSample03"
+                                                   id="schoolname"
+                                                   name="schoolname"
                                                    placeholder="Name"
                                                    required="">
 
@@ -83,10 +84,11 @@
                                     <div class="form-row">
                                         <div class="col-12 col-md-6 mb-3">
                                             <label class="form-label"
-                                                   for="validationSample03">City</label>
+                                                   for="schooladdress">City</label>
                                             <input type="text"
                                                    class="form-control"
-                                                   id="validationSample03"
+                                                   id="schooladdress"
+                                                   name="schooladdress"
                                                    placeholder="City"
                                                    required="">
                                             <div class="invalid-feedback">Please provide a valid city.</div>
@@ -165,7 +167,7 @@
 
         <!-- Dashboard js start here -->
 
-        <%- include("../partials/dsjs.ejs") %>
+        <%- include("../partials/js.ejs") %>
 
         <!-- Dashboard js end here -->
 

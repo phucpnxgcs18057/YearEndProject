@@ -41,7 +41,7 @@
                         <div class="flex d-flex flex-column flex-sm-row align-items-center">
 
                             <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                                <h2 class="mb-0">View All Donations</h2>
+                                <h2 class="mb-0">Create a New Question</h2>
                             </div>
                         </div>
 
@@ -56,27 +56,36 @@
 
                 <div class="container page__container page-section">
 
-                    <!-- User table -->
-                    <div class="page-separator">
-                        <div class="page-separator__text">Users</div>
-                    </div>
+                    <div class="row mb-32pt">
 
-                    <div class="card mb-lg-32pt">
+                        <div class= "col-lg-8 d-flex align-items-center"> 
 
-                        <!-- Table Content -->
+                            <div class="flex" style="max-width: 100%">
 
-                        <%- include("../partials/modulars/table/donation.ejs") %>
+                                <div class="form-group">
 
-                        <!-- // END Table Content -->
-                        
-                        <!-- Table footer -->
+                                    <label class="form-label"
+                                           for="questiontitle">Question Title</label>
+                                           
+                                    <input type="text"
+                                           class="form-control"
+                                           id="questiontitle"
+                                           name="questiontitle"
+                                           placeholder="Assign to a School">
 
-                        <%- include("../partials/modulars/table/footer.ejs") %>
-                        
-                        <!-- // END Table Footer -->
+                                </div>
 
-                    </div>
-                    <!-- // END User table --> 
+                                <label class="form-label">Question Content</label>
+
+                                <div style="height: 150px;"
+                                     data-toggle="quill"
+                                     data-quill-placeholder="Quill WYSIWYG editor">
+                                    <h1>Hello World!</h1>
+                                    <p>Some initial <strong>bold</strong> text</p>
+                                    <p><br></p>
+                                </div>
+
+                                <button class="btn btn-primary" type="submit">Submit</button>
 
                             </div>
 
@@ -122,7 +131,7 @@
 
         <!-- Dashboard js start here -->
 
-        <%- include("../partials/dsjs.ejs") %>
+        <%- include("../partials/js.ejs") %>
 
         <!-- Dashboard js end here -->
 

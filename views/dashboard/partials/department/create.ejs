@@ -41,7 +41,7 @@
                         <div class="flex d-flex flex-column flex-sm-row align-items-center">
 
                             <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                                <h2 class="mb-0">Create a New Course</h2>
+                                <h2 class="mb-0">Create a New Department</h2>
                             </div>
                         </div>
 
@@ -67,11 +67,12 @@
                                     <div class="form-group">
 
                                         <label class="form-label"
-                                               for="exampleInputPassword1">Course Name</label>
+                                               for="departmentname">Department Name</label>
 
                                         <input type="text"
                                                    class="form-control"
-                                                   id="validationSample03"
+                                                   id="departmentname"
+                                                   name="departmentname"
                                                    placeholder="Name"
                                                    required="">
 
@@ -83,27 +84,12 @@
                                     <div class="form-group">
 
                                         <label class="form-label"
-                                               for="exampleInputPassword1">Assign to a Department</label>
+                                               for="schoolname">Assign to a School</label>
 
                                         <input type="text"
                                                    class="form-control"
-                                                   id="validationSample03"
-                                                   placeholder="School"
-                                                   required="">
-
-                                            <div class="invalid-feedback">Please provide a valid Department.</div>
-
-                                            <div class="valid-feedback">Looks good!</div>
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <label class="form-label"
-                                               for="exampleInputPassword1">Assign to a School</label>
-
-                                        <input type="text"
-                                                   class="form-control"
-                                                   id="validationSample03"
+                                                   id="schoolname"
+                                                   name="school"
                                                    placeholder="School"
                                                    required="">
 
@@ -113,6 +99,8 @@
                                     </div>
                                     
                                 </div>
+
+                                
 
                                 <button class="btn btn-primary" type="submit">Submit</button>
 
@@ -160,7 +148,7 @@
 
         <!-- Dashboard js start here -->
 
-        <%- include("../partials/dsjs.ejs") %>
+        <%- include("../partials/js.ejs") %>
 
         <!-- Dashboard js end here -->
 

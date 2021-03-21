@@ -65,11 +65,12 @@
                                 <div class="form-group">
 
                                     <label class="form-label"
-                                           for="exampleInputEmail1">Resource Title</label>
+                                           for="resourcename">Resource Title</label>
 
                                     <input type="text"
                                            class="form-control"
-                                           id="exampleInputEmail1"
+                                           id="resourcename"
+                                           name="resourcename"
                                            placeholder="Enter your email address ..">
 
                                 </div>
@@ -77,11 +78,12 @@
                                 <div class="form-group ">
 
                                     <label class="form-label"
-                                           for="file">Resource Content</label>
+                                           for="resourcefile">Resource Content</label>
 
                                     <div class="custom-file">
                                         <input type="file"
-                                               id="file"
+                                                id="resourcefile"
+                                                name="resourcefile"
                                                class="custom-file-input">
                                         <label for="file"
                                                class="custom-file-label">Choose file</label>
@@ -92,11 +94,12 @@
                                 <div class="form-group ">
 
                                     <label class="form-label"
-                                           for="file-img">Resource Image</label>
+                                           for="resourceimg">Resource Image</label>
 
                                     <div class="custom-file">
                                         <input type="file-img"
-                                               id="file-img"
+                                                id="resourceimg"
+                                                name="resourceimg"
                                                class="custom-file-input">
                                         <label for="file-img"
                                                class="custom-file-label">Choose file</label>
@@ -164,7 +167,7 @@
 
         <!-- Dashboard js start here -->
 
-        <%- include("../partials/dsjs.ejs") %>
+        <%- include("../partials/js.ejs") %>
 
         <!-- Dashboard js end here -->
 

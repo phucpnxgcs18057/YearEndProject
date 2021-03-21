@@ -4,7 +4,6 @@
 
     <head>
         <%- include("../partials/head.ejs") %>
-        <!-- <%- include("../partials/modulars/chart/style.ejs") %> -->
     </head>
 
     <body class="layout-compact layout-compact">
@@ -42,7 +41,7 @@
                         <div class="flex d-flex flex-column flex-sm-row align-items-center">
 
                             <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                                <h2 class="mb-0">Statistics</h2>
+                                <h2 class="mb-0">All Resources</h2>
                             </div>
                         </div>
 
@@ -59,11 +58,22 @@
 
                     <!-- User table -->
 
+                    <div class="card mb-lg-32pt">
+
                         <!-- Table Content -->
 
-                        <%- include("../partials/analytic/analytic.ejs") %>
+                        <%- include("../partials/modulars/table/resource.ejs") %>
 
                         <!-- // END Table Content -->
+                        
+                        <!-- Table footer -->
+
+
+                        <%- include("../partials/modulars/table/footer.ejs") %>
+                        
+                        <!-- // END Table Footer -->
+
+                    </div>
 
                     <!-- // END User table --> 
 
@@ -108,12 +118,6 @@
         <%- include("../partials/js.ejs") %>
 
         <!-- Dashboard js end here -->
-
-        <!-- Chart js start here -->
-
-        <%- include("../partials/modulars/chart/script.ejs") %>
-
-        <!-- Chart js end here -->
 
     </body>
 

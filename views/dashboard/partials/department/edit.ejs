@@ -41,7 +41,7 @@
                         <div class="flex d-flex flex-column flex-sm-row align-items-center">
 
                             <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                                <h2 class="mb-0">Edit The Resource</h2>
+                                <h2 class="mb-0">Create a New Department</h2>
                             </div>
                         </div>
 
@@ -62,61 +62,45 @@
 
                             <div class="flex" style="max-width: 100%">
 
-                                <div class="form-group">
+                                <div class="was-validated">
 
-                                    <label class="form-label"
-                                           for="exampleInputEmail1">Resource Title</label>
+                                    <div class="form-group">
 
-                                    <input type="text"
-                                           class="form-control"
-                                           id="exampleInputEmail1"
-                                           placeholder="Enter your email address ..">
+                                        <label class="form-label"
+                                               for="departmentname">Department Name</label>
 
+                                        <input type="text"
+                                                   class="form-control"
+                                                   id="departmentname"
+                                                   name="departmentname"
+                                                   placeholder="Name"
+                                                   required="">
+
+                                            <div class="invalid-feedback">Please provide a valid name.</div>
+
+                                            <div class="valid-feedback">Looks good!</div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label class="form-label"
+                                               for="schoolname">Assign to a School</label>
+
+                                        <input type="text"
+                                                   class="form-control"
+                                                   id="schoolname"
+                                                   name="school"
+                                                   placeholder="School"
+                                                   required="">
+
+                                            <div class="invalid-feedback">Please provide a valid School.</div>
+
+                                            <div class="valid-feedback">Looks good!</div>
+                                    </div>
+                                    
                                 </div>
+
                                 
-                                <div class="form-group ">
-
-                                    <label class="form-label"
-                                           for="file">Resource Content</label>
-
-                                    <div class="custom-file">
-                                        <input type="file"
-                                               id="file"
-                                               class="custom-file-input">
-                                        <label for="file"
-                                               class="custom-file-label">Choose file</label>
-                                    </div>
-
-                                </div>
-
-                                <div class="form-group ">
-
-                                    <label class="form-label"
-                                           for="file-img">Resource Image</label>
-
-                                    <div class="custom-file">
-                                        <input type="file-img"
-                                               id="file-img"
-                                               class="custom-file-input">
-                                        <label for="file-img"
-                                               class="custom-file-label">Choose file</label>
-                                    </div>
-
-                                </div>
-
-                                <div class="form-group">
-
-                                    <label class="form-label"
-                                           for="select01">Resource Type</label>
-
-                                    <select id="select01"
-                                            data-toggle="select"
-                                            class="form-control">
-                                        <option selected="">Word Document</option>
-                                        <option>PDF Document</option>
-                                    </select>
-
-                                </div>
 
                                 <button class="btn btn-primary" type="submit">Submit</button>
 
@@ -164,7 +148,7 @@
 
         <!-- Dashboard js start here -->
 
-        <%- include("../partials/dsjs.ejs") %>
+        <%- include("../partials/js.ejs") %>
 
         <!-- Dashboard js end here -->
 
