@@ -2,7 +2,13 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const path = require('path');
-const Resource = require('./models/resource');
+// const Resource = require('./models/resource');
+// const Type = require('./models/usertype');
+// const Department = require('./models/department');
+// const School = require('./models/school');
+// const Course = require('./models/course');
+// const uCourse = require('./models/ucourse');
+const Question = require('./models/question');
 
 //express app
 const app = express();
@@ -32,14 +38,13 @@ app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/js', express.static(__dirname + 'public/js'))
 
 //mongoose and mongo sandbox routes
-app.get('/add-resource', (req, res) => {
-    const resource = new Resource({
-        ResourceName: 'Test Resource 2',
-        ResourceContent: 'This is the content of the test resource!',
-        ResourceType: 'Document'
+app.get('/add-school', (req, res) => {
+    const question = new Question({
+        questiontitle: 'Is there anything I can do to speedrun my project in time?',
+        questioncontent: 'With the deadline is at the end of April and currently my project progress is still at very beginning stages. Are there any tips that could help me?'
     });
 
-    resource.save()
+    question.save()
         .then((result) => {
             res.send(result)
         })
@@ -48,8 +53,8 @@ app.get('/add-resource', (req, res) => {
         });
 });
 
-app.get('/all-resources', (req, res) => {
-    Resource.find()
+app.get('/all-schools', (req, res) => {
+    Question.find()
         .then((result) => {
             res.send(result);
         })
@@ -90,18 +95,6 @@ app.get('/resources', (req, res) => {
 app.get('/signup', (req, res) => {
     res.render('signup');
 });
-
-// app.get('/school', (req, res) => {
-//     res.render('create');
-// });
-
-// app.get('/school-1', (req, res) => {
-//     res.render('edit');
-// });
-
-// app.get('/school-2', (req, res) => {
-//     res.render('view');
-// });
 
 //404 page
 app.use((req, res) => {
