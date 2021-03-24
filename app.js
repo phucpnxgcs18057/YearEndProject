@@ -2,13 +2,15 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const path = require('path');
+const multer = require('multer');
 // const Resource = require('./models/resource');
 // const Type = require('./models/usertype');
 // const Department = require('./models/department');
 // const School = require('./models/school');
 // const Course = require('./models/course');
 // const uCourse = require('./models/ucourse');
-const Question = require('./models/question');
+// const Question = require('./models/question');
+
 
 //express app
 const app = express();
@@ -26,10 +28,53 @@ app.set('views',
     __dirname + '/views/dashboard/mod',
     __dirname + '/views/dashboard/student',
     __dirname + '/views/dashboard/tutor',
+    __dirname + '/views/dashboard/partials/resource',
     __dirname + '/views/frontend',
     ]
 );
 
+//Define storage for the images and document files
+//For image files
+const storage_image = multer.diskStorage({
+    //File destination
+    destination: (req, file, cb) => {
+        cb(null, '/public/images')
+      },
+    
+    //Add back extension
+    filename: (req, res, cb) => {
+        cb(null, Date.now( ) + file.originalname);
+    }
+});
+
+//Upload parameters for multer
+const upload_image = multer ({
+    storage: storage_image,
+    limits: {
+        fieldSize: 1024*1024*10,
+    }
+});
+
+// Document files
+const storage_file = multer.diskStorage({
+    //File destination
+    destination: function (req, file, cb) {
+        cb(null, '/public/files')
+      },
+      
+    //Add back extension
+    filename: (req, res, cb) => {
+        cb(null, Date.now( ) + file.originalname);
+    }
+});
+
+//Upload parameters for multer
+const upload_file = multer ({
+    storage: storage_file,
+    limits: {
+        fieldSize: 1024*1024*100,
+    }
+});
 
 // middleware & static files
 app.use(morgan('dev'));
@@ -38,10 +83,9 @@ app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/js', express.static(__dirname + 'public/js'))
 
 //mongoose and mongo sandbox routes
-app.get('/add-school', (req, res) => {
+app.post('/add-school', upload_file.single('resourcefile'), (req, res) => {
     const question = new Question({
-        questiontitle: 'Is there anything I can do to speedrun my project in time?',
-        questioncontent: 'With the deadline is at the end of April and currently my project progress is still at very beginning stages. Are there any tips that could help me?'
+        resource: 'Is there anything I can do to speedrun my project in time?',
     });
 
     question.save()
@@ -94,6 +138,10 @@ app.get('/resources', (req, res) => {
 
 app.get('/signup', (req, res) => {
     res.render('signup');
+});
+
+app.get('/1', (req, res) => {
+    res.render('create');
 });
 
 //404 page

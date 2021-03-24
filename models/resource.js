@@ -6,7 +6,7 @@ const resourceSchema = new Schema({
         type: String,
         required: true
     },
-    resourcecontent: {
+    resourcefile: {
         type: String,
         required: true
     },
