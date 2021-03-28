@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const path = require('path');
 const multer = require('multer');
-// const Resource = require('./models/resource');
+const Resource = require('./api/models/resource');
 // const Type = require('./models/usertype');
 // const Department = require('./models/department');
 // const School = require('./models/school');
@@ -34,63 +34,64 @@ app.set('views',
 );
 
 //Define storage for the images and document files
-//For image files
-const storage_image = multer.diskStorage({
-    //File destination
-    destination: (req, file, cb) => {
-        cb(null, '/public/images')
-      },
-    
-    //Add back extension
-    filename: (req, res, cb) => {
-        cb(null, Date.now( ) + file.originalname);
-    }
-});
+// // Document files
+// const storage_file = multer.diskStorage({
+//     //File destination
+//     destination: function (req, file, cb) {
+//         cb(null, '/public/uploads/files')
+//     },
 
-//Upload parameters for multer
-const upload_image = multer ({
-    storage: storage_image,
-    limits: {
-        fieldSize: 1024*1024*10,
-    }
-});
+//     //Add back extension
+//     filename: function (req, file, cb) {
+//         cb(null, Date.now() + file.originalname);
+//     }
+// });
 
-// Document files
-const storage_file = multer.diskStorage({
-    //File destination
-    destination: function (req, file, cb) {
-        cb(null, '/public/files')
-      },
-      
-    //Add back extension
-    filename: (req, res, cb) => {
-        cb(null, Date.now( ) + file.originalname);
-    }
-});
+// //Upload parameters for multer
+// const upload_file = multer({
+//     storage: storage_file,
+//     limits: {
+//         fieldSize: 1024 * 1024 * 100,
+//     }
+// });
 
-//Upload parameters for multer
-const upload_file = multer ({
-    storage: storage_file,
-    limits: {
-        fieldSize: 1024*1024*100,
-    }
-});
+// //For image files
+// const storage_image = multer.diskStorage({
+//     //File destination
+//     destination: (req, file, cb) => {
+//         cb(null, '/public/uploads/images')
+//     },
+
+//     //Add back extension
+//     filename: (req, file, cb) => {
+//         cb(null, Date.now() + file.originalname);
+//     }
+// });
+
+// //Upload parameters for multer
+// const upload_image = multer({
+//     storage: storage_image,
+//     limits: {
+//         fieldSize: 1024 * 1024 * 10,
+//     }
+// });
 
 // middleware & static files
 app.use(morgan('dev'));
 app.use(express.static('public'));
-app.use('/css', express.static(__dirname + 'public/css'))
-app.use('/js', express.static(__dirname + 'public/js'))
+app.use('/css', express.static(__dirname + 'public/css'));
+app.use('/js', express.static(__dirname + 'public/js'));
+app.use(express.urlencoded({ extended: true }))
 
 //mongoose and mongo sandbox routes
-app.post('/add-school', upload_file.single('resourcefile'), (req, res) => {
-    const question = new Question({
-        resource: 'Is there anything I can do to speedrun my project in time?',
-    });
+app.post('/add-school', (req, res) => {
 
-    question.save()
+
+    const resource = new Resource(req.body);
+
+    resource.save()
         .then((result) => {
-            res.send(result)
+            res.redirect('/');
         })
         .catch((err) => {
             console.log(err);
@@ -98,7 +99,7 @@ app.post('/add-school', upload_file.single('resourcefile'), (req, res) => {
 });
 
 app.get('/all-schools', (req, res) => {
-    Question.find()
+    Resource.find()
         .then((result) => {
             res.send(result);
         })
