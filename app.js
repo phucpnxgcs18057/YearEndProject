@@ -3,14 +3,9 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const path = require('path');
 const multer = require('multer');
-const Resource = require('./api/models/resource');
-// const Type = require('./models/usertype');
-// const Department = require('./models/department');
-// const School = require('./models/school');
-// const Course = require('./models/course');
-// const uCourse = require('./models/ucourse');
-// const Question = require('./models/question');
 
+
+const resourceRoutes = require('./api/routes/resource');
 
 //express app
 const app = express();
@@ -38,7 +33,7 @@ app.set('views',
 // const storage_file = multer.diskStorage({
 //     //File destination
 //     destination: function (req, file, cb) {
-//         cb(null, '/public/uploads/files')
+//         cb(null, './public/uploads/files')
 //     },
 
 //     //Add back extension
@@ -47,7 +42,7 @@ app.set('views',
 //     }
 // });
 
-// //Upload parameters for multer
+// // //Upload parameters for multer
 // const upload_file = multer({
 //     storage: storage_file,
 //     limits: {
@@ -59,7 +54,7 @@ app.set('views',
 // const storage_image = multer.diskStorage({
 //     //File destination
 //     destination: (req, file, cb) => {
-//         cb(null, '/public/uploads/images')
+//         cb(null, './public/uploads/images')
 //     },
 
 //     //Add back extension
@@ -81,32 +76,8 @@ app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'));
 app.use('/js', express.static(__dirname + 'public/js'));
-app.use(express.urlencoded({ extended: true }))
-
-//mongoose and mongo sandbox routes
-app.post('/add-school', (req, res) => {
-
-
-    const resource = new Resource(req.body);
-
-    resource.save()
-        .then((result) => {
-            res.redirect('/');
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
-
-app.get('/all-schools', (req, res) => {
-    Resource.find()
-        .then((result) => {
-            res.send(result);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-})
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 //routing
 app.get('/', (req, res) => {
@@ -133,7 +104,7 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.get('/resources', (req, res) => {
+app.get('/test', (req, res) => {
     res.render('resources');
 });
 
@@ -141,9 +112,8 @@ app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-app.get('/1', (req, res) => {
-    res.render('create');
-});
+//resource routes
+app.use('/resources', resourceRoutes);
 
 //404 page
 app.use((req, res) => {

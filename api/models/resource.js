@@ -7,17 +7,17 @@ const resourceSchema = new Schema({
         type: String,
         required: true
     },
-    resourcefile: {
-        type: String,
-        required: true
-    },
+    // resourcefile: {
+    //     type: String,
+    //     required: true
+    // },
     resourceimage: {
         type: String,
-        required: true
+        default: "default.jpg"
     },
     resourcetype: {
         type: String,
-        required:true
+        required: true
     },
     resourcedate: {
         type: Date,

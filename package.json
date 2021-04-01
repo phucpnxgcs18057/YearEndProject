@@ -22,7 +22,6 @@
     "dom-factory": "^1.1.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "fm-plugin-chartjs": "^1.4.0",
     "fm-plugin-ion-rangeslider": "^1.0.0",
     "fm-plugin-listjs": "^1.0.2",
     "fm-plugin-quill": "^1.0.1",
