@@ -1,4 +1,3 @@
-const { truncate } = require('lodash');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -7,11 +6,11 @@ const resourceSchema = new Schema({
         type: String,
         required: true
     },
-    // resourcefile: {
-    //     type: String,
-    //     required: true
-    // },
-    resourceimage: {
+    resourcefile: {
+        type: String,
+        default: "default.docx"
+    },
+    resourceimage: { 
         type: String,
         default: "default.jpg"
     },

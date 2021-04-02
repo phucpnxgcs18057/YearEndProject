@@ -1,6 +1,7 @@
 
 const express = require('express');
 const Resource = require('../../api/models/resource');
+const mongoose = require('mongoose');
 
 const router = express.Router();
 
@@ -14,29 +15,38 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const resource = {
-        title: req.body.title,
-        type: req.body.type
-    }
-    res.status(201).json({
-        message: 'Handling POST requests to /resources',
-        createdResource: resource
+    const resource = new Resource({
+        resourcename: req.body.resourcename,
+        resourcetype: req.body.resourcetype
     });
+    resource.save()
+        .then(result => {
+            console.log(result);
+            res.status(201).json({
+                message: 'Handling POST requests to /resources',
+                createdResource: resource
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
 });
 
 router.get('/:resourceId', (req, res) => {
     const id = req.params.resourceId;
-    if (id === 'special') {
-        res.status(200).json({
-            message: 'You have found the special ID',
-            id: id
+    Resource.findById(id)
+        .exec()
+        .then(doc => {
+            console.log("From database", doc);
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
         });
-    } else {
-        res.status(200).json({
-            message: 'You have passed an ID',
-            id: id
-        });
-    }
 });
 
 router.put('/:resourceId', (req, res) => {
