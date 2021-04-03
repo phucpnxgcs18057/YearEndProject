@@ -2,6 +2,7 @@
 const express = require('express');
 const Resource = require('../../api/models/resource');
 const mongoose = require('mongoose');
+const { result } = require('lodash');
 
 const router = express.Router();
 
@@ -10,7 +11,6 @@ router.get('/', async (req, res) => {
     try {
         await Resource.find()
             .then(docs => {
-                console.log(docs);
                 res.status(200).json(docs);
             });
     } catch (error) {
@@ -23,16 +23,13 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const resource = await new Resource({
-            resourcename: req.body.resourcename,
-            resourcetype: req.body.resourcetype
-        });
+        const resource = await new Resource(req.body);
         await resource.save()
             .then(result => {
                 console.log(result);
                 res.status(201).json({
-                    message: 'Handling POST requests to /resources',
-                    createdResource: resource
+                    message: 'Resource added successfully!',
+                    createdResource: resource.resourcename
                 });
             })
     } catch (error) {
@@ -63,16 +60,13 @@ router.get('/:resourceId', async (req, res) => {
 
 router.put('/:resourceId', async (req, res) => {
     try {
-        req.resource = await Resource.findById(req.params.resourceId);
-        const resource = req.resource;
-        resource.resourcename = req.body.resourcename;
-        resource.resourcetype = req.body.resourcetype;
+        const id = req.params.resourceId;
+        const resourceUpdate = req.body;
+        const refresh = {new: true};
 
-        
-        res.status(200).json({
-            message: 'Updated resource',
-            id: req.params.resourceId
-        });
+        const resource = await Resource.findByIdAndUpdate(id, {...resourceUpdate, resourcedate: Date.now()}, refresh);
+        res.send(resource);
+
     } catch (err) {
         console.log(err);
         res.status(500).json({ error: err });
@@ -82,7 +76,7 @@ router.put('/:resourceId', async (req, res) => {
 router.delete('/:resourceId', async (req, res) => {
     try {
         const id = req.params.resourceId;
-        await Resource.remove({ _id: id })
+        await Resource.findByIdAndDelete(id)
             .then(result => {
                 res.status(200).json(result);
             });
