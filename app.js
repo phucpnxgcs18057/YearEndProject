@@ -12,7 +12,7 @@ const app = express();
 
 //connect to mongodb
 const dbURI = 'mongodb+srv://admin:test123456@projectcluster.g4aec.mongodb.net/project?retryWrites=true&w=majority';
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, })
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
 
@@ -23,7 +23,8 @@ app.set('views',
     __dirname + '/views/dashboard/mod',
     __dirname + '/views/dashboard/student',
     __dirname + '/views/dashboard/tutor',
-    __dirname + '/views/dashboard/partials/resource',
+    // __dirname + '/views/dashboard/partials/resource',
+    __dirname + '/views/dashboard/partials/question',
     __dirname + '/views/frontend',
     ]
 );
@@ -114,6 +115,11 @@ app.get('/signup', (req, res) => {
 
 //resource routes
 app.use('/resources', resourceRoutes);
+
+//question routes
+app.get('/questions', (req, res) => {
+    res.render('create');
+})
 
 //404 page
 app.use((req, res) => {
