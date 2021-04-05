@@ -2,13 +2,29 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const departmentSchema = new Schema ({
-    departmentname: {
+    department_name: {
         type: String,
         required: true
     },
-    departmentcourses: {
+    department_courses: {
         type: Number,
         required: true
+    },
+    course: {
+        type: Schema.Types.ObjectId,
+        ref: 'course'
+    },
+    school: {
+        type: Schema.Types.ObjectId,
+        ref: 'school'
+    },
+    create_date: {
+        type: Date,
+        default: Date.now()
+    },
+    last_update: {
+        type: Date,
+        default: Date.now()
     }
 });
 

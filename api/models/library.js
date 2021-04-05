@@ -1,22 +1,22 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const answerSchema = new Schema ({
-    answer_content: {
-        type: String,
-        required: true
-    },
-    answer_rating: {
-        type: Number,
-        required: true
-    },
+const librarySchema = new Schema ({
     question: {
         type: Schema.Types.ObjectId,
-        ref: 'question'
+        ref: 'question' 
+    },
+    resource:{
+        type: Schema.Types.ObjectId,
+        ref: 'resource'
     },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'user'
+    },
+    usercourse: {
+        type: Schema.Types.ObjectId,
+        ref: 'user-course'
     },
     create_date: {
         type: Date,
@@ -26,7 +26,7 @@ const answerSchema = new Schema ({
         type: Date,
         default: Date.now()
     }
-});
+})
 
-const Answer = mongoose.model('answer', answerSchema);
-module.exports = Answer;
+const Library = mongoose.model('library', librarySchema);
+module.exports = Library;

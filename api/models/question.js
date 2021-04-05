@@ -6,18 +6,34 @@ const stripHtml = require('string-strip-html');
 const Schema = mongoose.Schema;
 
 const questionSchema = new Schema ({
-    questiontitle: {
+    question_title: {
         type: String,
         required: true
     },
-    questioncontent: {
+    question_content: {
         type: String,
         required: true
     },
-    questionsnippet: {
+    question_snippet: {
         type: String
     },
-    questiondate: {
+    library: {
+        type: Schema.Types.ObjectId,
+        ref: 'library'
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    subject: {
+        type: Schema.Types.ObjectId,
+        ref: 'subject'
+    },
+    create_date: {
+        type: Date,
+        default: Date.now()
+    },
+    last_update: {
         type: Date,
         default: Date.now()
     }

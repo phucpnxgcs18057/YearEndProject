@@ -2,31 +2,43 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new SChema({
-    username: {
+    user_name: {
         type: String,
         required: true
     },
-    userpassword: {
+    user_password: {
         type: String,
         required: true
     },
-    userfullname: {
+    user_full_name: {
         type: String,
         required: true
     },
-    usermail: {
+    user_mail: {
         type: String,
         required: true
     },
-    usertype: {
+    user_type: {
         type: String,
         required: true
     },
-    userschool: {
+    user_school: {
         type: String,
         required: true
     },
-    createdate: {
+    school: {
+        type: Schema.Types.ObjectId,
+        ref: 'school'
+    },
+    type: {
+        type: Schema.Types.ObjectId,
+        ref: 'type'
+    },
+    create_date: {
+        type: Date,
+        default: Date.now()
+    },
+    last_update: {
         type: Date,
         default: Date.now()
     }

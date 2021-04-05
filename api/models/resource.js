@@ -2,23 +2,43 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const resourceSchema = new Schema({
-    resourcename: {
+    resource_name: {
         type: String,
         required: true
     },
-    resourcefile: {
+    resource_file: {
         type: String,
         default: "default.docx"
     },
-    resourceimage: { 
+    resource_image: {
         type: String,
         default: "default.jpg"
     },
-    resourcetype: {
-        type: String,
-        required: true
+    course: {
+        type: Schema.Types.ObjectId,
+        ref: 'course'
     },
-    resourcedate: {
+    library: {
+        type: Schema.Types.ObjectId,
+        ref: 'library'
+    },
+    major: {
+        type: Schema.Types.ObjectId,
+        ref: 'major'
+    },
+    school: {
+        type: Schema.Types.ObjectId,
+        ref: 'school'
+    },
+    subject: {
+        type: Schema.Types.ObjectId,
+        ref: 'subject'
+    },
+    create_date: {
+        type: Date,
+        default: Date.now()
+    },
+    last_update: {
         type: Date,
         default: Date.now()
     }

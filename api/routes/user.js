@@ -1,21 +1,21 @@
 
 const express = require('express');
-const Resource = require('../../api/models/resource');
+const User = require('../../api/models/user');
 const mongoose = require('mongoose');
 const { result } = require('lodash');
 
 const router = express.Router();
 
-//resource routes
+//user routes
 router.get('/', async (req, res) => {
     try {
-        const resource = await Resource.find()
+        const user = await User.find()
 
         return res.json({
             status: 200,
             success: true,
-            data: resource,
-            count: resource.length
+            data: user,
+            count: user.length
         })
     } catch (error) {
         console.log(err);
@@ -30,14 +30,14 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const resource = await new Resource(req.body);
-        await resource.save()
+        const user = await new User(req.body);
+        await user.save()
 
         return res.json({
             status: 200,
             success: true,
-            data: resource,
-            message: `Successfully created the resource`
+            data: user,
+            message: `Successfully created the user`
         })
     } catch (error) {
         console.log(err);
@@ -50,10 +50,10 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/:resourceId', async (req, res) => {
+router.get('/:userId', async (req, res) => {
     try {
-        const id = req.params.resourceId;
-        await Resource.findById(id)
+        const id = req.params.userId;
+        await User.findById(id)
             .then(doc => {
                 console.log("From database", doc);
                 if (doc) {
@@ -73,21 +73,21 @@ router.get('/:resourceId', async (req, res) => {
     }
 });
 
-router.put('/:resourceId', async (req, res) => {
+router.put('/:userId', async (req, res) => {
     try {
-        const id = req.params.resourceId;
-        const resourceUpdate = req.body;
+        const id = req.params.userId;
+        const userUpdate = req.body;
         const refresh = { new: true };
 
-        const resource = await Resource.findByIdAndUpdate(id,
-            { ...resourceUpdate, last_update: Date.now() },
+        const user = await User.findByIdAndUpdate(id,
+            { ...userUpdate, last_update: Date.now() },
             refresh);
 
         return res.json({
             status: 200,
             success: true,
-            data: resource,
-            message: `Successfully updated the resource`
+            data: user,
+            message: `Successfully updated the user`
         })
     } catch (err) {
         console.log(err);
@@ -100,16 +100,16 @@ router.put('/:resourceId', async (req, res) => {
     }
 });
 
-router.delete('/:resourceId', async (req, res) => {
+router.delete('/:userId', async (req, res) => {
     try {
-        const id = req.params.resourceId;
-        await Resource.findByIdAndDelete(id)
+        const id = req.params.userId;
+        await User.findByIdAndDelete(id)
 
         return res.json({
             status: 200,
             success: true,
-            data: resource,
-            message: `Successfully deleted the resource`
+            data: user,
+            message: `Successfully deleted the user`
         })
     } catch (error) {
         console.log(err);

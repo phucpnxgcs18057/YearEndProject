@@ -12,7 +12,12 @@ const app = express();
 
 //connect to mongodb
 const dbURI = 'mongodb+srv://admin:test123456@projectcluster.g4aec.mongodb.net/project?retryWrites=true&w=majority';
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, findOneAndUpdate: false })
+mongoose.connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+})
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
 
@@ -76,6 +81,7 @@ app.set('views',
 app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'));
+app.use('/img', express.static(__dirname + 'public/images'));
 app.use('/js', express.static(__dirname + 'public/js'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
