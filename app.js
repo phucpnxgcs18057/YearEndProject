@@ -6,6 +6,9 @@ const multer = require('multer');
 
 
 const resourceRoutes = require('./api/routes/resource');
+const typeRoutes = require('./api/routes/usertype');
+const userRoutes = require('./api/routes/user');
+
 
 //express app
 const app = express();
@@ -121,6 +124,12 @@ app.get('/signup', (req, res) => {
 
 //resource routes
 app.use('/resources', resourceRoutes);
+
+//user routes
+app.use('/users', userRoutes);
+
+//user type routes
+app.use('/types', typeRoutes);
 
 //question routes
 app.get('/questions', (req, res) => {

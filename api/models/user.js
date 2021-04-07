@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const userSchema = new SChema({
+const userSchema = new Schema({
     user_name: {
         type: String,
         required: true
@@ -18,21 +18,14 @@ const userSchema = new SChema({
         type: String,
         required: true
     },
-    user_type: {
-        type: String,
-        required: true
-    },
-    user_school: {
-        type: String,
-        required: true
-    },
     school: {
         type: Schema.Types.ObjectId,
         ref: 'school'
     },
     type: {
         type: Schema.Types.ObjectId,
-        ref: 'type'
+        ref: 'type',
+        required: true
     },
     create_date: {
         type: Date,

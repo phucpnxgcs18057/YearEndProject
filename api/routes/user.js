@@ -10,6 +10,8 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         const user = await User.find()
+            .populate('type')
+            .populate('school');
 
         return res.json({
             status: 200,
