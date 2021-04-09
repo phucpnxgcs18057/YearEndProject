@@ -56,6 +56,8 @@ router.get('/:userId', async (req, res) => {
     try {
         const id = req.params.userId;
         await User.findById(id)
+            .populate('type')
+            .populate('school')
             .then(doc => {
                 console.log("From database", doc);
                 if (doc) {

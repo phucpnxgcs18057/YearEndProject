@@ -1,9 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const path = require('path');
-const multer = require('multer');
-
 
 const resourceRoutes = require('./api/routes/resource');
 const typeRoutes = require('./api/routes/usertype');
@@ -31,57 +30,15 @@ app.set('views',
     __dirname + '/views/dashboard/mod',
     __dirname + '/views/dashboard/student',
     __dirname + '/views/dashboard/tutor',
-    // __dirname + '/views/dashboard/partials/resource',
-    __dirname + '/views/dashboard/partials/question',
+    __dirname + '/views/dashboard/partials/resource',
+    // __dirname + '/views/dashboard/partials/question',
     __dirname + '/views/frontend',
     ]
 );
 
-//Define storage for the images and document files
-// // Document files
-// const storage_file = multer.diskStorage({
-//     //File destination
-//     destination: function (req, file, cb) {
-//         cb(null, './public/uploads/files')
-//     },
-
-//     //Add back extension
-//     filename: function (req, file, cb) {
-//         cb(null, Date.now() + file.originalname);
-//     }
-// });
-
-// // //Upload parameters for multer
-// const upload_file = multer({
-//     storage: storage_file,
-//     limits: {
-//         fieldSize: 1024 * 1024 * 100,
-//     }
-// });
-
-// //For image files
-// const storage_image = multer.diskStorage({
-//     //File destination
-//     destination: (req, file, cb) => {
-//         cb(null, './public/uploads/images')
-//     },
-
-//     //Add back extension
-//     filename: (req, file, cb) => {
-//         cb(null, Date.now() + file.originalname);
-//     }
-// });
-
-// //Upload parameters for multer
-// const upload_image = multer({
-//     storage: storage_image,
-//     limits: {
-//         fieldSize: 1024 * 1024 * 10,
-//     }
-// });
-
 // middleware & static files
 app.use(morgan('dev'));
+app.use(cors());
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'));
 app.use('/img', express.static(__dirname + 'public/images'));
@@ -114,7 +71,7 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.get('/test', (req, res) => {
+app.get('/demo', (req, res) => {
     res.render('resources');
 });
 

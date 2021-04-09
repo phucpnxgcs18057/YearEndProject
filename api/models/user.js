@@ -14,7 +14,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    user_mail: {
+    user_email: {
         type: String,
         required: true
     },

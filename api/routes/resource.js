@@ -2,9 +2,34 @@
 const express = require('express');
 const Resource = require('../../api/models/resource');
 const mongoose = require('mongoose');
+const path = require('path');
 const { result } = require('lodash');
+const multer = require('multer');
 
 const router = express.Router();
+
+// Defines storage for the document files
+const storage = multer.diskStorage({
+    //File destination
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads')
+    },
+
+    //Add back extension
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + "-" + Date.now() + "-" + file.originalname);
+    }
+});
+
+//Upload file parameters for multer
+const upload = multer({
+    storage: storage,
+    limits: {
+        fieldSize: 1024 * 1024 * 100,
+    }
+});
+
+const multiUpload = upload.fields([{ name: 'resource_file' }, { name: 'resource_image' }])
 
 //resource routes
 router.get('/', async (req, res) => {
@@ -17,7 +42,7 @@ router.get('/', async (req, res) => {
             data: resource,
             count: resource.length
         })
-    } catch (error) {
+    } catch (err) {
         console.log(err);
         return res.json({
             status: 500,
@@ -28,9 +53,22 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', multiUpload, async (req, res) => {
+    const arr = req.files
+    const File = arr.resource_file.map(item => item.filename);
+    const Img = arr.resource_image.map(item => item.filename);
+
     try {
-        const resource = await new Resource(req.body);
+        let resource = new Resource({
+            resource_name: req.body.resource_name,
+            resource_file: File.toString(),
+            resource_image: Img.toString(),
+            course: req.body.courseId,
+            library: req.body.libraryId,
+            major: req.body.majorId,
+            school: req.body.schoolId,
+            subject: req.body.subjectId
+        })
         await resource.save()
 
         return res.json({
@@ -39,7 +77,7 @@ router.post('/', async (req, res) => {
             data: resource,
             message: `Successfully created the resource`
         })
-    } catch (error) {
+    } catch (err) {
         console.log(err);
         return res.json({
             status: 500,
@@ -73,11 +111,12 @@ router.get('/:resourceId', async (req, res) => {
     }
 });
 
-router.put('/:resourceId', async (req, res) => {
+router.put('/:resourceId', multiUpload, async (req, res) => {
     try {
         const id = req.params.resourceId;
+
         const resourceUpdate = req.body;
-        const refresh = { new: true };
+        const refresh = { new: true }
 
         const resource = await Resource.findByIdAndUpdate(id,
             { ...resourceUpdate, last_update: Date.now() },
@@ -111,7 +150,7 @@ router.delete('/:resourceId', async (req, res) => {
             data: resource,
             message: `Successfully deleted the resource`
         })
-    } catch (error) {
+    } catch (err) {
         console.log(err);
         return res.json({
             status: 500,
