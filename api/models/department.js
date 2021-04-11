@@ -8,6 +8,7 @@ const departmentSchema = new Schema ({
     },
     department_courses: {
         type: Number,
+        default: 1,
         required: true
     },
     course: {

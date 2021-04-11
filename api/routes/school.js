@@ -1,24 +1,23 @@
 
 const express = require('express');
-const User = require('../../api/models/user');
+const School = require('../../api/models/school');
 const mongoose = require('mongoose');
 const { result } = require('lodash');
-const routeName = `user`
+const routeName = `school`
 
 const router = express.Router();
 
 //user routes
 router.get('/', async (req, res) => {
     try {
-        const user = await User.find()
-            .populate('type')
-            .populate('school');
+        const school = await School.find()
+            .populate('school_type')
 
         return res.json({
             status: 200,
             success: true,
-            data: user,
-            count: user.length
+            data: school,
+            count: school.length
         })
     } catch (err) {
         console.log(err);
@@ -33,13 +32,13 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const user = await new User(req.body);
-        await user.save()
+        const school = await new School(req.body);
+        await school.save()
 
         return res.json({
             status: 200,
             success: true,
-            data: user,
+            data: school,
             message: `Successfully created the ${routeName}`
         })
     } catch (err) {
@@ -53,10 +52,10 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/:userId', async (req, res) => {
+router.get('/:schoolId', async (req, res) => {
     try {
-        const id = req.params.userId;
-        await User.findById(id)
+        const id = req.params.schoolId;
+        await School.findById(id)
             .populate('type')
             .populate('school')
             .then(doc => {
@@ -78,20 +77,20 @@ router.get('/:userId', async (req, res) => {
     }
 });
 
-router.put('/:userId', async (req, res) => {
+router.put('/:schoolId', async (req, res) => {
     try {
-        const id = req.params.userId;
-        const userUpdate = req.body;
+        const id = req.params.schoolId;
+        const schoolUpdate = req.body;
         const refresh = { new: true };
 
-        const user = await User.findByIdAndUpdate(id,
-            { ...userUpdate, last_update: Date.now() },
+        const school = await School.findByIdAndUpdate(id,
+            { ...schoolUpdate, last_update: Date.now() },
             refresh);
 
         return res.json({
             status: 200,
             success: true,
-            data: user,
+            data: school,
             message: `Successfully updated the ${routeName}`
         })
     } catch (err) {
@@ -105,15 +104,15 @@ router.put('/:userId', async (req, res) => {
     }
 });
 
-router.delete('/:userId', async (req, res) => {
+router.delete('/:schoolId', async (req, res) => {
     try {
-        const id = req.params.userId;
-        const user = await User.findByIdAndDelete(id)
+        const id = req.params.schoolId;
+        const school = await School.findByIdAndDelete(id)
 
         return res.json({
             status: 200,
             success: true,
-            data: user,
+            data: school,
             message: `Successfully deleted the ${routeName}`
         })
     } catch (err) {

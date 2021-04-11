@@ -2,11 +2,16 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path');
 
+//importing routes
 const resourceRoutes = require('./api/routes/resource');
 const typeRoutes = require('./api/routes/usertype');
 const userRoutes = require('./api/routes/user');
+const schoolRoutes = require('./api/routes/school');
+const stypeRoutes = require('./api/routes/schooltype');
+
+
+const Resource = require("./api/models/resource");
 
 
 //express app
@@ -20,7 +25,10 @@ mongoose.connect(dbURI, {
     useCreateIndex: true,
     useFindAndModify: false
 })
-    .then((result) => app.listen(3000))
+    .then((result) => {
+        console.log("Server is now running on port 3000");
+        app.listen(3000)
+    })
     .catch((err) => console.log(err));
 
 //register view engine
@@ -43,8 +51,8 @@ app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'));
 app.use('/img', express.static(__dirname + 'public/images'));
 app.use('/js', express.static(__dirname + 'public/js'));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ limit: '100mb', extended: false }));
 
 //routing
 app.get('/', (req, res) => {
@@ -88,10 +96,33 @@ app.use('/users', userRoutes);
 //user type routes
 app.use('/types', typeRoutes);
 
-//question routes
-app.get('/questions', (req, res) => {
+//school type routes
+app.use('/school-types', stypeRoutes);
+
+
+//school routes
+app.use('/schools', schoolRoutes);
+
+
+//resource routes
+app.get('/resources/view', async (req, res) => {
+    const resources = await Resource.find();
+    res.render('view', { resources });
+});
+app.get('/resources/create', (req, res) => {
     res.render('create');
-})
+});
+app.get('/resources/edit', async (req, res) => {
+    const id = req.query.resourceId;
+    const resource = await Resource.findById(id);
+    res.render('edit', { resourceID: id, resource });
+});
+
+app.get('/resources/detail', async (req, res) => {
+    // const id = req.query.resourceId;
+    // const resource = await Resource.findById(id);
+    res.render('detail');
+});
 
 //404 page
 app.use((req, res) => {

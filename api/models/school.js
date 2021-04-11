@@ -6,13 +6,13 @@ const schoolSchema = new Schema({
         type: String,
         required: true
     },
-    school_address: {
+    school_location: {
         type: String,
         required: true
     },
     school_type: {
-        type: String,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: 'school-type'
     },
     department: {
         type: Schema.Types.ObjectId,
