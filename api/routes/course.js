@@ -1,23 +1,23 @@
-
 const express = require('express');
-const School = require('../../api/models/school');
+const Course = require('../models/course');
 const mongoose = require('mongoose');
 const { result } = require('lodash');
-const routeName = `school`
+const routeName = `course`
 
 const router = express.Router();
 
-//School routes
+//course routes
 router.get('/', async (req, res) => {
     try {
-        const school = await School.find()
-            .populate('school_type')
+        const course = await Course.find()
+            .populate('department')
+            .populate('school')
 
         return res.json({
             status: 200,
             success: true,
-            data: school,
-            count: school.length
+            data: course,
+            count: course.length
         })
     } catch (err) {
         console.log(err);
@@ -32,13 +32,13 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const school = await new School(req.body);
-        await school.save()
+        const course = await new Course(req.body);
+        await course.save()
 
         return res.json({
             status: 200,
             success: true,
-            data: school,
+            data: course,
             message: `Successfully created the ${routeName}`
         })
     } catch (err) {
@@ -52,11 +52,12 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/:schoolId', async (req, res) => {
+router.get('/:courseId', async (req, res) => {
     try {
-        const id = req.params.schoolId;
-        await School.findById(id)
-            .populate('school_type')
+        const id = req.params.courseId;
+        await Course.findById(id)
+            .populate('department')
+            .populate('school')
             .then(doc => {
                 console.log("From database", doc);
                 if (doc) {
@@ -76,20 +77,20 @@ router.get('/:schoolId', async (req, res) => {
     }
 });
 
-router.put('/:schoolId', async (req, res) => {
+router.put('/:courseId', async (req, res) => {
     try {
-        const id = req.params.schoolId;
-        const schoolUpdate = req.body;
+        const id = req.params.courseId;
+        const courseUpdate = req.body;
         const refresh = { new: true };
 
-        const school = await School.findByIdAndUpdate(id,
-            { ...schoolUpdate, last_update: Date.now() },
+        const course = await Course.findByIdAndUpdate(id,
+            { ...courseUpdate, last_update: Date.now() },
             refresh);
 
         return res.json({
             status: 200,
             success: true,
-            data: school,
+            data: course,
             message: `Successfully updated the ${routeName}`
         })
     } catch (err) {
@@ -103,15 +104,15 @@ router.put('/:schoolId', async (req, res) => {
     }
 });
 
-router.delete('/:schoolId', async (req, res) => {
+router.delete('/:courseId', async (req, res) => {
     try {
-        const id = req.params.schoolId;
-        const school = await School.findByIdAndDelete(id)
+        const id = req.params.courseId;
+        const course = await Course.findByIdAndDelete(id)
 
         return res.json({
             status: 200,
             success: true,
-            data: school,
+            data: course,
             message: `Successfully deleted the ${routeName}`
         })
     } catch (err) {

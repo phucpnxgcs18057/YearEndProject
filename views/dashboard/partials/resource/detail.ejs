@@ -40,7 +40,7 @@
           >
             <div class="flex d-flex flex-column flex-sm-row align-items-center">
               <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                <h2 class="mb-0">All Resources</h2>
+                <h2 class="mb-0">Resource Detail</h2>
               </div>
             </div>
           </div>
@@ -58,7 +58,9 @@
               class="d-flex flex-column flex-md-row align-items-center align-items-md-start flex mb-16pt text-center text-md-left"
             >
               <div class="flex">
-                <h1 class="h2 measure-lead-max mb-16pt">Resource Title</h1>
+                <h1 class="h2 measure-lead-max mb-16pt">
+                  <%=resource.resource_name%>
+                </h1>
                 <div class="d-flex align-items-center">
                   <div class="mr-16pt">
                     <a href="teacher-profile.html" class="card-title"
@@ -80,18 +82,27 @@
               class="d-flex flex-column flex-md-row align-items-md-center mb-16pt"
             >
               <div class="mb-16pt mb-md-0 mr-md-16pt">
-                <div class="rounded p-relative o-hidden overlay overlay--primary">
+                <h2>Image here</h2>
+
+                <div
+                  class="rounded p-relative o-hidden overlay overlay--primary"
+                >
                   <img
                     class="img-fluid rounded"
-                    src="../../public/images/paths/sketch_200x168.png"
-                    alt="image"/>
+                    src="<%=resource.resource_image%>"
+                    alt="image"
+                  />
                   <div class="overlay__content"></div>
                 </div>
-                <h2>Image here</h2>
               </div>
 
               <div class="flex">
                 <h1>Content Here</h1>
+                <iframe
+                  src="<%=resource.resource_file%>"
+                  width="100%"
+                  height="500px"
+                ></iframe>
               </div>
             </div>
           </div>
@@ -132,17 +143,17 @@
     <!-- Dashboard js start here -->
 
     <%- include("../partials/js.ejs") %>
-    <script>function base64ToBlob(base64) {
-      const binaryString = window.atob(base64);
-      // const len = binaryString.length;
-      // const bytes = new Uint8Array(len);
-      // for (let i = 0; i < len; ++i) {
-      //   bytes[i] = binaryString.charCodeAt(i);
-      // }
-    
-      // return new Blob([bytes], { type: 'application/pdf' });
-    };
+    <script>
+      function base64ToBlob(base64) {
+        const binaryString = window.atob(base64);
+        // const len = binaryString.length;
+        // const bytes = new Uint8Array(len);
+        // for (let i = 0; i < len; ++i) {
+        //   bytes[i] = binaryString.charCodeAt(i);
+        // }
 
+        // return new Blob([bytes], { type: 'application/pdf' });
+      }
     </script>
 
     <!-- Dashboard js end here -->

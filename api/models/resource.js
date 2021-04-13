@@ -22,17 +22,9 @@ const resourceSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'library'
     },
-    major: {
-        type: Schema.Types.ObjectId,
-        ref: 'major'
-    },
     school: {
         type: Schema.Types.ObjectId,
         ref: 'school'
-    },
-    subject: {
-        type: Schema.Types.ObjectId,
-        ref: 'subject'
     },
     create_date: {
         type: Date,

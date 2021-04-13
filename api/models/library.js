@@ -14,7 +14,7 @@ const librarySchema = new Schema ({
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
-    usercourse: {
+    user_course: {
         type: Schema.Types.ObjectId,
         ref: 'user-course'
     },

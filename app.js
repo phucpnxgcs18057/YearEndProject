@@ -9,6 +9,8 @@ const typeRoutes = require('./api/routes/usertype');
 const userRoutes = require('./api/routes/user');
 const schoolRoutes = require('./api/routes/school');
 const stypeRoutes = require('./api/routes/schooltype');
+const depRoutes = require('./api/routes/department');
+const courseRoutes = require('./api/routes/course');
 
 
 const Resource = require("./api/models/resource");
@@ -103,6 +105,11 @@ app.use('/school-types', stypeRoutes);
 //school routes
 app.use('/schools', schoolRoutes);
 
+//department routes
+app.use('/departments', depRoutes);
+
+//course routes
+app.use('/courses', courseRoutes);
 
 //resource routes
 app.get('/resources/view', async (req, res) => {
@@ -119,9 +126,9 @@ app.get('/resources/edit', async (req, res) => {
 });
 
 app.get('/resources/detail', async (req, res) => {
-    // const id = req.query.resourceId;
-    // const resource = await Resource.findById(id);
-    res.render('detail');
+    const id = req.query.resourceId;
+    const resource = await Resource.findById(id);
+    res.render('detail', { resource });
 });
 
 //404 page

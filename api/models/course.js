@@ -10,10 +10,6 @@ const courseSchema = new Schema ({
         type: Schema.Types.ObjectId,
         ref: 'department'
     },
-    resource: {
-        type: Schema.Types.ObjectId,
-        ref: 'resource'
-    },
     school: {
         type: Schema.Types.ObjectId,
         ref: 'school'

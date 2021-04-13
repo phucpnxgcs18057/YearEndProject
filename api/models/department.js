@@ -6,15 +6,6 @@ const departmentSchema = new Schema ({
         type: String,
         required: true
     },
-    department_courses: {
-        type: Number,
-        default: 1,
-        required: true
-    },
-    course: {
-        type: Schema.Types.ObjectId,
-        ref: 'course'
-    },
     school: {
         type: Schema.Types.ObjectId,
         ref: 'school'

@@ -1,1 +1,14 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
+
+const encrypt = (plainString) => {
+    return bcrypt.hashSync(plainString, bcrypt.genSaltSync(10));
+};
+
+const compare = (plainString, hashString) => {
+    return bcrypt.compareSync(plainString, hashString);
+};
+
+module.exports = {
+    encrypt,
+    compare
+};

@@ -22,6 +22,7 @@
     "bcrypt": "^5.0.1",
     "bootstrap": "^4.6.0",
     "cors": "^2.8.5",
+    "create-object-url": "^1.0.2",
     "dom-factory": "^1.1.0",
     "dompurify": "^2.2.7",
     "ejs": "^3.1.6",
