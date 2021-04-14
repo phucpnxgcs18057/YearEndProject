@@ -1,128 +1,20 @@
-
 const express = require('express');
-const Department = require('../models/department');
-const mongoose = require('mongoose');
-const { result } = require('lodash');
-const routeName = `department`
-
 const router = express.Router();
+const departmentController = require('../controllers/departmentController');
 
 //department routes
-router.get('/', async (req, res) => {
-    try {
-        const department = await Department.find()
-            .populate('school')
+router.get('/view', departmentController.getAllDepartment);
 
-        return res.json({
-            status: 200,
-            success: true,
-            data: department,
-            count: department.length
-        })
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-});
+router.get('/view/client', departmentController.getAllDepartmentClient);
 
-router.post('/', async (req, res) => {
-    try {
-        const department = await new Department(req.body);
-        await department.save()
+router.post('/add', departmentController.addNewDepartment);
 
-        return res.json({
-            status: 200,
-            success: true,
-            data: department,
-            message: `Successfully created the ${routeName}`
-        })
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-});
+router.get('/detail/:departmentId', departmentController.getDepartmentById);
 
-router.get('/:departmentId', async (req, res) => {
-    try {
-        const id = req.params.departmentId;
-        await Department.findById(id)
-            .populate('school')
-            .then(doc => {
-                console.log("From database", doc);
-                if (doc) {
-                    res.status(200).json(doc);
-                } else {
-                    res.status(404).json({ message: "Unavailable / Non-exist ID" });
-                }
-            });
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-});
+router.get('/detail/client/:departmentId', departmentController.getDepartmentByIdClient);
 
-router.put('/:departmentId', async (req, res) => {
-    try {
-        const id = req.params.departmentId;
-        const departmentUpdate = req.body;
-        const refresh = { new: true };
+router.put('/edit/:departmentId', departmentController.editDepartment);
 
-        const department = await Department.findByIdAndUpdate(id,
-            { ...departmentUpdate, last_update: Date.now() },
-            refresh);
-
-        return res.json({
-            status: 200,
-            success: true,
-            data: department,
-            message: `Successfully updated the ${routeName}`
-        })
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-});
-
-router.delete('/:departmentId', async (req, res) => {
-    try {
-        const id = req.params.departmentId;
-        const department = await Department.findByIdAndDelete(id)
-
-        return res.json({
-            status: 200,
-            success: true,
-            data: department,
-            message: `Successfully deleted the ${routeName}`
-        })
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-});
+router.delete('/:departmentId', departmentController.deleteDepartment);
 
 module.exports = router;

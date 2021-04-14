@@ -5,13 +5,14 @@ const cors = require('cors');
 
 //importing routes
 const resourceRoutes = require('./api/routes/resource');
-const typeRoutes = require('./api/routes/usertype');
+const userTypeRoutes = require('./api/routes/userType');
 const userRoutes = require('./api/routes/user');
 const schoolRoutes = require('./api/routes/school');
-const stypeRoutes = require('./api/routes/schooltype');
+const schoolTypeRoutes = require('./api/routes/schoolType');
 const depRoutes = require('./api/routes/department');
 const courseRoutes = require('./api/routes/course');
-
+const questionRoutes = require('./api/routes/question');
+const answerRoutes = require('./api/routes/answer');
 
 const Resource = require("./api/models/resource");
 
@@ -96,11 +97,10 @@ app.use('/resources', resourceRoutes);
 app.use('/users', userRoutes);
 
 //user type routes
-app.use('/types', typeRoutes);
+app.use('/user-types', userTypeRoutes);
 
 //school type routes
-app.use('/school-types', stypeRoutes);
-
+app.use('/school-types', schoolTypeRoutes);
 
 //school routes
 app.use('/schools', schoolRoutes);
@@ -110,6 +110,12 @@ app.use('/departments', depRoutes);
 
 //course routes
 app.use('/courses', courseRoutes);
+
+//question routes
+app.user('/questions', questionRoutes);
+
+//answer routes
+app.use('/answer', answerRoutes);
 
 //resource routes
 app.get('/resources/view', async (req, res) => {

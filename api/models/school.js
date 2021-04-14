@@ -18,14 +18,6 @@ const schoolSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'department'
     },
-    question: {
-        type: Schema.Types.ObjectId,
-        ref: 'question'
-    },
-    resource: {
-        type: Schema.Types.ObjectId,
-        ref: 'resource'
-    },
     create_date: {
         type: Date,
         default: Date.now()

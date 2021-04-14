@@ -1,128 +1,21 @@
 
 const express = require('express');
-const School = require('../../api/models/school');
-const mongoose = require('mongoose');
-const { result } = require('lodash');
-const routeName = `school`
-
 const router = express.Router();
+const schoolController = require('../controllers/schoolController');
 
 //School routes
-router.get('/', async (req, res) => {
-    try {
-        const school = await School.find()
-            .populate('school_type')
+router.get('/view', schoolController.getAllSchool);
 
-        return res.json({
-            status: 200,
-            success: true,
-            data: school,
-            count: school.length
-        })
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-});
+router.get('/view/client', schoolController.getAllSchoolClient);
 
-router.post('/', async (req, res) => {
-    try {
-        const school = await new School(req.body);
-        await school.save()
+router.post('/add', schoolController.addNewSchool);
 
-        return res.json({
-            status: 200,
-            success: true,
-            data: school,
-            message: `Successfully created the ${routeName}`
-        })
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-});
+router.get('/detail/client/:schoolId', schoolController.getSchoolByIdClient);
 
-router.get('/:schoolId', async (req, res) => {
-    try {
-        const id = req.params.schoolId;
-        await School.findById(id)
-            .populate('school_type')
-            .then(doc => {
-                console.log("From database", doc);
-                if (doc) {
-                    res.status(200).json(doc);
-                } else {
-                    res.status(404).json({ message: "Unavailable / Non-exist ID" });
-                }
-            });
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-});
+router.get('/detail/:schoolId', schoolController.getSchoolById);
 
-router.put('/:schoolId', async (req, res) => {
-    try {
-        const id = req.params.schoolId;
-        const schoolUpdate = req.body;
-        const refresh = { new: true };
+router.put('/edit/:schoolId', schoolController.editSchool);
 
-        const school = await School.findByIdAndUpdate(id,
-            { ...schoolUpdate, last_update: Date.now() },
-            refresh);
-
-        return res.json({
-            status: 200,
-            success: true,
-            data: school,
-            message: `Successfully updated the ${routeName}`
-        })
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-});
-
-router.delete('/:schoolId', async (req, res) => {
-    try {
-        const id = req.params.schoolId;
-        const school = await School.findByIdAndDelete(id)
-
-        return res.json({
-            status: 200,
-            success: true,
-            data: school,
-            message: `Successfully deleted the ${routeName}`
-        })
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-});
+router.delete('/delete/:schoolId', schoolController.deleteSchool);
 
 module.exports = router;

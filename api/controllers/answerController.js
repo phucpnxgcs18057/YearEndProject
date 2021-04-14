@@ -1,119 +1,103 @@
 const { flowRight } = require('lodash');
-const Question = require('../models/question');
+const Answer = require('../models/answer');
 const routeName = `question`;
 
-const getAllQuestion = async (req, res) => {
+const getAllAnswer = async (req, res) => {
     try {
-        await Question.find()
+        await Answer.find()
             .sort({ timeCreated: 'desc' })
-            .then(docs => {
-                console.log(docs);
-                res.status(200).json(docs);
-            });
-    } catch (error) {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
-    }
-};
-
-const getAllQuestionClient = async (req, res) => {
-    try {
-        await Question.find()
-            .sort({ timeCreated: 'desc' })
-            .then(docs => {
-                console.log(docs);
-                res.status(200).json(docs);
-            });
-    } catch (error) {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
-    }
-};
-
-const addNewQuestion = async (req, res) => {
-    try {
-        const {question_title, question_content, question_snippet, library, user} = req.body;
-
-        const checkQuestion = await Question.findOne({ question_title });
-        if (checkQuestion) {
-            return res.json({
-                status: 200,
-                success: false,
-                data: null,
-                message: `${routeName} already exist`
-            })
-        }
-        const question = await new Question({
-            question_title, question_content, question_snippet, library, user,
-            create_date: Date.now(),
-            last_update: Date.now()
-        })
-        await question.save()
-
-        return res.json({
-            status: 200,
-            success: true,
-            data: question,
-            message: `Successfully created the ${routeName}`
-        })
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-};
-
-const addNewQuestionClient = async (req, res) => {
-    try {
-        const {question_title, question_content, question_snippet, library, user} = req.body;
-
-        const checkQuestion = await Question.findOne({ question_title });
-        if (checkQuestion) {
-            return res.json({
-                status: 200,
-                success: false,
-                data: null,
-                message: `${routeName} already exist`
-            })
-        }
-        const question = await new Question({
-            question_title, question_content, question_snippet, library, user,
-            create_date: Date.now(),
-            last_update: Date.now()
-        })
-        await question.save()
-
-        return res.json({
-            status: 200,
-            success: true,
-            data: question,
-            message: `Successfully created the ${routeName}`
-        })
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-};
-
-const getQuestionById = async (req, res) => {
-    try {
-        const id = req.params.questionId;
-        await Question.findById(id)
             .populate('user')
-            .populate('library')
+            .populate('question')
+            .then(docs => {
+                console.log(docs);
+                res.status(200).json(docs);
+            });
+    } catch (error) {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+};
+
+const getAllAnswerClient = async (req, res) => {
+    try {
+        await Answer.find()
+            .sort({ timeCreated: 'desc' })
+            .populate('user')
+            .populate('question')
+            .then(docs => {
+                console.log(docs);
+                res.status(200).json(docs);
+            });
+    } catch (error) {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+};
+
+const addNewAnswer = async (req, res) => {
+    try {
+        const { answer_content, answer_rating, question, user } = req.body;
+        const answer = await new Answer({
+            answer_content, answer_rating, question, user,
+            create_date: Date.now(),
+            last_update: Date.now()
+        })
+        await answer.save()
+
+        return res.json({
+            status: 200,
+            success: true,
+            data: answer,
+            message: `Successfully created the ${routeName}`
+        })
+    } catch (err) {
+        console.log(err);
+        return res.json({
+            status: 500,
+            success: false,
+            data: null,
+            message: `Internal Server Error`
+        })
+    }
+};
+
+const addNewAnswerClient = async (req, res) => {
+    try {
+        const { answer_content, answer_rating, question, user } = req.body;
+        const question = await new Question({
+            answer_content, answer_rating, question, user,
+            create_date: Date.now(),
+            last_update: Date.now()
+        })
+        await question.save()
+
+        return res.json({
+            status: 200,
+            success: true,
+            data: answer,
+            message: `Successfully created the ${routeName}`
+        })
+    } catch (err) {
+        console.log(err);
+        return res.json({
+            status: 500,
+            success: false,
+            data: null,
+            message: `Internal Server Error`
+        })
+    }
+};
+
+const getAnswerById = async (req, res) => {
+    try {
+        const id = req.params.answerId;
+        await Answer.findById(id)
+            .populate('user')
+            .populate('question')
             .then(doc => {
                 console.log("From database", doc);
                 if (doc) {
@@ -133,12 +117,12 @@ const getQuestionById = async (req, res) => {
     }
 };
 
-const getQuestionByIdClient = async (req, res) => {
+const getAnswerByIdClient = async (req, res) => {
     try {
-        const id = req.params.questionId;
-        await Question.findById(id)
+        const id = req.params.answerId;
+        await Answer.findById(id)
             .populate('user')
-            .populate('library')
+            .populate('question')
             .then(doc => {
                 console.log("From database", doc);
                 if (doc) {
@@ -158,20 +142,20 @@ const getQuestionByIdClient = async (req, res) => {
     }
 };
 
-const editQuestion = async (req, res) => {
+const editAnswer = async (req, res) => {
     try {
-        const id = req.params.questionId;
-        const questionUpdate = req.body;
+        const id = req.params.answerId;
+        const answerUpdate = req.body;
         const refresh = { new: true };
 
-        const question = await Question.findByIdAndUpdate(id,
-            { ...questionUpdate, last_update: Date.now() },
+        const answer = await Answer.findByIdAndUpdate(id,
+            { ...answerUpdate, last_update: Date.now() },
             refresh);
 
         return res.json({
             status: 200,
             success: true,
-            data: question,
+            data: answer,
             message: `Successfully updated the ${routeName}`
         })
     } catch (err) {
@@ -187,18 +171,18 @@ const editQuestion = async (req, res) => {
 
 const editQuestionClient = async (req, res) => {
     try {
-        const id = req.params.questionId;
-        const questionUpdate = req.body;
+        const id = req.params.answerId;
+        const answerUpdate = req.body;
         const refresh = { new: true };
 
-        const question = await Question.findByIdAndUpdate(id,
-            { ...questionUpdate, last_update: Date.now() },
+        const answer = await Answer.findByIdAndUpdate(id,
+            { ...answerUpdate, last_update: Date.now() },
             refresh);
 
         return res.json({
             status: 200,
             success: true,
-            data: question,
+            data: answer,
             message: `Successfully updated the ${routeName}`
         })
     } catch (err) {
@@ -212,15 +196,15 @@ const editQuestionClient = async (req, res) => {
     }
 };
 
-const deleteQuestion = async (req, res) => {
+const deleteAnswer = async (req, res) => {
     try {
-        const id = req.params.questionId;
-        const question = await Question.findByIdAndDelete(id)
+        const id = req.params.answerId;
+        const answer = await Answer.findByIdAndDelete(id)
 
         return res.json({
             status: 200,
             success: true,
-            data: question,
+            data: answer,
             message: `Successfully deleted the ${routeName}`
         })
     } catch (err) {
@@ -236,13 +220,13 @@ const deleteQuestion = async (req, res) => {
 
 const deleteQuestionClient = async (req, res) => {
     try {
-        const id = req.params.questionId;
-        const question = await Question.findByIdAndDelete(id)
+        const id = req.params.answerId;
+        const answer = await Answer.findByIdAndDelete(id)
 
         return res.json({
             status: 200,
             success: true,
-            data: question,
+            data: answer,
             message: `Successfully deleted the ${routeName}`
         })
     } catch (err) {
@@ -257,14 +241,14 @@ const deleteQuestionClient = async (req, res) => {
 };
 
 module.exports = {
-    getAllQuestion,
-    getAllQuestionClient,
-    addNewQuestion,
-    addNewQuestionClient,
-    getQuestionById,
-    getQuestionByIdClient,
-    editQuestion,
-    editQuestionClient,
-    deleteQuestion,
-    deleteQuestionClient
+    getAllAnswer,
+    getAllAnswerClient,
+    addNewAnswer,
+    addNewAnswerClient,
+    getAnswerById,
+    getAnswerByIdClient,
+    editAnswer,
+    editAnswerClient,
+    deleteAnswer,
+    deleteAnswerClient
 }
