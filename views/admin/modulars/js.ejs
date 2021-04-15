@@ -1,0 +1,51 @@
+<!-- jQuery -->
+<script src="../dashboard/vendor/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="../dashboard/vendor/popper.min.js"></script>
+<script src="../dashboard/vendor/bootstrap.min.js"></script>
+
+<!-- DOM Factory -->
+<script src="../dashboard/vendor/dom-factory.js"></script>
+
+<!-- MDK -->
+<script src="../dashboard/vendor/material-design-kit.js"></script>
+
+<!-- App JS -->
+<script src="../dashboard/js/app.js"></script>
+
+<!-- Preloader -->
+<script src="../dashboard/js/preloader.js"></script>
+
+<!-- Global Settings -->
+<script src="../dashboard/js/settings.js"></script>
+
+<!-- DateRangePicker -->
+<script src="../dashboard/vendor/moment.min.js"></script>
+<script src="../dashboard/vendor/daterangepicker.js"></script>
+<script src="../dashboard/js/daterangepicker.js"></script>
+
+<!-- List.js -->
+<script src="../dashboard/vendor/list.min.js"></script>
+<script src="../dashboard/js/list.js"></script>
+
+<!-- Quill -->
+<script src="../dashboard/vendor/quill.min.js"></script>
+<script src="../dashboard/js/quill.js"></script>
+
+<!-- Sidebar Mini JS -->
+<script src="../dashboard/js/sidebar-mini.js"></script>
+<script>
+  (function () {
+    "use strict";
+    // ENABLE sidebar menu tabs
+    $('.js-sidebar-mini-tabs [data-toggle="tab"]').on("click", function (e) {
+      e.preventDefault();
+      $(this).tab("show");
+    });
+    $(".js-sidebar-mini-tabs").on("show.bs.tab", function (e) {
+      $(".js-sidebar-mini-tabs > .active").removeClass("active");
+      $(e.target).parent().addClass("active");
+    });
+  })();
+</script>

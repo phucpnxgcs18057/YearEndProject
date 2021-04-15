@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include("../modulars/head.ejs") %>
+  </head>
+
+  <body class="layout-compact layout-compact">
+    <div class="preloader">
+      <div class="sk-chase">
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+      </div>
+    </div>
+
+    <!-- Drawer Layout -->
+
+    <div
+      class="mdk-drawer-layout js-mdk-drawer-layout"
+      data-push
+      data-responsive-width="992px"
+    >
+      <div class="mdk-drawer-layout__content page-content">
+        <!-- Header -->
+
+        <!-- Navbar -->
+
+        <%- include("../modulars/navbar/navbar.ejs") %>
+
+        <!-- // END Navbar -->
+
+        <!-- // END Header -->
+
+        <div class="pt-32pt">
+          <div
+            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
+          >
+            <div class="flex d-flex flex-column flex-sm-row align-items-center">
+              <div class="mb-24pt mb-sm-0 mr-sm-24pt">
+                <h2 class="mb-0">Resource Detail</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BEFORE Page Content -->
+
+        <!-- // END BEFORE Page Content -->
+
+        <!-- Page Content -->
+
+        <div class="page-section bg-white border-bottom-2">
+          <div class="container page__container">
+            <div
+              class="d-flex flex-column flex-md-row align-items-center align-items-md-start flex mb-16pt text-center text-md-left"
+            >
+              <div class="flex">
+                <h1 class="h2 measure-lead-max mb-16pt">
+                  <%=resource.resource_name%>
+                </h1>
+                <div class="d-flex align-items-center">
+                  <div class="mr-16pt">
+                    <a href="teacher-profile.html" class="card-title"
+                      >User name</a
+                    >
+                    <div class="d-flex align-items-center">
+                      <small class="text-50 mr-2">Upload Date</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-section border-bottom-2">
+          <div class="container page__container">
+            <div
+              class="d-flex flex-column flex-md-row align-items-md-center mb-16pt"
+            >
+              <div class="mb-16pt mb-md-0 mr-md-16pt">
+                <h2>Image here</h2>
+
+                <div
+                  class="rounded p-relative o-hidden overlay overlay--primary"
+                >
+                  <img
+                    class="img-fluid rounded"
+                    src="<%=resource.resource_image%>"
+                    alt="image"
+                  />
+                  <div class="overlay__content"></div>
+                </div>
+              </div>
+
+              <div class="flex">
+                <h1>Content Here</h1>
+                <iframe
+                  src="<%=resource.resource_file%>"
+                  width="100%"
+                  height="500px"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- // END Page Content -->
+
+        <!-- Footer -->
+
+        <%- include("../modulars/footer.ejs") %>
+
+        <!-- // END Footer -->
+      </div>
+
+      <!-- // END drawer-layout__content -->
+
+      <!-- drawer -->
+
+      <div
+        class="mdk-drawer js-mdk-drawer layout-compact__drawer"
+        id="default-drawer"
+      >
+        <div
+          class="mdk-drawer__content js-sidebar-mini"
+          data-responsive-width="992px"
+          data-layout="compact"
+        >
+          <%- include("../modulars/navbar/rnav.ejs") %> 
+        </div>
+      </div>
+
+      <!-- // END drawer -->
+    </div>
+
+    <!-- // END Drawer Layout -->
+
+    <!-- Dashboard js start here -->
+
+    <%- include("../modulars/js.ejs") %>
+    <script>
+      function base64ToBlob(base64) {
+        const binaryString = window.atob(base64);
+        // const len = binaryString.length;
+        // const bytes = new Uint8Array(len);
+        // for (let i = 0; i < len; ++i) {
+        //   bytes[i] = binaryString.charCodeAt(i);
+        // }
+
+        // return new Blob([bytes], { type: 'application/pdf' });
+      }
+    </script>
+
+    <!-- Dashboard js end here -->
+  </body>
+</html>

@@ -14,18 +14,6 @@ const resourceSchema = new Schema({
         type: String,
         default: "default.jpg"
     },
-    course: {
-        type: Schema.Types.ObjectId,
-        ref: 'course'
-    },
-    library: {
-        type: Schema.Types.ObjectId,
-        ref: 'library'
-    },
-    school: {
-        type: Schema.Types.ObjectId,
-        ref: 'school'
-    },
     create_date: {
         type: Date,
         default: Date.now()

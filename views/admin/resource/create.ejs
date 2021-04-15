@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include("../modulars/head.ejs") %>
+  </head>
+
+  <body class="layout-compact layout-compact">
+    <div class="preloader">
+      <div class="sk-chase">
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+      </div>
+    </div>
+
+    <!-- Drawer Layout -->
+
+    <div
+      class="mdk-drawer-layout js-mdk-drawer-layout"
+      data-push
+      data-responsive-width="992px"
+    >
+      <div class="mdk-drawer-layout__content page-content">
+        <!-- Header -->
+
+        <!-- Navbar -->
+
+        <%- include("../modulars/navbar/navbar.ejs") %>
+
+        <!-- // END Navbar -->
+
+        <!-- // END Header -->
+
+        <div class="pt-32pt">
+          <div
+            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
+          >
+            <div class="flex d-flex flex-column flex-sm-row align-items-center">
+              <div class="mb-24pt mb-sm-0 mr-sm-24pt">
+                <h2 class="mb-0">Create a New Resource</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BEFORE Page Content -->
+
+        <!-- // END BEFORE Page Content -->
+
+        <!-- Page Content -->
+
+        <div class="container page__container page-section">
+          <div class="row mb-32pt">
+            <div class="col-lg-8 d-flex align-items-center">
+              <div class="flex" style="max-width: 100%">
+                <form action="add" method="POST">
+                  <div class="form-group">
+                    <label class="form-label" for="resource_name"
+                      >Resource Name</label
+                    >
+
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="resourcename"
+                      name="resource_name"
+                      placeholder="Enter your email address .."
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="resource_file"
+                      >Resource Content</label
+                    >
+
+                    <div class="file">
+                      <input
+                        type="file"
+                        accept=".pdf"
+                        id="resource_file"
+                        name="resource_file"
+                        class="file-input"
+                      />
+                      <input
+                        type="text"
+                        hidden
+                        id="resource_file_base64"
+                        name="resource_file_base64"
+                      />
+                      <label for="file" class="file-label">Choose file</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="resource_image"
+                      >Resource Image</label
+                    >
+
+                    <div class="file">
+                      <input
+                        type="file"
+                        accept=".jpg, .png"
+                        id="resource_image"
+                        name="resource_image"
+                        class="file-input"
+                      />
+                      <input
+                        type="text"
+                        hidden
+                        id="resource_image_base64"
+                        name="resource_image_base64"
+                      />
+                      <label for="file" class="file-label">Choose image</label>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- // END Page Content -->
+
+        <!-- Footer -->
+
+        <%- include("../modulars/footer.ejs") %>
+
+        <!-- // END Footer -->
+      </div>
+
+      <!-- // END drawer-layout__content -->
+
+      <!-- drawer -->
+
+      <div
+        class="mdk-drawer js-mdk-drawer layout-compact__drawer"
+        id="default-drawer"
+      >
+        <div
+          class="mdk-drawer__content js-sidebar-mini"
+          data-responsive-width="992px"
+          data-layout="compact"
+        >
+          <%- include("../modulars/navbar/rnav.ejs") %>
+        </div>
+      </div>
+
+      <!-- // END drawer -->
+    </div>
+
+    <!-- // END Drawer Layout -->
+
+    <!-- Dashboard js start here -->
+
+    <%- include("../modulars/js.ejs") %> <%-
+    include("../modulars/base64Upload.ejs") %>
+
+    <script>
+      (async function () {
+        await onChangeBase64Converter("resource_file", "resource_file_base64");
+        await onChangeBase64Converter(
+          "resource_image",
+          "resource_image_base64"
+        );
+      })();
+    </script>
+
+    <!-- Dashboard js end here -->
+  </body>
+</html>

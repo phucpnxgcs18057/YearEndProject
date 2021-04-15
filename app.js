@@ -7,14 +7,8 @@ const cors = require('cors');
 const resourceRoutes = require('./api/routes/resource');
 const userTypeRoutes = require('./api/routes/userType');
 const userRoutes = require('./api/routes/user');
-const schoolRoutes = require('./api/routes/school');
-const schoolTypeRoutes = require('./api/routes/schoolType');
 const depRoutes = require('./api/routes/department');
-const courseRoutes = require('./api/routes/course');
-const questionRoutes = require('./api/routes/question');
-const answerRoutes = require('./api/routes/answer');
-
-const Resource = require("./api/models/resource");
+const Resource = require("./api/routes/resource");
 
 
 //express app
@@ -37,11 +31,10 @@ mongoose.connect(dbURI, {
 //register view engine
 app.set('view engine', 'ejs');
 app.set('views',
-    [__dirname + '/views/dashboard/admin',
-    __dirname + '/views/dashboard/mod',
-    __dirname + '/views/dashboard/student',
-    __dirname + '/views/dashboard/tutor',
-    __dirname + '/views/dashboard/partials/resource',
+    [__dirname + '/views/admin',
+    // __dirname + '/views/mod',
+    // __dirname + '/views/student',
+    // __dirname + '/views/tutor',
     // __dirname + '/views/dashboard/partials/question',
     __dirname + '/views/frontend',
     ]
@@ -86,7 +79,7 @@ app.get('/demo', (req, res) => {
     res.render('resources');
 });
 
-app.get('/signup', (req, res) => {
+app.get('/users/signup', (req, res) => {
     res.render('signup');
 });
 
@@ -99,43 +92,8 @@ app.use('/users', userRoutes);
 //user type routes
 app.use('/user-types', userTypeRoutes);
 
-//school type routes
-app.use('/school-types', schoolTypeRoutes);
-
-//school routes
-app.use('/schools', schoolRoutes);
-
 //department routes
 app.use('/departments', depRoutes);
-
-//course routes
-app.use('/courses', courseRoutes);
-
-//question routes
-app.user('/questions', questionRoutes);
-
-//answer routes
-app.use('/answer', answerRoutes);
-
-//resource routes
-app.get('/resources/view', async (req, res) => {
-    const resources = await Resource.find();
-    res.render('view', { resources });
-});
-app.get('/resources/create', (req, res) => {
-    res.render('create');
-});
-app.get('/resources/edit', async (req, res) => {
-    const id = req.query.resourceId;
-    const resource = await Resource.findById(id);
-    res.render('edit', { resourceID: id, resource });
-});
-
-app.get('/resources/detail', async (req, res) => {
-    const id = req.query.resourceId;
-    const resource = await Resource.findById(id);
-    res.render('detail', { resource });
-});
 
 //404 page
 app.use((req, res) => {

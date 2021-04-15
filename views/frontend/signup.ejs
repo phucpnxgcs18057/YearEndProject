@@ -1,80 +1,122 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+  <head>
+    <%- include("../partials/head.ejs") %>
+    <!-- Bootstrap min -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 
-<head>
+    <!-- Fontawesome-all min -->
+    <link rel="stylesheet" type="text/css" href="css/fontawesome-all.min.css" />
 
-	<%- include("../partials/head.ejs") %>
-	<!-- Bootstrap min -->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> 
-		
-	<!-- Fontawesome-all min -->
-	<link rel="stylesheet" type="text/css" href="css/fontawesome-all.min.css"> 
-		
-	<!-- Iofrm-style -->
-	<link rel="stylesheet" type="text/css" href="css/iofrm-style.css">
-		
-	<!-- Iofrm-theme 17 -->
-	<link rel="stylesheet" type="text/css" href="css/iofrm-theme17.css">
-		
-</head>
+    <!-- Iofrm-style -->
+    <link rel="stylesheet" type="text/css" href="css/iofrm-style.css" />
 
-<body>
-		
-	<div class="colorlib-loader"></div>
+    <!-- Iofrm-theme 17 -->
+    <link rel="stylesheet" type="text/css" href="css/iofrm-theme17.css" />
+  </head>
 
-	<div id="page">
+  <body>
+    <div class="colorlib-loader"></div>
 
-        <%- include("../partials/nav.ejs") %>
-        
-		<div class="form-body without-side">
+    <div id="page">
+      <%- include("../partials/nav.ejs") %>
 
-			<div class="row">
-				<div class="img-holder">
-					<div class="bg">
-						<img src="images/img_bg_2.jpg" alt="">
-					</div>
-				</div>
-				
-				<div class="form-holder">
-					<div class="form-content">
-						<div class="form-items">
-							<h3>Create new account</h3>
-							<p>Log in to your account to gain access to a vast library of resources</p>
-							<form>
-								<input class="form-control" type="text" name="name" placeholder="Full Name" required>
-								<input class="form-control" type="email" name="email" placeholder="E-mail Address" required>
-								<input class="form-control" type="password" name="password" placeholder="Password" required>
-								<div class="form-button">
-									<button id="submit" type="submit" class="ibtn">Create</button>
-								</div>
-							</form>
-							<div class="other-links">
-								<div class="text">Or sign-up with</div>
-								<a href="#"><i class="fab fa-facebook-f"></i>Facebook</a><a href="#"><i class="fab fa-google"></i>Google</a><a href="#"><i class="fab fa-linkedin-in"></i>Linkedin</a>
-							</div>
-							<div class="page-links">
-								<a href="/login">Login to account</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+      <div class="form-body without-side">
+        <div class="row">
+          <div class="img-holder">
+            <div class="bg">
+              <img src="images/img_bg_2.jpg" alt="" />
+            </div>
+          </div>
 
-        <%- include("../partials/footer.ejs") %>
+          <div class="form-holder">
+            <div class="form-content">
+              <div class="form-items">
+                <h3>Create new account</h3>
+                <form action="" method="POST" id="signup">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="user_name"
+                    id="user_name"
+                    placeholder="User Name"
+                    required
+                  />
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="user_full_name"
+                    id="user_full_name"
+                    placeholder="Full Name"
+                    required
+                  />
+                  <input
+                    class="form-control"
+                    type="email"
+                    name="user_email"
+                    id="user_email"
+                    placeholder="E-mail Address"
+                    required
+                  />
+                  <input
+                    class="form-control"
+                    type="password"
+                    name="password"
+                    id="user_password"
+                    placeholder="Password"
+                    required
+                  />
 
-	</div>
+				  <h4> Select Your School </h4>
+                  <div class="form-group">
+                    <div class="form-field">
+                      <i class="icon icon-arrow-down3"></i>
+                      <select name="school" id="schol" class="form-control">
+                        <option value="#">school 1</option>
+                        <option value="#">school 2</option>
+                        <option value="#">school 3</option>
+                        <option value="#">school 4</option>
+                        <option value="#">school 5</option>
+                      </select>
+                    </div>
+                  </div>
 
-	<!-- js start here -->
-	<%- include("../partials/script.ejs") %>
-	<!-- Main-log -->
-	<script src="js/main-log.js"></script>
-	
-	<!-- Popper -->
-	<script src="js/popper.min.js"></script>
+				  <h4> Select Your User Type </h4>
+                  <div class="form-group">
+                    <div class="form-field">
+                      <i class="icon icon-arrow-down3"></i>
+                      <select name="type" id="type" class="form-control">
+                        <option value="#">type 1</option>
+                        <option value="#">type 2</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-button">
+                    <button id="submit" type="submit" class="ibtn">
+                      Create
+                    </button>
+                  </div>
+                </form>
+                <div class="page-links">
+                  <a href="/login">Login to account</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-	<!-- js end here -->
+    </div>
 
-</body>
+    <!-- js start here -->
+    <%- include("../partials/script.ejs") %>
+    <!-- Main-log -->
+    <script src="js/main-log.js"></script>
+
+    <!-- Popper -->
+    <script src="js/popper.min.js"></script>
+    <!-- js end here -->
+
+	<script></script>
+  </body>
 </html>
-

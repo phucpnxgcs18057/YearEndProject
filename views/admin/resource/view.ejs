@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include("../modulars/head.ejs") %>
+  </head>
+
+  <body class="layout-compact layout-compact">
+    <div class="preloader">
+      <div class="sk-chase">
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+      </div>
+    </div>
+
+    <!-- Drawer Layout -->
+
+    <div
+      class="mdk-drawer-layout js-mdk-drawer-layout"
+      data-push
+      data-responsive-width="992px"
+    >
+      <div class="mdk-drawer-layout__content page-content">
+        <!-- Header -->
+
+        <!-- Navbar -->
+
+        <%- include("../modulars/navbar/navbar.ejs") %>
+
+        <!-- // END Navbar -->
+
+        <!-- // END Header -->
+
+        <div class="pt-32pt">
+          <div
+            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
+          >
+            <div class="flex d-flex flex-column flex-sm-row align-items-center">
+              <div class="mb-24pt mb-sm-0 mr-sm-24pt">
+                <h2 class="mb-0">All Resources</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BEFORE Page Content -->
+
+        <!-- // END BEFORE Page Content -->
+
+        <!-- Page Content -->
+
+        <div class="container page__container page-section">
+          <!-- User table -->
+
+          <div class="card mb-lg-32pt">
+            <!-- Table Content -->
+
+            <div
+              class="table-responsive"
+              data-toggle="lists"
+              data-lists-sort-by="js-lists-values-resource-name"
+              data-lists-values='["js-lists-values-resource-name", 
+                    "js-lists-values-course-name",
+                    "js-lists-values-school-name",
+                    "js-lists-values-resource-status",
+                    "js-lists-values-resource-date",
+                    "js-lists-values-resource-type"]'
+            >
+              <div class="card-header">
+                <div class="search-form">
+                  <input
+                    type="text"
+                    class="form-control search"
+                    placeholder="Search ..."
+                  />
+
+                  <button class="btn" type="button">
+                    <i class="material-icons">search</i>
+                  </button>
+                </div>
+              </div>
+
+              <table class="table mb-0 thead-border-top-0 table-nowrap">
+                <thead>
+                  <tr>
+                    <th>
+                        <a
+                          href="javascript:void(0)"
+                          class="sort"
+                          data-sort="js-lists-values-resource-name"
+                          >ID
+                        </a>
+                      </th>
+
+                    <th>
+                      <a
+                        href="javascript:void(0)"
+                        class="sort"
+                        data-sort="js-lists-values-resource-name"
+                        >Resource Name
+                      </a>
+                    </th>
+
+                    <th>
+                      <a
+                        href="javascript:void(0)"
+                        class="sort"
+                        data-sort="js-lists-values-resource-date"
+                        >Upload Date
+                      </a>
+                    </th>
+
+                    <th>
+                        <a
+                          href="javascript:void(0)"
+                          class="sort"
+                          data-sort="js-lists-values-resource-date"
+                          >Last Update
+                        </a>
+                      </th>
+
+                    <th style="width: 30px" class="pl-0">
+                      <a>Functions</a>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody class="list" id="resources">
+
+                    <% for(var i=0; i<resources.length; i++) {%>
+                        <!-- User -->
+                  <tr>
+                    <td>
+                        <div
+                          class="media flex-nowrap align-items-center"
+                          style="white-space: nowrap"
+                        >
+                          <div class="media-body">
+                            <div class="d-flex flex-column">
+                              <p class="mb-0">
+                                <strong class="js-lists-values-resource-id">
+                                  <%= resources[i]._id %>
+                                </strong>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+
+                    <td>
+                      <div
+                        class="media flex-nowrap align-items-center"
+                        style="white-space: nowrap"
+                      >
+                        <div class="media-body">
+                          <div class="d-flex flex-column">
+                            <p class="mb-0">
+                              <strong class="js-lists-values-resource-name">
+                                <%= resources[i].resource_name %>
+                              </strong>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      <small class="js-lists-values-resource-date text-50"
+                        ><%= resources[i].create_date %></small
+                      >
+                    </td>
+
+                    <td>
+                        <small class="js-lists-values-resource-date text-50"
+                          ><%= resources[i].last_update %></small
+                        >
+                      </td>
+
+                    <td class="text-right pl-0">
+                      <a href="/resources/detail?resourceId=<%= resources[i]._id %>" type="button" class="btn btn-primary">
+                        <i class="material-icons">visibility</i>
+                      </a>
+
+                      <a href="/resources/edit?resourceId=<%= resources[i]._id %>" type="button" class="btn btn-warning">
+                        <i class="material-icons">build</i>
+                      </a>
+
+                      <a href="/resources/delete/<%= resources[i]._id %>" type="button" class="btn btn-accent">
+                        <i class="material-icons">close</i>
+                      </a>
+                    </td>
+                  </tr>
+                  <!-- // END User -->
+                     <% } %>
+
+                  
+                </tbody>
+              </table>
+            </div>
+
+            <!-- // END Table Content -->
+
+            <!-- Table footer -->
+
+            <%- include("../modulars/table/footer.ejs") %>
+
+            <!-- // END Table Footer -->
+          </div>
+
+          <!-- // END User table -->
+        </div>
+
+        <!-- // END Page Content -->
+
+        <!-- Footer -->
+
+        <%- include("../modulars/footer.ejs") %>
+
+        <!-- // END Footer -->
+      </div>
+
+      <!-- // END drawer-layout__content -->
+
+      <!-- drawer -->
+
+      <div
+        class="mdk-drawer js-mdk-drawer layout-compact__drawer"
+        id="default-drawer"
+      >
+        <div
+          class="mdk-drawer__content js-sidebar-mini"
+          data-responsive-width="992px"
+          data-layout="compact"
+        >
+          <%- include("../modulars/navbar/rnav.ejs") %>
+        </div>
+      </div>
+
+      <!-- // END drawer -->
+    </div>
+
+    <!-- // END Drawer Layout -->
+
+    <!-- Dashboard js start here -->
+
+    <%- include("../modulars/js.ejs") %>
+
+    <!-- Get date -->
+    <script>
+
+    </script>
+
+    <!-- Dashboard js end here -->
+  </body>
+</html>

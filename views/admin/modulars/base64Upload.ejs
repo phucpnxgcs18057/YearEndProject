@@ -1,0 +1,28 @@
+<script>
+  async function readFileAsDataURL(file) {
+    let result_base64 = await new Promise((resolve) => {
+      let fileReader = new FileReader();
+      fileReader.onload = (e) => resolve(fileReader.result);
+      fileReader.readAsDataURL(file);
+    });
+
+    console.log(result_base64); // aGV5IHRoZXJl...
+
+    return result_base64;
+  }
+
+  // [resource_file, resource_file_base64, resource_image, resource_image_base64]
+
+  const onChangeBase64Converter = async (inputFileID, inputFileTextID) => {
+    const resourceInputFile = document.querySelector(`#${inputFileID}`);
+    console.log(resourceInputFile);
+
+    resourceInputFile.addEventListener("change", async (e) => {
+      let file = document.querySelector(`#${inputFileID}`).files[0];
+
+      const resourceBase64 = await readFileAsDataURL(file);
+
+      document.querySelector(`#${inputFileTextID}`).value = resourceBase64;
+    });
+  };
+</script>
