@@ -14,6 +14,11 @@ const resourceSchema = new Schema({
         type: String,
         default: "default.jpg"
     },
+    department: {
+        type: Schema.Types.ObjectId,
+        ref: 'department',
+        require: true
+    },
     create_date: {
         type: Date,
         default: Date.now()

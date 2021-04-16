@@ -1,16 +1,15 @@
 const Resource = require('../models/resource');
+const Department = require('../models/department');
 const routeName = `resource`;
 
 const getAllResources = async (req, res) => {
     try {
         const resources = await Resource.find()
-        res.render('resource/view', { resources });
-        // return res.json({
-        //     status: 200,
-        //     success: true,
-        //     data: resources,
-        //     count: resources.length
-        // })
+            .populate('department')
+            .exec();
+        console.log(resources);
+        const departments = await Department.find();
+        res.render('resource/view', { resources, departments });
     } catch (err) {
         console.log(err);
         return res.json({
@@ -22,22 +21,22 @@ const getAllResources = async (req, res) => {
     }
 };
 
-const addNewResourcePage = (req, res) => {
-    res.render('resource/create');
+const addNewResourcePage = async (req, res) => {
+    const departments = await Department.find();
+    res.render('resource/create', { departments });
 };
 
 const addNewResource = async (req, res) => {
     try {
-        console.log(req.body);
         const {
             resource_name
-            , resource_file_base64, resource_image_base64
+            , resource_file_base64, resource_image_base64, department
         } = req.body;
-
         await new Resource({
             resource_name: resource_name,
             resource_file: resource_file_base64,
             resource_image: resource_image_base64,
+            department: department
         }).save();
 
         return res.redirect("/resources/view");
@@ -55,7 +54,7 @@ const addNewResource = async (req, res) => {
 const getResourceById = async (req, res) => {
     try {
         const id = req.query.resourceId;
-        const resource = await Resource.findById(id)
+        const resource = await Resource.findById(id).populate('department').exec();
         res.render('resource/detail', { resource });
     } catch (err) {
         console.log(err);
@@ -70,8 +69,11 @@ const getResourceById = async (req, res) => {
 
 const editResourcePage = async (req, res) => {
     const id = req.query.resourceId;
-    const resource = await Resource.findById(id);
-    res.render('resource/edit', { resourceID: id, resource });
+    const resource = await Resource.findById(id).populate('department').exec();
+    console.log(resource.department);
+    const departments = await Department.find();
+    console.log(departments);
+    res.render('resource/edit', { resourceID: id, resource, departments });
 };
 
 const editResource = async (req, res) => {
@@ -117,9 +119,9 @@ const editResource = async (req, res) => {
 
 const deleteResource = async (req, res) => {
     try {
-    const id = req.params.resourceId;
-    await Resource.findByIdAndDelete(id);
-    res.redirect("back");    
+        const id = req.params.resourceId;
+        await Resource.findByIdAndDelete(id);
+        res.redirect("back");
     } catch (err) {
         console.log(err);
         return res.json({

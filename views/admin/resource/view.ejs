@@ -68,10 +68,9 @@
               data-lists-sort-by="js-lists-values-resource-name"
               data-lists-values='["js-lists-values-resource-name", 
                     "js-lists-values-course-name",
-                    "js-lists-values-school-name",
+                    "js-lists-values-department-name",
                     "js-lists-values-resource-status",
-                    "js-lists-values-resource-date",
-                    "js-lists-values-resource-type"]'
+                    "js-lists-values-resource-date"]'
             >
               <div class="card-header">
                 <div class="search-form">
@@ -112,19 +111,28 @@
                       <a
                         href="javascript:void(0)"
                         class="sort"
+                        data-sort="js-lists-values-department-name"
+                        >Department
+                      </a>
+                    </th>
+
+                    <th>
+                      <a
+                        href="javascript:void(0)"
+                        class="sort"
                         data-sort="js-lists-values-resource-date"
                         >Upload Date
                       </a>
                     </th>
 
                     <th>
-                        <a
-                          href="javascript:void(0)"
-                          class="sort"
-                          data-sort="js-lists-values-resource-date"
-                          >Last Update
-                        </a>
-                      </th>
+                      <a
+                        href="javascript:void(0)"
+                        class="sort"
+                        data-sort="js-lists-values-resource-date"
+                        >Last Update
+                      </a>
+                    </th>
 
                     <th style="width: 30px" class="pl-0">
                       <a>Functions</a>
@@ -165,6 +173,23 @@
                             <p class="mb-0">
                               <strong class="js-lists-values-resource-name">
                                 <%= resources[i].resource_name %>
+                              </strong>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div
+                        class="media flex-nowrap align-items-center"
+                        style="white-space: nowrap"
+                      >
+                        <div class="media-body">
+                          <div class="d-flex flex-column">
+                            <p class="mb-0">
+                              <strong class="js-lists-values-department-name">
+                                <%= resources[i].department.department_name %>
                               </strong>
                             </p>
                           </div>

@@ -35,15 +35,19 @@
         <!-- // END Header -->
 
         <div class="pt-32pt">
-          <div
-            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
-          >
-            <div class="flex d-flex flex-column flex-sm-row align-items-center">
-              <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                <h2 class="mb-0">All Departments</h2>
-              </div>
+            <div class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left">
+                <div class="flex d-flex flex-column flex-sm-row align-items-center">
+                    <div class="mb-24pt mb-sm-0 mr-sm-24pt">
+                        <h2 class="mb-0">All Departments</h2>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="container page__container d-flex flex-column flex-md-row align-items-center     text-center text-sm-left">
+                <a href="/departments/add" type="button" class="btn btn-success">
+                  <i class="material-icons">post_add</i>
+                  <span style="padding-left: 10px;">Add new Department</span>
+                </a>
+              </div>
         </div>
 
         <!-- BEFORE Page Content -->
@@ -60,9 +64,8 @@
             <div
             class="table-responsive"
             data-toggle="lists"
-            data-lists-sort-by="js-lists-values-department-id"
-            data-lists-values='["js-lists-values-department-id",
-                      "js-lists-values-department-name", 
+            data-lists-sort-by="js-lists-values-department-name"
+            data-lists-values='["js-lists-values-department-name", 
                       "js-lists-values-create-date",
                       "js-lists-values-last-update"]'
           >
@@ -83,14 +86,6 @@
             <table class="table mb-0 thead-border-top-0 table-nowrap">
               <thead>
                 <tr>
-                  <th>
-                      <a
-                        href="javascript:void(0)"
-                        class="sort"
-                        data-sort="js-lists-values-department-id"
-                        >Department ID
-                      </a>
-                    </th>
                   <th>
                     <a
                       href="javascript:void(0)"
@@ -127,22 +122,6 @@
                   <!-- Department -->
                 <tr>
                   <td>
-                      <div
-                        class="media flex-nowrap align-items-center"
-                        style="white-space: nowrap"
-                      >
-                        <div class="media-body">
-                          <div class="d-flex flex-column">
-                            <p class="mb-0">
-                              <strong class="js-lists-values-department-id">
-                                <%= departments[i]._id %>
-                              </strong>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                  </td>
-                  <td>
                       <div class="media flex-nowrap align-items-center" style="white-space: nowrap">
                           <div class="media-body">
                               <div class="d-flex flex-column">
@@ -167,11 +146,11 @@
                   </td>
   
                   <td class="text-right pl-0">
-                      <a href="/departments/detail/<%= departments[i]._id %>" type="button" class="btn btn-primary">
+                      <a href="/departments/detail?departmentId=<%= departments[i]._id %>" type="button" class="btn btn-primary">
                           <i class="material-icons">visibility</i>
                       </a>
   
-                      <a href="/departments/edit/<%= departments[i]._id %>" type="button" class="btn btn-warning">
+                      <a href="/departments/edit?departmentId=<%= departments[i]._id %>" type="button" class="btn btn-warning">
                           <i class="material-icons">build</i>
                       </a>
   

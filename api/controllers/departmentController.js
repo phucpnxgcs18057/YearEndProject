@@ -39,13 +39,7 @@ const addNewDepartment = async (req, res) => {
     try {
         const department = await new Department(req.body);
         await department.save()
-
-        return res.json({
-            status: 200,
-            success: true,
-            data: department,
-            message: `Successfully created the ${routeName}`
-        })
+        return res.redirect("/departments/view");
     } catch (err) {
         console.log(err);
         return res.json({
@@ -59,7 +53,7 @@ const addNewDepartment = async (req, res) => {
 
 const getDepartmentById = async (req, res) => {
     try {
-        const id = req.params.departmentId;
+        const id = req.query.departmentId;
         const department = await Department.findById(id)
         res.render('department/detail', { department })
     } catch (err) {
@@ -101,16 +95,13 @@ const editDepartment = async (req, res) => {
         const departmentUpdate = req.body;
         const refresh = { new: true };
 
-        const department = await Department.findByIdAndUpdate(id,
+        await Department.findByIdAndUpdate(id,
             { ...departmentUpdate, last_update: Date.now() },
             refresh);
+        await Department.find();
 
-        return res.json({
-            status: 200,
-            success: true,
-            data: department,
-            message: `Successfully updated the ${routeName}`
-        })
+        return res.redirect("/departments/view");
+
     } catch (err) {
         console.log(err);
         return res.json({

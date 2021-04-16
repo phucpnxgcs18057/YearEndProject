@@ -11,14 +11,14 @@ router.get('/add', departmentController.addNewDepartmentPage)
 
 router.post('/add', departmentController.addNewDepartment);
 
-router.get('/detail/:departmentId', departmentController.getDepartmentById);
+router.get('/detail', departmentController.getDepartmentById);
 
-router.get('/detail/client/:departmentId', departmentController.getDepartmentByIdClient);
+router.get('/detail/client', departmentController.getDepartmentByIdClient);
 
-router.get('/edit/:departmentId', departmentController.editDepartmentPage);
+router.get('/edit', departmentController.editDepartmentPage);
 
 router.post('/edit/:departmentId', departmentController.editDepartment);
 
-router.delete('/:departmentId', departmentController.deleteDepartment);
+router.get('/delete/:departmentId', departmentController.deleteDepartment);
 
 module.exports = router;
