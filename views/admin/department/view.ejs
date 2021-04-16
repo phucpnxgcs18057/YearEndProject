@@ -1,124 +1,238 @@
 <!DOCTYPE html>
-<html lang="en"
-      dir="ltr">
+<html lang="en" dir="ltr">
+  <head>
+    <%- include("../modulars/head.ejs") %>
+  </head>
 
-    <head>
-        <%- include("../partials/head.ejs") %>
-    </head>
+  <body class="layout-compact layout-compact">
+    <div class="preloader">
+      <div class="sk-chase">
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+      </div>
+    </div>
 
-    <body class="layout-compact layout-compact">
+    <!-- Drawer Layout -->
 
-        <div class="preloader">
-            <div class="sk-chase">
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
+    <div
+      class="mdk-drawer-layout js-mdk-drawer-layout"
+      data-push
+      data-responsive-width="992px"
+    >
+      <div class="mdk-drawer-layout__content page-content">
+        <!-- Header -->
+
+        <!-- Navbar -->
+
+        <%- include("../modulars/navbar/navbar.ejs") %>
+
+        <!-- // END Navbar -->
+
+        <!-- // END Header -->
+
+        <div class="pt-32pt">
+          <div
+            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
+          >
+            <div class="flex d-flex flex-column flex-sm-row align-items-center">
+              <div class="mb-24pt mb-sm-0 mr-sm-24pt">
+                <h2 class="mb-0">All Departments</h2>
+              </div>
             </div>
+          </div>
         </div>
 
-        <!-- Drawer Layout -->
+        <!-- BEFORE Page Content -->
 
-        <div class="mdk-drawer-layout js-mdk-drawer-layout"
-             data-push
-             data-responsive-width="992px">
-            <div class="mdk-drawer-layout__content page-content">
+        <!-- // END BEFORE Page Content -->
 
-                <!-- Header -->
+        <!-- Page Content -->
 
-                <!-- Navbar -->
+        <div class="container page__container page-section">
 
-                <%- include("../partials/modulars/navbar.ejs") %>
+          <div class="card mb-lg-32pt">
+            <!-- Table Content -->
 
-                <!-- // END Navbar -->
-
-                <!-- // END Header -->
-
-                <div class="pt-32pt">
-                    <div class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left">
-                        <div class="flex d-flex flex-column flex-sm-row align-items-center">
-
-                            <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                                <h2 class="mb-0">All Departments</h2>
-                            </div>
+            <div
+            class="table-responsive"
+            data-toggle="lists"
+            data-lists-sort-by="js-lists-values-department-id"
+            data-lists-values='["js-lists-values-department-id",
+                      "js-lists-values-department-name", 
+                      "js-lists-values-create-date",
+                      "js-lists-values-last-update"]'
+          >
+            <div class="card-header">
+              <div class="search-form">
+                <input
+                  type="text"
+                  class="form-control search"
+                  placeholder="Search ..."
+                />
+  
+                <button class="btn" type="button">
+                  <i class="material-icons">search</i>
+                </button>
+              </div>
+            </div>
+  
+            <table class="table mb-0 thead-border-top-0 table-nowrap">
+              <thead>
+                <tr>
+                  <th>
+                      <a
+                        href="javascript:void(0)"
+                        class="sort"
+                        data-sort="js-lists-values-department-id"
+                        >Department ID
+                      </a>
+                    </th>
+                  <th>
+                    <a
+                      href="javascript:void(0)"
+                      class="sort"
+                      data-sort="js-lists-values-department-name"
+                      >Department Name
+                    </a>
+                  </th>
+                  <th>
+                    <a
+                      href="javascript:void(0)"
+                      class="sort"
+                      data-sort="js-lists-values-create-date"
+                      >Created Date
+                    </a>
+                  </th>
+                  <th>
+                    <a
+                      href="javascript:void(0)"
+                      class="sort"
+                      data-sort="js-lists-values-last-update"
+                      >Last Update
+                    </a>
+                  </th>
+                  <th style="width: 30px" class="pl-0">
+                    <a>Functions</a>
+                  </th>
+                </tr>
+              </thead>
+  
+              <tbody class="list" id="departments">
+  
+                  <% for(var i=0; i<departments.length; i++) {%>
+                  <!-- Department -->
+                <tr>
+                  <td>
+                      <div
+                        class="media flex-nowrap align-items-center"
+                        style="white-space: nowrap"
+                      >
+                        <div class="media-body">
+                          <div class="d-flex flex-column">
+                            <p class="mb-0">
+                              <strong class="js-lists-values-department-id">
+                                <%= departments[i]._id %>
+                              </strong>
+                            </p>
+                          </div>
                         </div>
+                      </div>
+                  </td>
+                  <td>
+                      <div class="media flex-nowrap align-items-center" style="white-space: nowrap">
+                          <div class="media-body">
+                              <div class="d-flex flex-column">
+                                  <p class="mb-0">
+                                      <strong class="js-lists-values-department-name">
+                                          <%= departments[i].department_name %>
+                                      </strong>
+                                  </p>
+                              </div>
+                          </div>
+                      </div>
+                  </td>
+                  <td>
+                      <small class="js-lists-values-resource-date text-50">
+                          <%= departments[i].create_date %>
+                      </small>
+                  </td>
+                  <td>
+                      <small class="js-lists-values-resource-date text-50">
+                          <%= departments[i].last_update %>
+                      </small>
+                  </td>
+  
+                  <td class="text-right pl-0">
+                      <a href="/departments/detail/<%= departments[i]._id %>" type="button" class="btn btn-primary">
+                          <i class="material-icons">visibility</i>
+                      </a>
+  
+                      <a href="/departments/edit/<%= departments[i]._id %>" type="button" class="btn btn-warning">
+                          <i class="material-icons">build</i>
+                      </a>
+  
+                      <a href="/departments/delete/<%= departments[i]._id %>" type="button" class="btn btn-accent">
+                          <i class="material-icons">close</i>
+                      </a>
+                  </td>
+                </tr>
+                <!-- // END Department -->
+                <% } %>
+  
+              </tbody>
+            </table>
+          </div>
 
-                    </div>
-                </div>
+            <!-- // END Table Content -->
 
-                <!-- BEFORE Page Content -->
+            <!-- Table footer -->
 
-                <!-- // END BEFORE Page Content -->
+            <%- include("../modulars/table/footer.ejs") %>
 
-                <!-- Page Content -->
-
-                <div class="container page__container page-section">
-
-                    <!-- User table -->
-
-                    <div class="card mb-lg-32pt">
-
-                        <!-- Table Content -->
-
-                        <%- include("../partials/modulars/table/department.ejs") %>
-
-                        <!-- // END Table Content -->
-                        
-                        <!-- Table footer -->
-
-
-                        <%- include("../partials/modulars/table/footer.ejs") %>
-                        
-                        <!-- // END Table Footer -->
-
-                    </div>
-
-                    <!-- // END User table --> 
-
-                </div>
-
-                <!-- // END Page Content -->
-
-                <!-- Footer -->
-
-                <%- include("../partials/footer.ejs") %>
-
-
-                <!-- // END Footer -->
-
-            </div>
-
-            <!-- // END drawer-layout__content -->
-
-            <!-- drawer -->
-
-            <div class="mdk-drawer js-mdk-drawer layout-compact__drawer"
-                 id="default-drawer">
-                <div class="mdk-drawer__content js-sidebar-mini"
-                     data-responsive-width="992px"
-                     data-layout="compact">
-
-                     <%- include("../partials/modulars/rnav.ejs") %>
-                     
-                     <%- include("../partials/modulars/rnavsec.ejs") %>
-
-                </div>
-            </div>
-
-            <!-- // END drawer -->
+            <!-- // END Table Footer -->
+          </div>
 
         </div>
 
-        <!-- // END Drawer Layout -->
+        <!-- // END Page Content -->
 
-        <!-- Dashboard js start here -->
+        <!-- Footer -->
 
-        <%- include("../partials/js.ejs") %>
+        <%- include("../modulars/footer.ejs") %>
 
-        <!-- Dashboard js end here -->
+        <!-- // END Footer -->
+      </div>
 
-    </body>
+      <!-- // END drawer-layout__content -->
 
+      <!-- drawer -->
+
+      <div
+        class="mdk-drawer js-mdk-drawer layout-compact__drawer"
+        id="default-drawer"
+      >
+        <div
+          class="mdk-drawer__content js-sidebar-mini"
+          data-responsive-width="992px"
+          data-layout="compact"
+        >
+          <%- include("../modulars/navbar/rnav.ejs") %>
+        </div>
+      </div>
+
+      <!-- // END drawer -->
+    </div>
+
+    <!-- // END Drawer Layout -->
+
+    <!-- Dashboard js start here -->
+
+    <%- include("../modulars/js.ejs") %>
+
+    <!-- Dashboard js end here -->
+  </body>
 </html>

@@ -6,10 +6,6 @@ const departmentSchema = new Schema ({
         type: String,
         required: true
     },
-    school: {
-        type: Schema.Types.ObjectId,
-        ref: 'school'
-    },
     create_date: {
         type: Date,
         default: Date.now()

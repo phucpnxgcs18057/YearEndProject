@@ -41,7 +41,7 @@
                         <div class="flex d-flex flex-column flex-sm-row align-items-center">
 
                             <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                                <h2 class="mb-0">Create a New School</h2>
+                                <h2 class="mb-0">Create a New Department</h2>
                             </div>
                         </div>
 
@@ -67,12 +67,12 @@
                                     <div class="form-group">
 
                                         <label class="form-label"
-                                               for="schoolname">School Name</label>
+                                               for="departmentname">Department Name</label>
 
                                         <input type="text"
                                                    class="form-control"
-                                                   id="schoolname"
-                                                   name="schoolname"
+                                                   id="departmentname"
+                                                   name="departmentname"
                                                    placeholder="Name"
                                                    required="">
 
@@ -80,46 +80,27 @@
 
                                             <div class="valid-feedback">Looks good!</div>
                                     </div>
-                                    
-                                    <div class="form-row">
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <label class="form-label"
-                                                   for="schooladdress">City</label>
-                                            <input type="text"
+
+                                    <div class="form-group">
+
+                                        <label class="form-label"
+                                               for="schoolname">Assign to a School</label>
+
+                                        <input type="text"
                                                    class="form-control"
-                                                   id="schooladdress"
-                                                   name="schooladdress"
-                                                   placeholder="City"
+                                                   id="schoolname"
+                                                   name="school"
+                                                   placeholder="School"
                                                    required="">
-                                            <div class="invalid-feedback">Please provide a valid city.</div>
+
+                                            <div class="invalid-feedback">Please provide a valid School.</div>
+
                                             <div class="valid-feedback">Looks good!</div>
-                                        </div>
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <label class="form-label"
-                                                   for="validationSample04">State</label>
-                                            <input type="text"
-                                                   class="form-control"
-                                                   id="validationSample04"
-                                                   placeholder="State"
-                                                   required="">
-                                            <div class="invalid-feedback">Please provide a valid state.</div>
-                                            <div class="valid-feedback">Looks good!</div>
-                                        </div>
                                     </div>
-
+                                    
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-label"
-                                           for="select01">School Type</label>
-                                    <select id="select01"
-                                            data-toggle="select"
-                                            class="form-control">
-                                        <option selected="">High School</option>
-                                        <option>College</option>
-                                        <option>University</option>
-                                    </select>
-                                </div>
+                                
 
                                 <button class="btn btn-primary" type="submit">Submit</button>
 

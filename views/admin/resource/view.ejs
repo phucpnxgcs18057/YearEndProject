@@ -22,9 +22,10 @@
       class="mdk-drawer-layout js-mdk-drawer-layout"
       data-push
       data-responsive-width="992px"
-    >
+    > 
+      <!-- drawer-layout__content -->
+
       <div class="mdk-drawer-layout__content page-content">
-        <!-- Header -->
 
         <!-- Navbar -->
 
@@ -35,14 +36,18 @@
         <!-- // END Header -->
 
         <div class="pt-32pt">
-          <div
-            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
-          >
+          <div class="container page__container d-flex flex-column flex-md-row align-items-center     text-center text-sm-left">
             <div class="flex d-flex flex-column flex-sm-row align-items-center">
               <div class="mb-24pt mb-sm-0 mr-sm-24pt">
                 <h2 class="mb-0">All Resources</h2>
               </div>
             </div>
+          </div>
+          <div class="container page__container d-flex flex-column flex-md-row align-items-center     text-center text-sm-left">
+            <a href="/resources/add" type="button" class="btn btn-success">
+              <i class="material-icons">post_add</i>
+              <span style="padding-left: 10px;">Add new Resource</span>
+            </a>
           </div>
         </div>
 
@@ -53,7 +58,6 @@
         <!-- Page Content -->
 
         <div class="container page__container page-section">
-          <!-- User table -->
 
           <div class="card mb-lg-32pt">
             <!-- Table Content -->
@@ -131,7 +135,8 @@
                 <tbody class="list" id="resources">
 
                     <% for(var i=0; i<resources.length; i++) {%>
-                        <!-- User -->
+
+                        <!-- Resource -->
                   <tr>
                     <td>
                         <div
@@ -148,7 +153,7 @@
                             </div>
                           </div>
                         </div>
-                      </td>
+                    </td>
 
                     <td>
                       <div
@@ -193,7 +198,7 @@
                       </a>
                     </td>
                   </tr>
-                  <!-- // END User -->
+                  <!-- // END Resource -->
                      <% } %>
 
                   
@@ -210,7 +215,6 @@
             <!-- // END Table Footer -->
           </div>
 
-          <!-- // END User table -->
         </div>
 
         <!-- // END Page Content -->

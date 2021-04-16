@@ -34,7 +34,7 @@ const addNewResource = async (req, res) => {
             , resource_file_base64, resource_image_base64
         } = req.body;
 
-        let resource = await new Resource({
+        await new Resource({
             resource_name: resource_name,
             resource_file: resource_file_base64,
             resource_image: resource_image_base64,
@@ -116,9 +116,19 @@ const editResource = async (req, res) => {
 };
 
 const deleteResource = async (req, res) => {
+    try {
     const id = req.params.resourceId;
     await Resource.findByIdAndDelete(id);
-    res.redirect("back");
+    res.redirect("back");    
+    } catch (err) {
+        console.log(err);
+        return res.json({
+            status: 500,
+            success: false,
+            data: null,
+            message: `Internal Server Error`
+        })
+    }
 };
 
 module.exports = {

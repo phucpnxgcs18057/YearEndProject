@@ -7,13 +7,17 @@ router.get('/view', departmentController.getAllDepartment);
 
 router.get('/view/client', departmentController.getAllDepartmentClient);
 
+router.get('/add', departmentController.addNewDepartmentPage)
+
 router.post('/add', departmentController.addNewDepartment);
 
 router.get('/detail/:departmentId', departmentController.getDepartmentById);
 
 router.get('/detail/client/:departmentId', departmentController.getDepartmentByIdClient);
 
-router.put('/edit/:departmentId', departmentController.editDepartment);
+router.get('/edit/:departmentId', departmentController.editDepartmentPage);
+
+router.post('/edit/:departmentId', departmentController.editDepartment);
 
 router.delete('/:departmentId', departmentController.deleteDepartment);
 

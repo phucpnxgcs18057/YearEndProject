@@ -41,7 +41,7 @@
                         <div class="flex d-flex flex-column flex-sm-row align-items-center">
 
                             <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                                <h2 class="mb-0">Edit The Question</h2>
+                                <h2 class="mb-0">Create a New Department</h2>
                             </div>
                         </div>
 
@@ -62,28 +62,45 @@
 
                             <div class="flex" style="max-width: 100%">
 
-                                <div class="form-group">
+                                <div class="was-validated">
 
-                                    <label class="form-label"
-                                           for="questiontitle">Question Title</label>
-                                           
-                                    <input type="text"
-                                           class="form-control"
-                                           id="questiontitle"
-                                           name="questiontitle"
-                                           placeholder="Assign to a School">
+                                    <div class="form-group">
 
+                                        <label class="form-label"
+                                               for="departmentname">Department Name</label>
+
+                                        <input type="text"
+                                                   class="form-control"
+                                                   id="departmentname"
+                                                   name="departmentname"
+                                                   placeholder="Name"
+                                                   required="">
+
+                                            <div class="invalid-feedback">Please provide a valid name.</div>
+
+                                            <div class="valid-feedback">Looks good!</div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label class="form-label"
+                                               for="schoolname">Assign to a School</label>
+
+                                        <input type="text"
+                                                   class="form-control"
+                                                   id="schoolname"
+                                                   name="school"
+                                                   placeholder="School"
+                                                   required="">
+
+                                            <div class="invalid-feedback">Please provide a valid School.</div>
+
+                                            <div class="valid-feedback">Looks good!</div>
+                                    </div>
+                                    
                                 </div>
 
-                                <label class="form-label">Question Content</label>
-
-                                <div style="height: 150px;"
-                                     data-toggle="quill"
-                                     data-quill-placeholder="Quill WYSIWYG editor">
-                                    <h1>Hello World!</h1>
-                                    <p>Some initial <strong>bold</strong> text</p>
-                                    <p><br></p>
-                                </div>
+                                
 
                                 <button class="btn btn-primary" type="submit">Submit</button>
 

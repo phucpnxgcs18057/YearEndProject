@@ -1,106 +1,124 @@
-<div class="sidebar sidebar-mini sidebar-dark-pickled-bluewood sidebar-left d-flex flex-column">
+<div
+  class="sidebar sidebar-mini sidebar-dark-pickled-bluewood sidebar-left d-flex flex-column"
+>
+  <!-- Brand -->
+  <a class="sidebar-brand p-0 navbar-height d-flex justify-content-center">
+    <span class="avatar avatar-sm">
+      <span class="avatar-title rounded bg-primary"
+        ><img
+          src="../dashboard/images/illustration/teacher/128/white.svg"
+          class="img-fluid"
+          alt="logo"
+        />
+      </span>
+    </span>
+  </a>
 
-    <!-- Brand -->
-    <a href="index.html"
-       class="sidebar-brand p-0 navbar-height d-flex justify-content-center">
-        <span class="avatar avatar-sm ">
-
-            <span class="avatar-title rounded bg-primary"><img src="../dashboard/images/illustration/teacher/128/white.svg"
-                    class="img-fluid"
-                     alt="logo"
-                />
-            </span>
-        </span>
-    </a>
-
-    <div class="flex d-flex flex-column justify-content-start"
-         data-perfect-scrollbar>
-        <ul class="nav flex-shrink-0 flex-nowrap flex-column sidebar-menu mb-0 sm-item-bordered js-sidebar-mini-tabs"
-            role="tablist">
-            <li class="sidebar-menu-item"
-                data-title="Student"
-                data-placement="right"
-                data-boundary="window">
-                <a class="sidebar-menu-button"
-                   href="#sm_student"
-                   data-toggle="tab"
-                   role="tab"
-                   aria-controls="sm_student"
-                   aria-selected="true">
-                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">school</i>
-                    <span class="sidebar-menu-text">Resources</span>
-                </a>
-            </li>
-            <li class="sidebar-menu-item"
-                data-title="Instructor"
-                data-placement="right"
-                data-container="body"
-                data-boundary="window">
-                <a class="sidebar-menu-button"
-                   href="#sm_instructor"
-                   data-toggle="tab"
-                   role="tab"
-                   aria-controls="sm_instructor"
-                   aria-selected="false">
-                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">folder</i>
-                    <span class="sidebar-menu-text">Departments</span>
-                </a>
-            </li>
-            <li class="sidebar-menu-item"
-                data-title="Instructor"
-                data-placement="right"
-                data-container="body"
-                data-boundary="window">
-                <a class="sidebar-menu-button"
-                   href="#sm_instructor"
-                   data-toggle="tab"
-                   role="tab"
-                   aria-controls="sm_instructor"
-                   aria-selected="false">
-                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">attach_money</i>
-                    <span class="sidebar-menu-text">Donations</span>
-                </a>
-            </li>
-            <li class="sidebar-menu-item "
-                data-title="Apps"
-                data-placement="right"
-                data-container="body"
-                data-boundary="window">
-                <a class="sidebar-menu-button"
-                   href="#sm_apps"
-                   data-toggle="tab"
-                   role="tab"
-                   aria-controls="sm_apps">
-                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">apps</i>
-                    <span class="sidebar-menu-text">Library</span>
-                </a>
-            </li>
-            <li class="sidebar-menu-item "
-                data-title="Account"
-                data-placement="right"
-                data-container="body"
-                data-boundary="window">
-                <a class="sidebar-menu-button"
-                   href="#sm_account"
-                   data-toggle="tab"
-                   role="tab"
-                   aria-controls="sm_account">
-                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">person</i>
-                    <span class="sidebar-menu-text">User</span>
-                </a>
-            </li>
-            <ul class="nav flex-column sidebar-menu align-items-center" role="tablist">
-                <li class="sidebar-account"style="width: 40px;">
-                    <a href="#sm_account_1">
-                        <span class="avatar avatar-sm mr-8pt2">
-                            <span class="avatar-title rounded-circle bg-primary">
-                              <i class="material-icons">account_box</i>
-                            </span>
-                        </span>
-                    </a>
-                    
-                </li>
-            </ul>
-        </ul>
-    </div>
+  <div
+    class="flex d-flex flex-column justify-content-start"
+    data-perfect-scrollbar
+  >
+    <li
+      class="sidebar-menu-item"
+      data-title="Student"
+      data-placement="right"
+      data-boundary="window"
+    >
+      <a
+        class="sidebar-menu-button"
+        href="/resources/view"
+        data-toggle="tab"
+        role="tab"
+        aria-controls="sm_student"
+        aria-selected="true"
+      >
+        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons"
+          >school</i
+        >
+        <span class="sidebar-menu-text">Resources</span>
+      </a>
+    </li>
+    <li
+      class="sidebar-menu-item"
+      data-title="Instructor"
+      data-placement="right"
+      data-container="body"
+      data-boundary="window"
+    >
+      <a
+        class="sidebar-menu-button"
+        href="/departments/view"
+        data-toggle="tab"
+        role="tab"
+        aria-controls="sm_instructor"
+        aria-selected="false"
+      >
+        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons"
+          >folder</i
+        >
+        <span class="sidebar-menu-text">Departments</span>
+      </a>
+    </li>
+    <li
+      class="sidebar-menu-item"
+      data-title="Instructor"
+      data-placement="right"
+      data-container="body"
+      data-boundary="window"
+    >
+      <a
+        class="sidebar-menu-button"
+        href="#"
+        data-toggle="tab"
+        role="tab"
+        aria-controls="sm_instructor"
+        aria-selected="false"
+      >
+        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons"
+          >attach_money</i
+        >
+        <span class="sidebar-menu-text">Donations</span>
+      </a>
+    </li>
+    <li
+      class="sidebar-menu-item"
+      data-title="Apps"
+      data-placement="right"
+      data-container="body"
+      data-boundary="window"
+    >
+      <a
+        class="sidebar-menu-button"
+        href="library/view"
+        data-toggle="tab"
+        role="tab"
+        aria-controls="sm_apps"
+      >
+        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons"
+          >apps</i
+        >
+        <span class="sidebar-menu-text">Library</span>
+      </a>
+    </li>
+    <li
+      class="sidebar-menu-item"
+      data-title="Account"
+      data-placement="right"
+      data-container="body"
+      data-boundary="window"
+    >
+      <a
+        class="sidebar-menu-button"
+        href="users/view"
+        data-toggle="tab"
+        role="tab"
+        aria-controls="sm_account"
+      >
+        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons"
+          >person</i
+        >
+        <span class="sidebar-menu-text">User</span>
+      </a>
+    </li>
+  </div>
 </div>

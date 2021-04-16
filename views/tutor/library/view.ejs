@@ -41,7 +41,7 @@
                         <div class="flex d-flex flex-column flex-sm-row align-items-center">
 
                             <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                                <h2 class="mb-0">Edit The Question</h2>
+                                <h2 class="mb-0">All Departments</h2>
                             </div>
                         </div>
 
@@ -56,42 +56,26 @@
 
                 <div class="container page__container page-section">
 
-                    <div class="row mb-32pt">
+                    <!-- User table -->
 
-                        <div class= "col-lg-8 d-flex align-items-center"> 
+                    <div class="card mb-lg-32pt">
 
-                            <div class="flex" style="max-width: 100%">
+                        <!-- Table Content -->
 
-                                <div class="form-group">
+                        <%- include("../partials/modulars/table/department.ejs") %>
 
-                                    <label class="form-label"
-                                           for="questiontitle">Question Title</label>
-                                           
-                                    <input type="text"
-                                           class="form-control"
-                                           id="questiontitle"
-                                           name="questiontitle"
-                                           placeholder="Assign to a School">
+                        <!-- // END Table Content -->
+                        
+                        <!-- Table footer -->
 
-                                </div>
 
-                                <label class="form-label">Question Content</label>
-
-                                <div style="height: 150px;"
-                                     data-toggle="quill"
-                                     data-quill-placeholder="Quill WYSIWYG editor">
-                                    <h1>Hello World!</h1>
-                                    <p>Some initial <strong>bold</strong> text</p>
-                                    <p><br></p>
-                                </div>
-
-                                <button class="btn btn-primary" type="submit">Submit</button>
-
-                            </div>
-
-                        </div>
+                        <%- include("../partials/modulars/table/footer.ejs") %>
+                        
+                        <!-- // END Table Footer -->
 
                     </div>
+
+                    <!-- // END User table --> 
 
                 </div>
 

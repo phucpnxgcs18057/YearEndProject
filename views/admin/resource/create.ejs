@@ -44,6 +44,14 @@
               </div>
             </div>
           </div>
+          <div
+            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
+          >
+            <a href="/resources/add" type="button" class="btn btn-success">
+              <i class="material-icons">keyboard_return</i>
+              <span style="padding-left: 10px">Back</span>
+            </a>
+          </div>
         </div>
 
         <!-- BEFORE Page Content -->
@@ -57,25 +65,30 @@
             <div class="col-lg-8 d-flex align-items-center">
               <div class="flex" style="max-width: 100%">
                 <form action="add" method="POST">
-                  <div class="form-group">
-                    <label class="form-label" for="resource_name"
-                      >Resource Name</label
-                    >
-
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="resourcename"
-                      name="resource_name"
-                      placeholder="Enter your email address .."
-                    />
+                  <div class="was-validated">
+                    <div class="form-group">
+                      <label class="form-label" for="resource_name">
+                        Resource Name
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="resourcename"
+                        name="resource_name"
+                        placeholder="Enter the Resource Name ..."
+                        required=""
+                      />
+                      <div class="invalid-feedback">
+                        Please provide a valid name.
+                      </div>
+                      <div class="valid-feedback">Looks good!</div>
+                    </div>
                   </div>
 
                   <div class="form-group">
-                    <label class="form-label" for="resource_file"
-                      >Resource Content</label
-                    >
-
+                    <label class="form-label" for="resource_file">
+                      Resource Content
+                    </label>
                     <div class="file">
                       <input
                         type="file"
@@ -90,15 +103,16 @@
                         id="resource_file_base64"
                         name="resource_file_base64"
                       />
-                      <label for="file" class="file-label">Choose file</label>
+                      <label for="file" class="file-label text-danger">
+                        *Only accept .pdf
+                      </label>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label class="form-label" for="resource_image"
-                      >Resource Image</label
-                    >
-
+                    <label class="form-label" for="resource_image">
+                      Resource Image
+                    </label>
                     <div class="file">
                       <input
                         type="file"
@@ -113,7 +127,9 @@
                         id="resource_image_base64"
                         name="resource_image_base64"
                       />
-                      <label for="file" class="file-label">Choose image</label>
+                      <label for="file" class="file-label text-danger">
+                        *Only accept .jpg, .png
+                      </label>
                     </div>
                   </div>
 
@@ -127,8 +143,6 @@
         <!-- // END Page Content -->
 
         <!-- Footer -->
-
-        <%- include("../modulars/footer.ejs") %>
 
         <!-- // END Footer -->
       </div>

@@ -35,14 +35,20 @@
         <!-- // END Header -->
 
         <div class="pt-32pt">
-          <div
-            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
-          >
+          <div class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left">
             <div class="flex d-flex flex-column flex-sm-row align-items-center">
               <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                <h2 class="mb-0">Resource Detail</h2>
+                <h1 class="mb-0">
+                  <%=resource.resource_name%>
+                </h1>
               </div>
             </div>
+          </div>
+          <div class="container page__container d-flex flex-column flex-md-row align-items-center     text-center text-sm-left">
+            <a href="/resources/view" type="button" class="btn btn-success">
+              <i class="material-icons">keyboard_return</i>
+              <span style="padding-left: 10px;">Back</span>
+            </a>
           </div>
         </div>
 
@@ -54,23 +60,29 @@
 
         <div class="page-section bg-white border-bottom-2">
           <div class="container page__container">
-            <div
-              class="d-flex flex-column flex-md-row align-items-center align-items-md-start flex mb-16pt text-center text-md-left"
-            >
+            <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start flex mb-16pt text-center text-md-left">
               <div class="flex">
-                <h1 class="h2 measure-lead-max mb-16pt">
-                  <%=resource.resource_name%>
-                </h1>
-                <div class="d-flex align-items-center">
-                  <div class="mr-16pt">
-                    <a href="teacher-profile.html" class="card-title"
-                      >User name</a
-                    >
-                    <div class="d-flex align-items-center">
-                      <small class="text-50 mr-2">Upload Date</small>
-                    </div>
+                <div class="col-lg-4">
+                  <div class="page-separator">
+                      <div class="page-separator__text">
+                        <a href="">Department</a>
+                      </div>
                   </div>
-                </div>
+                  <p class="card-subtitle text-70 mb-16pt mb-lg-0">
+                    <div class="d-flex align-items-center">
+                      <div class="mr-16pt">
+                        <a href="#" class="card-title">
+                          User name
+                        </a>
+                        <div class="d-flex align-items-center">
+                          <small class="text-50 mr-2">
+                            Upload Date: <%=resource.create_date%>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </p>
+                  </div>
               </div>
             </div>
           </div>
@@ -78,32 +90,35 @@
 
         <div class="page-section border-bottom-2">
           <div class="container page__container">
-            <div
-              class="d-flex flex-column flex-md-row align-items-md-center mb-16pt"
-            >
-              <div class="mb-16pt mb-md-0 mr-md-16pt">
-                <h2>Image here</h2>
+            <div class="d-flex flex-column flex-md-row mb-16pt">
 
-                <div
-                  class="rounded p-relative o-hidden overlay overlay--primary"
-                >
-                  <img
-                    class="img-fluid rounded"
-                    src="<%=resource.resource_image%>"
-                    alt="image"
-                  />
-                  <div class="overlay__content"></div>
+              <div class="col-lg-4">
+                <h2>Image Content</h2>
+                <p class="card-subtitle text-70 mb-16pt mb-lg-0"> 
+                  <div class="rounded p-relative o-hidden overlay overlay--primary">
+                    <img
+                      class="img-fluid rounded"
+                      src="<%=resource.resource_image%>"
+                      alt="image"/>
+                    <div class="overlay__content"></div>
+                  </div>
+                </p>
+                <div class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left">
+                  <a href="/resources/edit?resourceId=<%= resource._id %>" type="button" class="btn btn-warning">
+                    <i class="material-icons">build</i>
+                    <span style="padding-left: 10px;">Edit</span>
+                  </a>
                 </div>
               </div>
-
               <div class="flex">
-                <h1>Content Here</h1>
+                <h2>Resource Content</h2>
                 <iframe
                   src="<%=resource.resource_file%>"
                   width="100%"
-                  height="500px"
+                  height="900px"
                 ></iframe>
               </div>
+              
             </div>
           </div>
         </div>
@@ -111,8 +126,6 @@
         <!-- // END Page Content -->
 
         <!-- Footer -->
-
-        <%- include("../modulars/footer.ejs") %>
 
         <!-- // END Footer -->
       </div>
