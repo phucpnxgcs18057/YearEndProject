@@ -62,7 +62,138 @@
 
                         <!-- Table Content -->
 
-                        <%- include("../partials/modulars/table/donation.ejs") %>
+                        <div class="table-responsive"
+data-toggle="lists"
+data-lists-sort-by="js-lists-values-employee-name"
+data-lists-values='["js-lists-values-name", 
+                    "js-lists-values-status", 
+                    "js-lists-values-activity", 
+                    "js-lists-values-earnings"]'>
+
+<div class="card-header">
+
+    <div class="search-form">
+                    
+        <input type="text"
+            class="form-control search"
+            placeholder="Search ...">
+                    
+        <button class="btn"
+            type="button"><i class="material-icons">search</i>
+        </button>
+                    
+    </div>
+                        
+</div>
+
+<table class="table mb-0 thead-border-top-0 table-nowrap">
+
+    <thead>
+
+        <tr>
+
+            <th>
+
+                <a href="javascript:void(0)"
+                   class="sort"
+                   data-sort="js-lists-values-name">Name
+                </a>
+
+            </th>
+
+            <th>
+
+                <a href="javascript:void(0)"
+                   class="sort"
+                   data-sort="js-lists-values-status">Type
+                </a>
+
+            </th>
+
+            <th>
+
+               <a href="javascript:void(0)"
+                  class="sort"
+                  data-sort="js-lists-values-activity">Last Donation
+                </a>
+
+            </th>
+
+            <th>
+
+               <a href="javascript:void(0)"
+                  class="sort"
+                  data-sort="js-lists-values-earnings">Amount
+                </a>
+
+            </th>
+
+            <th style="width: 30px;"
+               class="pl-0">
+               <a>Function</a>
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody class="list"
+          id="donation">
+
+        <!-- User 1 -->
+        <tr>
+
+            <td>
+
+                <div class="media flex-nowrap align-items-center"
+                    style="white-space: nowrap;">
+
+                    <div class="avatar avatar-sm mr-8pt">
+
+                       <img src="../dashboard/images/people/110/guy-1.jpg"
+                            alt="Avatar"
+                            class="avatar-img rounded-circle">
+
+                    </div>
+
+                    <div class="media-body">
+
+                        <div class="d-flex flex-column">
+                           <p class="mb-0"><strong class="js-lists-values-name">Michael Smith</strong></p>
+                           <small class="js-lists-values-email text-50">michael.smith@yahoo.com</small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </td>
+
+
+            <td>
+
+               <a href=""
+                  class="chip chip-outline-secondary js-lists-values-status">Admin</a>
+
+            </td>
+
+           <td class="text-50 js-lists-values-activity small">3 days ago</td>
+
+           <td class="js-lists-values-earnings small">$12,402</td>
+
+            <td class="text-center pl-0">
+                <button type="button" class="btn btn-primary">
+                    <i class="material-icons">visibility</i>
+                </button>
+            </td>
+
+        </tr>
+        <!-- // END User 1 -->
+
+    </tbody>
+
+</table>
+</div>
 
                         <!-- // END Table Content -->
                         

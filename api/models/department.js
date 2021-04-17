@@ -1,10 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const domPurifier = require('dompurify');
+const {JSDOM} = require('jsdom');
+const htmlPurify = domPurifier(new JSDOM().window);
+const {stripHtml} = require('string-strip-html');
 
 const departmentSchema = new Schema ({
     department_name: {
         type: String,
         required: true
+    },
+    department_description: {
+        type: String,
+        required: true
+    },
+    description_snippet: {
+        type: String,
     },
     create_date: {
         type: Date,
@@ -16,5 +27,13 @@ const departmentSchema = new Schema ({
     }
 });
 
+departmentSchema.pre('validate', function (next) {
+    //Check if a description is there or not
+    if (this.department_description) {
+        this.department_description = htmlPurify.sanitize(this.department_description);
+        this.description_snippet = stripHtml(this.department_description.substring(0,100)).result;
+    }
+    next();
+});
 const Department = mongoose.model('department', departmentSchema);
 module.exports = Department;

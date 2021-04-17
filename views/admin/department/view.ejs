@@ -65,7 +65,8 @@
             class="table-responsive"
             data-toggle="lists"
             data-lists-sort-by="js-lists-values-department-name"
-            data-lists-values='["js-lists-values-department-name", 
+            data-lists-values='["js-lists-values-department-name",
+                      "js-lists-values-department-snippet",
                       "js-lists-values-create-date",
                       "js-lists-values-last-update"]'
           >
@@ -92,6 +93,14 @@
                       class="sort"
                       data-sort="js-lists-values-department-name"
                       >Department Name
+                    </a>
+                  </th>
+                  <th>
+                    <a
+                      href="javascript:void(0)"
+                      class="sort"
+                      data-sort="js-lists-values-department-snippet"
+                      >Description Snippet
                     </a>
                   </th>
                   <th>
@@ -135,13 +144,18 @@
                       </div>
                   </td>
                   <td>
+                    <small class="js-lists-values-resource-date text-50">
+                        <%= departments[i].description_snippet.substring(0,15) %>
+                    </small>
+                </td>
+                  <td>
                       <small class="js-lists-values-resource-date text-50">
-                          <%= departments[i].create_date %>
+                          <%= departments[i].create_date.toLocaleDateString() %>
                       </small>
                   </td>
                   <td>
                       <small class="js-lists-values-resource-date text-50">
-                          <%= departments[i].last_update %>
+                          <%= departments[i].last_update.toLocaleDateString() %>
                       </small>
                   </td>
   

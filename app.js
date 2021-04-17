@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const methodOverride = require('method-override');
 
 //importing routes
 const resourceRoutes = require('./api/routes/resource');
@@ -49,6 +50,7 @@ app.use('/img', express.static(__dirname + 'public/images'));
 app.use('/js', express.static(__dirname + 'public/js'));
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ limit: '100mb', extended: false }));
+app.use(methodOverride('_method'));
 
 //routing
 app.get('/', (req, res) => {
@@ -77,6 +79,10 @@ app.get('/login', (req, res) => {
 
 app.get('/demo', (req, res) => {
     res.render('resources');
+});
+
+app.get('/signup', (req,res) => {
+    res.render('signup');
 });
 
 app.get('/users/signup', (req, res) => {

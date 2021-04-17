@@ -1,19 +1,15 @@
 const User = require('../models/user');
+const Type = require('../models/usertype');
 const { encrypt, compare } = require('../other/bcrypt');
 const routeName = `user`;
 
 const getAllUsers = async (req, res) => {
     try {
-        const user = await User.find()
+        const users = await User.find()
             .populate('type')
-            .populate('school');
-
-        return res.json({
-            status: 200,
-            success: true,
-            data: user,
-            count: user.length
-        })
+            .exec();
+        const types = await Type.find();
+        res.render('user/view', { users, types });
     } catch (err) {
         console.log(err);
         return res.json({
@@ -28,17 +24,11 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
     try {
         const id = req.params.userId;
-        await User.findById(id)
+        const user = await User.findById(id)
             .populate('type')
-            .populate('school')
-            .then(doc => {
-                console.log("From database", doc);
-                if (doc) {
-                    res.status(200).json(doc);
-                } else {
-                    res.status(404).json({ message: "Unavailable / Non-exist ID" });
-                }
-            });
+            .exec();
+        res.render('user/detail', { user });
+
     } catch (err) {
         console.log(err);
         return res.json({
@@ -53,17 +43,11 @@ const getUserById = async (req, res) => {
 const getUserByIdClient = async (req, res) => {
     try {
         const id = req.params.userId;
-        await User.findById(id)
+        const user = await User.findById(id)
             .populate('type')
-            .populate('school')
-            .then(doc => {
-                console.log("From database", doc);
-                if (doc) {
-                    res.status(200).json(doc);
-                } else {
-                    res.status(404).json({ message: "Unavailable / Non-exist ID" });
-                }
-            });
+            .exec();
+        res.render('user/detail', { user });
+
     } catch (err) {
         console.log(err);
         return res.json({
@@ -73,12 +57,17 @@ const getUserByIdClient = async (req, res) => {
             message: `Internal Server Error`
         })
     }
+};
+
+const addNewUserPage = async (req, res) => {
+    const users = await User.find();
+    res.render('user/create', { users });
 };
 
 const addNewUser = async (req, res) => {
     try {
 
-        const { user_name, user_password, user_full_name, user_email, school, type } = req.body;
+        const { user_name, user_password, user_full_name, user_email, type } = req.body;
 
         const checkUser = await User.findOne({ user_email });
         if (checkUser) {
@@ -92,20 +81,15 @@ const addNewUser = async (req, res) => {
 
         const encryptPassword = encrypt(user_password);
         const user = await new User({
-            user_name,
+            user_name: user_name,
             user_password: encryptPassword,
-            user_full_name, user_email, school, type,
-            create_date: Date.now(),
-            last_update: Date.now()
+            user_full_name: user_full_name, 
+            user_email: user_email, 
+            type: type,
         });
         await user.save()
 
-        return res.json({
-            status: 200,
-            success: true,
-            data: user,
-            message: `Successfully created the ${routeName}`
-        })
+        return res.redirect("/users/view");
     } catch (err) {
         console.log(err);
         return res.json({
@@ -117,10 +101,15 @@ const addNewUser = async (req, res) => {
     }
 };
 
+const signUpPage = async (req, res) => {
+    const users = await User.find();
+    res.render('/signup', { users });
+};
+
 const signUp = async (req, res) => {
     try {
 
-        const { user_name, user_password, user_full_name, user_email, school, type } = req.body;
+        const { user_name, user_password, user_full_name, user_email, type } = req.body;
 
         const checkUser = await User.findOne({ user_email });
         if (checkUser) {
@@ -134,21 +123,15 @@ const signUp = async (req, res) => {
 
         const encryptPassword = encrypt(user_password);
         const user = await new User({
-            user_name,
+            user_name: user_name,
             user_password: encryptPassword,
-            user_full_name, user_email, school, type,
-            create_date: Date.now(),
-            last_update: Date.now()
+            user_full_name: user_full_name, 
+            user_email: user_email, 
+            type: type,
         });
         await user.save()
 
-        return res.json({
-            status: 200,
-            success: true,
-            data: user,
-            message: `Successfully created the ${routeName}`
-        })
-
+        return res.redirect("/users/view");
     } catch (err) {
         console.log(err);
         return res.json({
@@ -158,6 +141,13 @@ const signUp = async (req, res) => {
             message: `Internal Server Error`
         })
     }
+};
+
+const editUserClientPage = async (req, res) => {
+    const id = req.query.userId;
+    const user = await User.findById(id).populate('type').exec();
+    const types = await Type.find();
+    res.render('user/edit', { userID: id, user, types });
 };
 
 const editUserClient = async (req, res) => {
@@ -167,16 +157,10 @@ const editUserClient = async (req, res) => {
         const refresh = { new: true };
 
         const encryptPassword = encrypt(req.body.user_password)
-        const user = await User.findByIdAndUpdate(id,
+        await User.findByIdAndUpdate(id,
             { ...userUpdate, user_password: encryptPassword, last_update: Date.now() },
             refresh);
-
-        return res.json({
-            status: 200,
-            success: true,
-            data: user,
-            message: `Successfully updated the ${routeName}`
-        })
+        return res.redirect("/users/view");
     } catch (err) {
         console.log(err);
         return res.json({
@@ -188,6 +172,13 @@ const editUserClient = async (req, res) => {
     }
 };
 
+const editUserPage = async (req, res) => {
+    const id = req.query.userId;
+    const user = await User.findById(id).populate('type').exec();
+    const types = await Type.find();
+    res.render('user/edit', { userID: id, user, types });
+};
+
 const editUser = async (req, res) => {
     try {
         const id = req.params.userId;
@@ -195,16 +186,10 @@ const editUser = async (req, res) => {
         const refresh = { new: true };
 
         const encryptPassword = encrypt(req.body.user_password)
-        const user = await User.findByIdAndUpdate(id,
+        await User.findByIdAndUpdate(id,
             { ...userUpdate, user_password: encryptPassword, last_update: Date.now() },
             refresh);
-
-        return res.json({
-            status: 200,
-            success: true,
-            data: user,
-            message: `Successfully updated the ${routeName}`
-        })
+        return res.redirect("/users/view");
     } catch (err) {
         console.log(err);
         return res.json({
@@ -220,13 +205,7 @@ const deleteUser = async (req, res) => {
     try {
         const id = req.params.userId;
         const user = await User.findByIdAndDelete(id)
-
-        return res.json({
-            status: 200,
-            success: true,
-            data: user,
-            message: `Successfully deleted the ${routeName}`
-        })
+        res.redirect("back");
     } catch (err) {
         console.log(err);
         return res.json({
@@ -358,9 +337,13 @@ module.exports = {
     getAllUsers,
     getUserById,
     getUserByIdClient,
+    addNewUserPage,
     addNewUser,
+    signUpPage,
     signUp,
+    editUserPage,
     editUser,
+    editUserClientPage,
     editUserClient,
     deleteUser,
     loginClient,

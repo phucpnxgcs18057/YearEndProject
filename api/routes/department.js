@@ -17,7 +17,7 @@ router.get('/detail/client', departmentController.getDepartmentByIdClient);
 
 router.get('/edit', departmentController.editDepartmentPage);
 
-router.post('/edit/:departmentId', departmentController.editDepartment);
+router.put('/edit/:departmentId', departmentController.editDepartment);
 
 router.get('/delete/:departmentId', departmentController.deleteDepartment);
 

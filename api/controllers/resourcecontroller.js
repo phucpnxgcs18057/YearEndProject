@@ -7,7 +7,6 @@ const getAllResources = async (req, res) => {
         const resources = await Resource.find()
             .populate('department')
             .exec();
-        console.log(resources);
         const departments = await Department.find();
         res.render('resource/view', { resources, departments });
     } catch (err) {
@@ -70,7 +69,6 @@ const getResourceById = async (req, res) => {
 const editResourcePage = async (req, res) => {
     const id = req.query.resourceId;
     const resource = await Resource.findById(id).populate('department').exec();
-    console.log(resource.department);
     const departments = await Department.find();
     console.log(departments);
     res.render('resource/edit', { resourceID: id, resource, departments });

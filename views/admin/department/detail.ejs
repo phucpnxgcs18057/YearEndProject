@@ -39,13 +39,13 @@
             <div class="flex d-flex flex-column flex-sm-row align-items-center">
               <div class="mb-24pt mb-sm-0 mr-sm-24pt">
                 <h1 class="mb-0">
-                  <%=resource.resource_name%>
+                  <%=department.department_name%>
                 </h1>
               </div>
             </div>
           </div>
           <div class="container page__container d-flex flex-column flex-md-row align-items-center     text-center text-sm-left">
-            <a href="/resources/view" type="button" class="btn btn-success">
+            <a href="/departments/view" type="button" class="btn btn-success">
               <i class="material-icons">keyboard_return</i>
               <span style="padding-left: 10px;">Back</span>
             </a>
@@ -65,18 +65,20 @@
                 <div class="">
                   <div class="page-separator">
                       <div class="page-separator__text">
-                        <a href=""><%=resource.department.department_name%></a>
+                        Department Detail
                       </div>
                   </div>
                   <p class="card-subtitle text-70 mb-16pt mb-lg-0">
                     <div class="d-flex align-items-center">
                       <div class="mr-16pt">
-                        <a href="#" class="card-title">
-                          User name
-                        </a>
                         <div class="d-flex align-items-center">
                           <small class="text-50 mr-2">
-                            Upload Date: <%=resource.create_date.toLocaleDateString()%>
+                            Upload Date: <%=department.create_date.toLocaleDateString()%>
+                          </small>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <small class="text-50 mr-2">
+                            Number of Assigned Resource(s):
                           </small>
                         </div>
                       </div>
@@ -87,45 +89,32 @@
             </div>
           </div>
         </div>
-
-        <div class="page-section border-bottom-2">
-          <div class="container page__container">
-            <div class="d-flex flex-column flex-md-row mb-16pt">
-
-              <div class="col-lg-4">
-                <h2>Image Content</h2>
-                <p class="card-subtitle text-70 mb-16pt mb-lg-0"> 
-                  <div class="rounded p-relative o-hidden overlay overlay--primary">
-                    <img
-                      class="img-fluid rounded"
-                      src="<%=resource.resource_image%>"
-                      alt="image"/>
-                    <div class="overlay__content"></div>
-                  </div>
+        <div class="mdk-box bg-grey js-mdk-box mb-0"
+          data-effects="blend-background">
+          <div class="mdk-box__content">
+            <div class="hero py-64pt text-center text-sm-left">
+              <div class="container page__container">
+                <h2 class="text">
+                  Department Description
+                </h2>
+                  <p class="lead text-white-50 measure-hero-lead">
+                  <%-department.department_description%>
                 </p>
-                <div class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left">
-                  <a href="/resources/edit?resourceId=<%= resource._id %>" type="button" class="btn btn-warning">
+                <div class="d-flex flex-column flex-sm-row align-items-center justify-content-start">
+                  <a href="/department/edit?departmentId=<%= department._id %>" type="button"       class="btn btn-warning">
                     <i class="material-icons">build</i>
                     <span style="padding-left: 10px;">Edit</span>
                   </a>
                 </div>
               </div>
-              <div class="flex">
-                <h2>Resource Content</h2>
-                <iframe
-                  src="<%=resource.resource_file%>"
-                  width="100%"
-                  height="900px"
-                ></iframe>
-              </div>
-              
             </div>
           </div>
         </div>
-
         <!-- // END Page Content -->
 
         <!-- Footer -->
+
+        <%- include("../modulars/footer.ejs") %>
 
         <!-- // END Footer -->
       </div>
