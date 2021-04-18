@@ -39,7 +39,7 @@
             <div class="flex d-flex flex-column flex-sm-row align-items-center">
               <div class="mb-24pt mb-sm-0 mr-sm-24pt">
                 <h1 class="mb-0">
-                  <%=department.department_name%>
+                  Department Detail
                 </h1>
               </div>
             </div>
@@ -59,53 +59,33 @@
         <!-- Page Content -->
 
         <div class="page-section bg-white border-bottom-2">
-          <div class="container page__container">
-            <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start flex mb-16pt text-center text-md-left">
-              <div class="flex">
-                <div class="">
-                  <div class="page-separator">
-                      <div class="page-separator__text">
-                        Department Detail
-                      </div>
-                  </div>
-                  <p class="card-subtitle text-70 mb-16pt mb-lg-0">
-                    <div class="d-flex align-items-center">
-                      <div class="mr-16pt">
-                        <div class="d-flex align-items-center">
-                          <small class="text-50 mr-2">
-                            Upload Date: <%=department.create_date.toLocaleDateString()%>
-                          </small>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <small class="text-50 mr-2">
-                            Number of Assigned Resource(s):
-                          </small>
-                        </div>
-                      </div>
-                    </div>
-                  </p>
-                  </div>
-              </div>
+          <div class="container page__container d-flex flex-column flex-md-row align-items-center     text-center text-md-left">
+            <div class="flex mb-32pt mb-md-0">
+              <h2 class="text-black mb-0">
+                <%=department.department_name%>
+              </h2>
+              <p class="lead text-black-50 d-flex align-items-center">
+                Create Date: <%=department.create_date.toLocaleDateString()%>
+                <br>
+                Last Update: <%=department.last_update.toLocaleDateString()%>  
+              </p>
             </div>
+            <a href="/departments/edit?departmentId=<%= department._id %>" type="button" class="btn btn-warning">
+              <i class="material-icons">build</i>
+              <span style="padding-left: 10px;">Edit</span>
+            </a>
           </div>
         </div>
-        <div class="mdk-box bg-grey js-mdk-box mb-0"
-          data-effects="blend-background">
-          <div class="mdk-box__content">
-            <div class="hero py-64pt text-center text-sm-left">
-              <div class="container page__container">
-                <h2 class="text">
+        <div class="page-section bg-white border-bottom-2">
+          <div class="container page__container">
+            <div class="row">
+              <div class="">
+                <h2>
                   Department Description
                 </h2>
-                  <p class="lead text-white-50 measure-hero-lead">
+                <p>
                   <%-department.department_description%>
                 </p>
-                <div class="d-flex flex-column flex-sm-row align-items-center justify-content-start">
-                  <a href="/department/edit?departmentId=<%= department._id %>" type="button"       class="btn btn-warning">
-                    <i class="material-icons">build</i>
-                    <span style="padding-left: 10px;">Edit</span>
-                  </a>
-                </div>
               </div>
             </div>
           </div>

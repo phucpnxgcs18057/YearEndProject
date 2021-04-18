@@ -23,26 +23,7 @@ const getAllUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
     try {
-        const id = req.params.userId;
-        const user = await User.findById(id)
-            .populate('type')
-            .exec();
-        res.render('user/detail', { user });
-
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-};
-
-const getUserByIdClient = async (req, res) => {
-    try {
-        const id = req.params.userId;
+        const id = req.query.userId;
         const user = await User.findById(id)
             .populate('type')
             .exec();
@@ -60,8 +41,8 @@ const getUserByIdClient = async (req, res) => {
 };
 
 const addNewUserPage = async (req, res) => {
-    const users = await User.find();
-    res.render('user/create', { users });
+    const types = await Type.find();
+    res.render('user/create', { types });
 };
 
 const addNewUser = async (req, res) => {
@@ -79,7 +60,9 @@ const addNewUser = async (req, res) => {
             })
         }
 
+        console.log(user_password);
         const encryptPassword = encrypt(user_password);
+        
         const user = await new User({
             user_name: user_name,
             user_password: encryptPassword,
@@ -102,8 +85,13 @@ const addNewUser = async (req, res) => {
 };
 
 const signUpPage = async (req, res) => {
-    const users = await User.find();
-    res.render('/signup', { users });
+    const types = await Type.find();
+    const limitedTypes = ["Admin", "Moderator"];
+    let filteredTypes =  types.filter(type => {
+        return !limitedTypes.includes(type._doc.user_type);
+    })
+    console.log(filteredTypes);
+    res.render('signup', { types: filteredTypes });
 };
 
 const signUp = async (req, res) => {
@@ -131,7 +119,7 @@ const signUp = async (req, res) => {
         });
         await user.save()
 
-        return res.redirect("/users/view");
+        return res.redirect("/login");
     } catch (err) {
         console.log(err);
         return res.json({
@@ -143,14 +131,12 @@ const signUp = async (req, res) => {
     }
 };
 
-const editUserClientPage = async (req, res) => {
-    const id = req.query.userId;
-    const user = await User.findById(id).populate('type').exec();
-    const types = await Type.find();
-    res.render('user/edit', { userID: id, user, types });
+const editSelfPage = async (req, res) => {
+    const id = req.user._id;
+    res.render('user/edit', { userID: id, user: req.user, types: null});
 };
 
-const editUserClient = async (req, res) => {
+const editSelf = async (req, res) => {
     try {
         const id = req.params.userId;
         const userUpdate = req.body;
@@ -160,7 +146,7 @@ const editUserClient = async (req, res) => {
         await User.findByIdAndUpdate(id,
             { ...userUpdate, user_password: encryptPassword, last_update: Date.now() },
             refresh);
-        return res.redirect("/users/view");
+        return res.redirect("/library/view");
     } catch (err) {
         console.log(err);
         return res.json({
@@ -233,95 +219,7 @@ const loginClient = async (req, res) => {
             })
         }
         const user = checkUser;
-        return res.json({
-            status: 200,
-            success: true,
-            data: user,
-            message: `Successfully logged in`
-        })
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-};
 
-const login = async (req, res) => {
-    try {
-        const { user_email, user_password } = req.body;
-        const checkUser = await (await User.findOne({ user_email }))
-            .populate('school')
-            .populate('type');
-
-        if (!checkUser || !compare(user_password, checkUser.user_password)) {
-            return res.json({
-                status: 200,
-                success: false,
-                data: null,
-                message: `${routeName} does not exist`
-            })
-        }
-        const user = checkUser;
-        return res.json({
-            status: 200,
-            success: true,
-            data: user,
-            message: `Successfully logged in`
-        })
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            status: 500,
-            success: false,
-            data: null,
-            message: `Internal Server Error`
-        })
-    }
-};
-
-const changePassword = async (req, res) => {
-    try {
-        const id = req.params.userId;
-        const { oldPassword, newPassword } = req.body;
-        const checkUser = await User.findById(id);
-
-        if (!checkUser) {
-            return res.json({
-                status: 200,
-                success: false,
-                data: null,
-                message: `${route} does not exist`
-            })
-        }
-
-        if (!compare(oldPassword, checkUser.user_password)) {
-            return res.json({
-                status: 200,
-                success: false,
-                data: null,
-                message: `Current password does not match`
-            })
-        }
-
-        const password = encrypt(newPassword);
-        const refresh = { new: true };
-        const user = await User.findByIdAndUpdate(id,
-            { password, last_update: Date.now() },
-            refresh);
-        user = await User.findById(id)
-            .populate('school')
-            .populate('type');
-
-        return res.json({
-            status: 200,
-            success: true,
-            data: user,
-            message: `Successfully updated the password`
-        })
     } catch (err) {
         console.log(err);
         return res.json({
@@ -336,17 +234,14 @@ const changePassword = async (req, res) => {
 module.exports = {
     getAllUsers,
     getUserById,
-    getUserByIdClient,
     addNewUserPage,
     addNewUser,
     signUpPage,
     signUp,
+    editSelfPage,
+    editSelf,
     editUserPage,
     editUser,
-    editUserClientPage,
-    editUserClient,
     deleteUser,
     loginClient,
-    login,
-    changePassword
 }

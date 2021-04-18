@@ -2,15 +2,25 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
+const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
+const passport = require('passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+require("./api/other/passport");
+
+// const dotenv = require('dotenv');
+// dotenv.config({ path: path.join(__dirname, 'other', "config.env") });
 
 //importing routes
 const resourceRoutes = require('./api/routes/resource');
 const userTypeRoutes = require('./api/routes/userType');
 const userRoutes = require('./api/routes/user');
 const depRoutes = require('./api/routes/department');
-const Resource = require("./api/routes/resource");
-
+const libraryRoutes = require('./api/routes/library');
+// const donationRoutes = require('./api/routes/donation');
+const clientRoutes = require('./api/routes/client');
 
 //express app
 const app = express();
@@ -51,43 +61,21 @@ app.use('/js', express.static(__dirname + 'public/js'));
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ limit: '100mb', extended: false }));
 app.use(methodOverride('_method'));
+app.use(cookieParser());
+app.use(session({
+    secret: "process.env.SESS_SECRET",
+    resave: false,
+    saveUninitialized: true,
+    maxAge: 3600 * 1000,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 //routing
-app.get('/', (req, res) => {
-    res.render('index');
-});
 
-app.get('/about', (req, res) => {
-    res.render('about');
-});
-
-app.get('/contact', (req, res) => {
-    res.render('contact');
-});
-
-app.get('/courses-single', (req, res) => {
-    res.render('courses-single');
-});
-
-app.get('/forget', (req, res) => {
-    res.render('forget');
-});
-
-app.get('/login', (req, res) => {
-    res.render('login');
-});
-
-app.get('/demo', (req, res) => {
-    res.render('resources');
-});
-
-app.get('/signup', (req,res) => {
-    res.render('signup');
-});
-
-app.get('/users/signup', (req, res) => {
-    res.render('signup');
-});
+//client routes
+app.use('/', clientRoutes);
 
 //resource routes
 app.use('/resources', resourceRoutes);
@@ -100,6 +88,12 @@ app.use('/user-types', userTypeRoutes);
 
 //department routes
 app.use('/departments', depRoutes);
+
+//library routes
+app.use('/library', libraryRoutes);
+
+// //donation routes
+// app.use('/donations', donationRoutes);
 
 //404 page
 app.use((req, res) => {

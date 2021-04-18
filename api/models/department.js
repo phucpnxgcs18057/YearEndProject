@@ -14,9 +14,6 @@ const departmentSchema = new Schema ({
         type: String,
         required: true
     },
-    description_snippet: {
-        type: String,
-    },
     create_date: {
         type: Date,
         default: Date.now()
@@ -31,7 +28,6 @@ departmentSchema.pre('validate', function (next) {
     //Check if a description is there or not
     if (this.department_description) {
         this.department_description = htmlPurify.sanitize(this.department_description);
-        this.description_snippet = stripHtml(this.department_description.substring(0,100)).result;
     }
     next();
 });

@@ -1,254 +1,234 @@
 <!DOCTYPE html>
-<html lang="en"
-      dir="ltr">
+<html lang="en" dir="ltr">
+  <head>
+    <%- include("../modulars/head.ejs") %>
+  </head>
 
-    <head>
-        <%- include("../partials/head.ejs") %>
-    </head>
+  <body class="layout-compact layout-compact">
+    <div class="preloader">
+      <div class="sk-chase">
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+      </div>
+    </div>
 
-    <body class="layout-compact layout-compact">
+    <!-- Drawer Layout -->
 
-        <div class="preloader">
-            <div class="sk-chase">
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
+    <div
+      class="mdk-drawer-layout js-mdk-drawer-layout"
+      data-push
+      data-responsive-width="992px"
+    >
+      <div class="mdk-drawer-layout__content page-content">
+        <!-- Header -->
+
+        <!-- Navbar -->
+
+        <%- include("../modulars/navbar/navbar.ejs") %>
+
+        <!-- // END Navbar -->
+
+        <!-- // END Header -->
+
+        <div class="pt-32pt">
+          <div
+            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
+          >
+            <div class="flex d-flex flex-column flex-sm-row align-items-center">
+              <div class="mb-24pt mb-sm-0 mr-sm-24pt">
+                <h2 class="mb-0">All Donations</h2>
+              </div>
             </div>
+          </div>
         </div>
 
-        <!-- Drawer Layout -->
+        <!-- BEFORE Page Content -->
 
-        <div class="mdk-drawer-layout js-mdk-drawer-layout"
-             data-push
-             data-responsive-width="992px">
-            <div class="mdk-drawer-layout__content page-content">
+        <!-- // END BEFORE Page Content -->
 
-                <!-- Header -->
+        <!-- Page Content -->
 
-                <!-- Navbar -->
+        <div class="container page__container page-section">
+          <!-- User table -->
 
-                <%- include("../partials/modulars/navbar.ejs") %>
+          <div class="card mb-lg-32pt">
+            <!-- Table Content -->
 
-                <!-- // END Navbar -->
-
-                <!-- // END Header -->
-
-                <div class="pt-32pt">
-                    <div class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left">
-                        <div class="flex d-flex flex-column flex-sm-row align-items-center">
-
-                            <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                                <h2 class="mb-0">All Donations</h2>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- BEFORE Page Content -->
-
-                <!-- // END BEFORE Page Content -->
-
-                <!-- Page Content -->
-
-                <div class="container page__container page-section">
-
-                    <!-- User table -->
-
-                    <div class="card mb-lg-32pt">
-
-                        <!-- Table Content -->
-
-                        <div class="table-responsive"
-data-toggle="lists"
-data-lists-sort-by="js-lists-values-employee-name"
-data-lists-values='["js-lists-values-name", 
+            <div
+              class="table-responsive"
+              data-toggle="lists"
+              data-lists-sort-by="js-lists-values-employee-name"
+              data-lists-values='["js-lists-values-name", 
                     "js-lists-values-status", 
                     "js-lists-values-activity", 
-                    "js-lists-values-earnings"]'>
+                    "js-lists-values-earnings"]'
+            >
+              <div class="card-header">
+                <div class="search-form">
+                  <input
+                    type="text"
+                    class="form-control search"
+                    placeholder="Search ..."
+                  />
 
-<div class="card-header">
+                  <button class="btn" type="button">
+                    <i class="material-icons">search</i>
+                  </button>
+                </div>
+              </div>
 
-    <div class="search-form">
-                    
-        <input type="text"
-            class="form-control search"
-            placeholder="Search ...">
-                    
-        <button class="btn"
-            type="button"><i class="material-icons">search</i>
-        </button>
-                    
-    </div>
-                        
-</div>
+              <table class="table mb-0 thead-border-top-0 table-nowrap">
+                <thead>
+                  <tr>
+                    <th>
+                      <a
+                        href="javascript:void(0)"
+                        class="sort"
+                        data-sort="js-lists-values-name"
+                        >Name
+                      </a>
+                    </th>
 
-<table class="table mb-0 thead-border-top-0 table-nowrap">
+                    <th>
+                      <a
+                        href="javascript:void(0)"
+                        class="sort"
+                        data-sort="js-lists-values-status"
+                        >Type
+                      </a>
+                    </th>
 
-    <thead>
+                    <th>
+                      <a
+                        href="javascript:void(0)"
+                        class="sort"
+                        data-sort="js-lists-values-activity"
+                        >Last Donation
+                      </a>
+                    </th>
 
-        <tr>
+                    <th>
+                      <a
+                        href="javascript:void(0)"
+                        class="sort"
+                        data-sort="js-lists-values-earnings"
+                        >Amount
+                      </a>
+                    </th>
 
-            <th>
+                    <th style="width: 30px" class="pl-0">
+                      <a>Function</a>
+                    </th>
+                  </tr>
+                </thead>
 
-                <a href="javascript:void(0)"
-                   class="sort"
-                   data-sort="js-lists-values-name">Name
-                </a>
-
-            </th>
-
-            <th>
-
-                <a href="javascript:void(0)"
-                   class="sort"
-                   data-sort="js-lists-values-status">Type
-                </a>
-
-            </th>
-
-            <th>
-
-               <a href="javascript:void(0)"
-                  class="sort"
-                  data-sort="js-lists-values-activity">Last Donation
-                </a>
-
-            </th>
-
-            <th>
-
-               <a href="javascript:void(0)"
-                  class="sort"
-                  data-sort="js-lists-values-earnings">Amount
-                </a>
-
-            </th>
-
-            <th style="width: 30px;"
-               class="pl-0">
-               <a>Function</a>
-            </th>
-
-        </tr>
-
-    </thead>
-
-    <tbody class="list"
-          id="donation">
-
-        <!-- User 1 -->
-        <tr>
-
-            <td>
-
-                <div class="media flex-nowrap align-items-center"
-                    style="white-space: nowrap;">
-
-                    <div class="avatar avatar-sm mr-8pt">
-
-                       <img src="../dashboard/images/people/110/guy-1.jpg"
+                <tbody class="list" id="donation">
+                  <!-- User 1 -->
+                  <tr>
+                    <td>
+                      <div
+                        class="media flex-nowrap align-items-center"
+                        style="white-space: nowrap"
+                      >
+                        <div class="avatar avatar-sm mr-8pt">
+                          <img
+                            src="../dashboard/images/people/110/guy-1.jpg"
                             alt="Avatar"
-                            class="avatar-img rounded-circle">
-
-                    </div>
-
-                    <div class="media-body">
-
-                        <div class="d-flex flex-column">
-                           <p class="mb-0"><strong class="js-lists-values-name">Michael Smith</strong></p>
-                           <small class="js-lists-values-email text-50">michael.smith@yahoo.com</small>
+                            class="avatar-img rounded-circle"
+                          />
                         </div>
 
-                    </div>
+                        <div class="media-body">
+                          <div class="d-flex flex-column">
+                            <p class="mb-0">
+                              <strong class="js-lists-values-name"
+                                >Michael Smith</strong
+                              >
+                            </p>
+                            <small class="js-lists-values-email text-50"
+                              >michael.smith@yahoo.com</small
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </td>
 
-                </div>
+                    <td>
+                      <a
+                        href=""
+                        class="chip chip-outline-secondary js-lists-values-status"
+                        >Admin</a
+                      >
+                    </td>
 
-            </td>
+                    <td class="text-50 js-lists-values-activity small">
+                      3 days ago
+                    </td>
 
+                    <td class="js-lists-values-earnings small">$12,402</td>
 
-            <td>
-
-               <a href=""
-                  class="chip chip-outline-secondary js-lists-values-status">Admin</a>
-
-            </td>
-
-           <td class="text-50 js-lists-values-activity small">3 days ago</td>
-
-           <td class="js-lists-values-earnings small">$12,402</td>
-
-            <td class="text-center pl-0">
-                <button type="button" class="btn btn-primary">
-                    <i class="material-icons">visibility</i>
-                </button>
-            </td>
-
-        </tr>
-        <!-- // END User 1 -->
-
-    </tbody>
-
-</table>
-</div>
-
-                        <!-- // END Table Content -->
-                        
-                        <!-- Table footer -->
-
-                        <%- include("../partials/modulars/table/footer.ejs") %>
-                        
-                        <!-- // END Table Footer -->
-
-                    </div>
-
-                    <!-- // END User table --> 
-
-                </div>
-
-                <!-- // END Page Content -->
-
-                <!-- Footer -->
-
-                <%- include("../partials/footer.ejs") %>
-
-
-                <!-- // END Footer -->
-
+                    <td class="text-center pl-0">
+                      <button type="button" class="btn btn-primary">
+                        <i class="material-icons">visibility</i>
+                      </button>
+                    </td>
+                  </tr>
+                  <!-- // END User 1 -->
+                </tbody>
+              </table>
             </div>
 
-            <!-- // END drawer-layout__content -->
+            <!-- // END Table Content -->
 
-            <!-- drawer -->
+            <!-- Table footer -->
 
-            <div class="mdk-drawer js-mdk-drawer layout-compact__drawer"
-                 id="default-drawer">
-                <div class="mdk-drawer__content js-sidebar-mini"
-                     data-responsive-width="992px"
-                     data-layout="compact">
+            <%- include("../modulars/table/footer.ejs") %>
 
-                     <%- include("../partials/modulars/rnav.ejs") %>
-                     
-                     <%- include("../partials/modulars/rnavsec.ejs") %>
+            <!-- // END Table Footer -->
+          </div>
 
-                </div>
-            </div>
-
-            <!-- // END drawer -->
-
+          <!-- // END User table -->
         </div>
 
-        <!-- // END Drawer Layout -->
+        <!-- // END Page Content -->
 
-        <!-- Dashboard js start here -->
+        <!-- Footer -->
 
-        <%- include("../partials/js.ejs") %>
+        <%- include("../modulars/footer.ejs") %>
 
-        <!-- Dashboard js end here -->
+        <!-- // END Footer -->
+      </div>
 
-    </body>
+      <!-- // END drawer-layout__content -->
 
+      <!-- drawer -->
+
+      <div
+        class="mdk-drawer js-mdk-drawer layout-compact__drawer"
+        id="default-drawer"
+      >
+        <div
+          class="mdk-drawer__content js-sidebar-mini"
+          data-responsive-width="992px"
+          data-layout="compact"
+        >
+          <%- include("../modulars/navbar/rnav.ejs") %>
+        </div>
+      </div>
+
+      <!-- // END drawer -->
+    </div>
+
+    <!-- // END Drawer Layout -->
+
+    <!-- Dashboard js start here -->
+
+    <%- include("../modulars/js.ejs") %>
+
+    <!-- Dashboard js end here -->
+  </body>
 </html>

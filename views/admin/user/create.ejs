@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <%- include("../partials/head.ejs") %>
+    <%- include("../modulars/head.ejs") %>
   </head>
 
   <body class="layout-compact layout-compact">
@@ -28,7 +28,7 @@
 
         <!-- Navbar -->
 
-        <%- include("../partials/modulars/navbar.ejs") %>
+        <%- include("../modulars/navbar/navbar.ejs") %>
 
         <!-- // END Navbar -->
 
@@ -43,6 +43,14 @@
                 <h2 class="mb-0">Create a New User</h2>
               </div>
             </div>
+          </div>
+          <div
+            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
+          >
+            <a href="/users/add" type="button" class="btn btn-success">
+              <i class="material-icons">keyboard_return</i>
+                <span style="padding-left: 10px">Back</span>
+            </a>
           </div>
         </div>
 
@@ -126,7 +134,7 @@
                         id="userpassword"
                         name="user_password"
                         placeholder="Password"
-                        required="Password"
+                        required
                       />
 
                       <div class="invalid-feedback">
@@ -137,7 +145,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label class="form-label" for="user_password"
+                      <label class="form-label" for="confirm_user_password"
                         >Confirm Password</label
                       >
 
@@ -145,7 +153,7 @@
                         type="password"
                         class="form-control"
                         id="userpassword"
-                        name="user_password"
+                        name="confirm_user_password"
                         placeholder="Password"
                         required="Password"
                       />
@@ -163,24 +171,10 @@
 
                     <select id="type" name="type" class="form-control custom-select">
                         <option selected>User Types </option>
-                        <% for(var i=0; i<departments.length; i++) {%>
-                        <option value="<%= departments[i]._id %>"><%= departments[i].department_name %></option>
+                        <% for(var i=0; i<types.length; i++) {%>
+                        <option value="<%= types[i]._id %>"><%= types[i].user_type %></option>
                         <% } %>
                       </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="form-label" for="schoolname"
-                      >Assign to a School</label
-                    >
-
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="schoolname"
-                      name="schoolname"
-                      placeholder="Assign to a School"
-                    />
                   </div>
 
                   <button class="btn btn-primary" type="submit">Submit</button>
@@ -194,7 +188,7 @@
 
         <!-- Footer -->
 
-        <%- include("../partials/footer.ejs") %>
+        <%- include("../modulars/footer.ejs") %>
 
         <!-- // END Footer -->
       </div>
@@ -212,8 +206,7 @@
           data-responsive-width="992px"
           data-layout="compact"
         >
-          <%- include("../partials/modulars/rnav.ejs") %> <%-
-          include("../partials/modulars/rnavsec.ejs") %>
+          <%- include("../modulars/navbar/rnav.ejs") %>
         </div>
       </div>
 
@@ -224,7 +217,7 @@
 
     <!-- Dashboard js start here -->
 
-    <%- include("../partials/js.ejs") %>
+    <%- include("../modulars/js.ejs") %>
 
     <!-- Dashboard js end here -->
   </body>

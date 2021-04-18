@@ -2,22 +2,30 @@
   class="sidebar sidebar-mini sidebar-dark-pickled-bluewood sidebar-left d-flex flex-column"
 >
   <!-- Brand -->
-  <a class="sidebar-brand p-0 navbar-height d-flex justify-content-center">
-    <span class="avatar avatar-sm">
-      <span class="avatar-title rounded bg-primary"
-        ><img
-          src="../dashboard/images/illustration/teacher/128/white.svg"
-          class="img-fluid"
-          alt="logo"
-        />
-      </span>
-    </span>
-  </a>
-
   <div
     class="flex d-flex flex-column justify-content-start"
     data-perfect-scrollbar
   >
+    <li
+      class="sidebar-menu-item"
+      data-title="Account"
+      data-placement="right"
+      data-container="body"
+      data-boundary="window"
+    >
+      <a
+        class="sidebar-menu-button"
+        href="/"
+        data-toggle="tab"
+        role="tab"
+        aria-controls="sm_account"
+      >
+        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons"
+          >home</i
+        >
+        <span class="sidebar-menu-text">Home</span>
+      </a>
+    </li>
     <li
       class="sidebar-menu-item"
       data-title="Student"
@@ -68,7 +76,7 @@
     >
       <a
         class="sidebar-menu-button"
-        href="#"
+        href="/donations/view"
         data-toggle="tab"
         role="tab"
         aria-controls="sm_instructor"
@@ -89,7 +97,7 @@
     >
       <a
         class="sidebar-menu-button"
-        href="library/view"
+        href="/library/view"
         data-toggle="tab"
         role="tab"
         aria-controls="sm_apps"
@@ -109,7 +117,7 @@
     >
       <a
         class="sidebar-menu-button"
-        href="users/view"
+        href="/users/view"
         data-toggle="tab"
         role="tab"
         aria-controls="sm_account"

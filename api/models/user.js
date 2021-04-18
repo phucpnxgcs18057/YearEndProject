@@ -18,10 +18,6 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    user_question: [{
-        type: Schema.Types.ObjectId,
-        ref: 'question'
-    }],
     user_resource: [{
         type: Schema.Types.ObjectId,
         ref: 'resource'

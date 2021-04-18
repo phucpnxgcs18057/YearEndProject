@@ -30,10 +30,11 @@
           </div>
 
           <div class="form-holder">
+            
             <div class="form-content">
               <div class="form-items">
+                <form action="/signup" method="POST">
                 <h3>Create new account</h3>
-                <form action="" method="POST" id="signup">
                   <input
                     class="form-control"
                     type="text"
@@ -61,47 +62,42 @@
                   <input
                     class="form-control"
                     type="password"
-                    name="password"
+                    name="user_password"
                     id="user_password"
                     placeholder="Password"
                     required
                   />
+                  <input
+                    class="form-control"
+                    type="password"
+                    name="confirm_user_password"
+                    id="confirm_user_password"
+                    placeholder="Confirm Password"
+                    required
+                  />
 
-				  <h4> Select Your School </h4>
-                  <div class="form-group">
-                    <div class="form-field">
-                      <i class="icon icon-arrow-down3"></i>
-                      <select name="school" id="schol" class="form-control">
-                        <option value="#">school 1</option>
-                        <option value="#">school 2</option>
-                        <option value="#">school 3</option>
-                        <option value="#">school 4</option>
-                        <option value="#">school 5</option>
-                      </select>
-                    </div>
-                  </div>
+				          <div class="form-group">
+                    <label class="form-label" for="type">User Type</label>
 
-				  <h4> Select Your User Type </h4>
-                  <div class="form-group">
-                    <div class="form-field">
-                      <i class="icon icon-arrow-down3"></i>
-                      <select name="type" id="type" class="form-control">
-                        <option value="#">type 1</option>
-                        <option value="#">type 2</option>
+                    <select id="type" name="type" class="form-control custom-select">
+                        <option selected>User Types </option>
+                        <% for(var i=0; i<types.length; i++) {%>
+                        <option value="<%= types[i]._id %>"><%= types[i].user_type %></option>
+                        <% } %>
                       </select>
-                    </div>
                   </div>
                   <div class="form-button">
                     <button id="submit" type="submit" class="ibtn">
                       Create
                     </button>
                   </div>
-                </form>
                 <div class="page-links">
                   <a href="/login">Login to account</a>
                 </div>
+              </form>
               </div>
             </div>
+            
           </div>
         </div>
       </div>

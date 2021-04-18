@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+
+<body>
+		
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+
+        <%- include("../partials/nav.ejs") %>
+
+		<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+			   	<li style="background-image: url(images/img_bg_2.jpg);">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-md-6 col-sm-12 col-md-offset-3 col-xs-12 slider-text">
+				   				<div class="slider-text-inner text-center">
+				   					<h1>News</h1>
+				   					<h2 class="breadcrumbs"><span><a href="index.html">Home</a></span> | <span>News</span></h2>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			  	</ul>
+		  	</div>
+		</aside>
+
+		<div class="colorlib-search">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 search-wrap">
+						<div class="search-wrap-2">
+							<form method="post" class="colorlib-form">
+			              	<div class="row">
+			                <div class="col-md-3">
+			                  <div class="form-group">
+			                    <!-- <label for="search">Search Course</label> -->
+			                    <div class="form-field">
+			                      <input type="text" id="search" class="form-control" placeholder="Keyword search">
+			                    </div>
+			                  </div>
+			                </div>
+			                <div class="col-md-3">
+			                  <div class="form-group">
+			                    <!-- <label for="course">Category Course</label> -->
+			                    <div class="form-field">
+			                      <i class="icon icon-arrow-down3"></i>
+			                      <select name="people" id="people" class="form-control">
+			                        <option value="#">WordPress</option>
+			                        <option value="#">HTML/CSS</option>
+			                        <option value="#">PHP</option>
+			                        <option value="#">JavaScript</option>
+			                        <option value="#">Python</option>
+			                      </select>
+			                    </div>
+			                  </div>
+			                </div>
+			                <div class="col-md-3">
+			                  <div class="form-group">
+			                    <!-- <label for="difficulty">Difficulty</label> -->
+			                    <div class="form-field">
+			                      <i class="icon icon-arrow-down3"></i>
+			                      <select name="people" id="people" class="form-control">
+			                        <option value="#">Difficulty</option>
+			                        <option value="#">Beginner</option>
+			                        <option value="#">Intermediate</option>
+			                        <option value="#">Advance</option>
+			                      </select>
+			                    </div>
+			                  </div>
+			                </div>
+			                <div class="col-md-3">
+			                  <input type="submit" name="submit" id="submit" value="Search course" class="btn btn-primary btn-block">
+			                </div>
+			              </div>
+			            </form>
+		            </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="colorlib-classes">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 colorlib-heading center-heading text-center animate-box">
+						<h1 class="heading-big">Available Departments</h1>
+						<h2>Available Departments</h2>
+					</div>
+				</div>
+				<div class="row">
+
+					<% for(var i=0; i<departments.length; i++) {%>
+						<div class="col-md-4 animate-box department-item">
+							<div class="classes">
+								<div class="wrap">
+									<div class="desc">
+										<h3><a href="/resources?departmentId=<%=departments[i]._id%>">
+											<%= departments[i].department_name %>
+										</a></h3>
+									</div>
+									<div class="pricing">
+										<p>
+											<span class="price"> Date: <%= departments[i].create_date.toLocaleDateString() %> </span>
+											<br/>
+											<span class="price"> Update: <%= departments[i].last_update.toLocaleDateString() %> </span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					<% } %>
+
+					
+				</div>
+			</div>	
+		</div>
+	
+	        
+		<%- include("../partials/footer.ejs") %>
+
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+	</div>
+	
+	<!-- js start here -->
+
+	<script>
+		const resourcesItems = document.querySelectorAll(".department-item .classes-img");
+		for (let i = 0; i < resourcesItems.length; i++) {
+			const resourcesItem = resourcesItems[i];
+			const bgImage = resourcesItem.getAttribute("bg-data");
+			resourcesItem.setAttribute("style", `background-image: url(${bgImage})`)
+		}
+	</script>
+    
+	<%- include("../partials/script.ejs") %>
+
+	<!-- js end here -->
+
+</body>
+</html>
+

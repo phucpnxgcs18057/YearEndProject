@@ -3,7 +3,7 @@
       dir="ltr">
 
     <head>
-        <%- include("../partials/head.ejs") %>
+        <%- include("../modulars/head.ejs") %>
     </head>
 
     <body class="layout-compact layout-compact">
@@ -30,7 +30,7 @@
 
                 <!-- Navbar -->
 
-                <%- include("../partials/modulars/navbar.ejs") %>
+                <%- include("../modulars/navbar/navbar.ejs") %>
 
                 <!-- // END Navbar -->
 
@@ -44,8 +44,13 @@
                                 <h2 class="mb-0">All Users</h2>
                             </div>
                         </div>
-
                     </div>
+                    <div class="container page__container d-flex flex-column flex-md-row align-items-center     text-center text-sm-left">
+                        <a href="/users/add" type="button" class="btn btn-success">
+                          <i class="material-icons">add</i>
+                          <span style="padding-left: 10px;">Add new Resource</span>
+                        </a>
+                      </div>
                 </div>
 
                 <!-- BEFORE Page Content -->
@@ -63,63 +68,33 @@
                         <!-- Table Content -->
 
                         <div class="table-responsive"
-data-toggle="lists"
-data-lists-sort-by="js-lists-values-name"
-data-lists-values='["js-lists-values-name", 
-                    "js-lists-values-user", 
-                    "js-lists-values-type", 
-                    "js-lists-values-school", 
-                    "js-lists-values-earnings"]'>
+                            data-toggle="lists"
+                            data-lists-sort-by="js-lists-values-user"
+                            data-lists-values='["js-lists-values-user", 
+                                "js-lists-values-name", 
+                                "js-lists-values-type",
+                                "js-lists-values-user-date"]'>
 
-<div class="card-header">
-
-    <div class="search-form">
-
-        <input type="text"
-            class="form-control search"
-            placeholder="Search ...">
-
-        <button class="btn"
-        type="button"><i class="material-icons">search</i>
-        </button>
-
-    </div>
-
-</div>
+                                <div class="card-header">
+                                    <div class="search-form">
+                                      <input
+                                        type="text"
+                                        class="form-control search"
+                                        placeholder="Search ..."
+                                      />
+                    
+                                      <button class="btn" type="button">
+                                        <i class="material-icons">search</i>
+                                      </button>
+                                    </div>
+                                  </div>
 
 <table class="table mb-0 thead-border-top-0 table-nowrap">
 
     <thead>
 
         <tr>
-
-            <th style="width: 18px;" class="pr-0">
-                
-                <div class="custom-control custom-checkbox">
-
-                    <input type="checkbox"
-                        class="custom-control-input js-toggle-check-all"
-                        data-target="#users"
-                        id="customCheckAllusers"
-                    >
-
-                    <label class="custom-control-label"
-                        for="customCheckAllusers"><span class="text-hide">Toggle all</span>
-                    </label>
-
-                </div>
-
-            </th>
             
-            <th>
-
-                <a href="javascript:void(0)"
-                   class="sort"
-                   data-sort="js-lists-values-name">Name
-                </a>
-
-            </th>
-
             <th>
 
                 <a href="javascript:void(0)"
@@ -133,18 +108,36 @@ data-lists-values='["js-lists-values-name",
 
                 <a href="javascript:void(0)"
                    class="sort"
+                   data-sort="js-lists-values-name">Full name
+                </a>
+
+            </th>
+
+            <th>
+
+                <a href="javascript:void(0)"
+                   class="sort"
                    data-sort="js-lists-values-type">Type
                 </a>
 
             </th>
 
-            <th style="width: 70px;">
-
-               <a href="javascript:void(0)"
+            <th>
+                <a
+                  href="javascript:void(0)"
                   class="sort"
-                  data-sort="js-lists-values-school">School
+                  data-sort="js-lists-values-user-date"
+                  >Create Date
                 </a>
+            </th>
 
+            <th>
+                <a
+                  href="javascript:void(0)"
+                  class="sort"
+                  data-sort="js-lists-values-user-date"
+                  >Last Update
+                </a>
             </th>
 
             <th style="width: 30px;"
@@ -158,44 +151,20 @@ data-lists-values='["js-lists-values-name",
 
     <tbody class="list"
           id="users">
-
+          <% for(var i=0; i<users.length; i++) {%>
         <!-- User 1 -->
         <tr>
 
-            <td class="pr-0">
-
-                <div class="custom-control custom-checkbox">
-
-                    <input type="checkbox"
-                           class="custom-control-input js-check-selected-row"
-                           id="customCheck1_users1">
-
-                    <label class="custom-control-label"
-                           for="customCheck1_users1"><span class="text-hide">Check</span>
-                    </label>
-
-                </div>
-
-            </td>
-            
             <td>
                 
                 <div class="media flex-nowrap align-items-center"
                     style="white-space: nowrap;">
 
-                    <div class="avatar avatar-sm mr-8pt">
-
-                       <img src="../dashboard/images/people/110/guy-1.jpg"
-                            alt="Avatar"
-                            class="avatar-img rounded-circle">
-
-                    </div>
-
                     <div class="media-body">
 
                         <div class="d-flex flex-column">
-                           <p class="mb-0"><strong class="js-lists-values-name">Michael Smith</strong></p>
-                           <small class="js-lists-values-email text-50">michael.smith@yahoo.com</small>
+                           <p class="mb-0"><strong class="js-lists-values-user"><%= users[i].user_name %></strong></p>
+                           <small class="js-lists-values-email text-50"><%= users[i].user_email %></small>
                         </div>
 
                     </div>
@@ -212,8 +181,7 @@ data-lists-values='["js-lists-values-name",
                     <div class="media-body">
 
                         <div class="d-flex flex-column">
-                           <p class="mb-0"><strong class="js-lists-values-user">msmith</strong></p>
-                           <small class="js-lists-values-password text-50">test1234</small>
+                           <p class="mb-0"><strong class="js-lists-values-name"><%= users[i].user_full_name %></strong></p>
                         </div>
 
                     </div>
@@ -224,32 +192,40 @@ data-lists-values='["js-lists-values-name",
 
 
             <td>
-
-               <a href=""
-                  class="chip chip-outline-secondary js-lists-values-type">Admin</a>
-
+                <div class="chip chip-outline-secondary js-lists-values-type">
+                    <%= users[i].type.user_type %>
+                </div>
             </td>
 
-           <td class="text-50 js-lists-values-school small">Harvard University</td>
+            <td>
+                <small class="js-lists-values-resource-date text-50">
+                  <%= users[i].create_date.toLocaleDateString() %>
+                </small>
+            </td>
+
+            <td>
+                <small class="js-lists-values-resource-date text-50">
+                  <%= users[i].last_update.toLocaleDateString() %>
+                </small>
+            </td>
 
             <td class="text-right pl-0">
+                <a href="/users/detail?userId=<%= users[i]._id %>" type="button" class="btn btn-primary">
+                  <i class="material-icons">visibility</i>
+                </a>
 
-                <button type="button" class="btn btn-primary">
-                    <i class="material-icons">visibility</i>
-                </button>
+                <a href="/users/edit?userId=<%= users[i]._id %>" type="button" class="btn btn-warning">
+                  <i class="material-icons">build</i>
+                </a>
 
-                <button type="button" class="btn btn-warning">
-                    <i class="material-icons">build</i>
-                </button>
-                
-                <button type="button" class="btn btn-accent">
-                    <i class="material-icons">close</i>
-                </button>
-
-            </td>
+                <a href="/users/delete/<%= users[i]._id %>" type="button" class="btn btn-accent">
+                  <i class="material-icons">close</i>
+                </a>
+              </td>
 
         </tr>
         <!-- // END User 1 -->
+        <% } %>
 
     </tbody>
 
@@ -261,7 +237,7 @@ data-lists-values='["js-lists-values-name",
                         <!-- Table footer -->
 
 
-                        <%- include("../partials/modulars/table/footer.ejs") %>
+                        <%- include("../modulars/table/footer.ejs") %>
                         
                         <!-- // END Table Footer -->
 
@@ -275,7 +251,7 @@ data-lists-values='["js-lists-values-name",
 
                 <!-- Footer -->
 
-                <%- include("../partials/footer.ejs") %>
+                <%- include("../modulars/footer.ejs") %>
 
 
                 <!-- // END Footer -->
@@ -292,9 +268,7 @@ data-lists-values='["js-lists-values-name",
                      data-responsive-width="992px"
                      data-layout="compact">
 
-                     <%- include("../partials/modulars/rnav.ejs") %>
-                     
-                     <%- include("../partials/modulars/rnavsec.ejs") %>
+                     <%- include("../modulars/navbar/rnav.ejs") %>
 
                 </div>
             </div>
@@ -307,7 +281,7 @@ data-lists-values='["js-lists-values-name",
 
         <!-- Dashboard js start here -->
 
-        <%- include("../partials/js.ejs") %>
+        <%- include("../modulars/js.ejs") %>
 
         <!-- Dashboard js end here -->
 

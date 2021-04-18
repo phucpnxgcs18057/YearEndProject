@@ -1,10 +1,12 @@
 const Resource = require('../models/resource');
 const Department = require('../models/department');
+const User = require('../models/user');
+const Library = require('../models/library');
 const routeName = `resource`;
 
 const getAllResources = async (req, res) => {
     try {
-        const resources = await Resource.find()
+        const resources = await Resource.find({}, ['-resource_file', '-resource_image'])
             .populate('department')
             .exec();
         const departments = await Department.find();
@@ -54,7 +56,10 @@ const getResourceById = async (req, res) => {
     try {
         const id = req.query.resourceId;
         const resource = await Resource.findById(id).populate('department').exec();
-        res.render('resource/detail', { resource });
+        const library = await Library.findOne({
+            resource: id
+        })
+        res.render('resource/detail', { resource, library });
     } catch (err) {
         console.log(err);
         return res.json({
@@ -131,6 +136,22 @@ const deleteResource = async (req, res) => {
     }
 };
 
+const saveResource = async (req, res) => {
+    const resource_id = req.query.resourceId;
+    const library = await Library({
+        resource: resource_id,
+        user: req.user._id
+    }).save();
+    return res.redirect(`/resources/detail?resourceId=${resource_id}`);
+};
+
+const deleteResourceLibrary = async (req, res) => {
+    const libraryId = req.query.libraryId;
+    const resource_id = req.query.resourceId;
+    const library = await Library.findByIdAndDelete(libraryId);
+    return res.redirect(`/resources/detail?resourceId=${resource_id}`);
+};
+
 module.exports = {
     getAllResources,
     addNewResourcePage,
@@ -138,5 +159,7 @@ module.exports = {
     getResourceById,
     editResourcePage,
     editResource,
-    deleteResource
+    deleteResource,
+    saveResource,
+    deleteResourceLibrary
 }
