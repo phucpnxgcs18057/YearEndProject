@@ -91,7 +91,7 @@ const signUpPage = async (req, res) => {
         return !limitedTypes.includes(type._doc.user_type);
     })
     console.log(filteredTypes);
-    res.render('signup', { types: filteredTypes });
+    res.render('signup', { types: filteredTypes, user: req.user });
 };
 
 const signUp = async (req, res) => {

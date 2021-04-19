@@ -8,6 +8,7 @@ const resourceController = require('../controllers/resourceController');
 const loginChecker = require('../other/loginCheck');
 const Resource = require('../models/resource');
 const Department = require('../models/department');
+const Library = require('../models/library');
 
 //client routes
 router.get('/signup', userController.signUpPage);
@@ -35,15 +36,26 @@ router.get('/', (req, res) => {
 });
 
 router.get('/about', (req, res) => {
-    res.render('about');
+    res.render('about', { user: req.user });
 });
 
 router.get('/contact', (req, res) => {
-    res.render('contact');
+    res.render('contact', { user: req.user });
 });
 
-router.get('/resource-single', (req, res) => {
-    res.render('resource');
+router.get('/resource-single', async (req, res) => {
+    let { resourceId } = req.query;
+    let departments = await Department.find();
+
+    let resource = await Resource.findById(resourceId)
+        .populate("department")
+        .exec();
+
+    const library = await Library.findOne({
+        resource: resourceId
+    })
+
+    res.render('resource', { resource, library, departments, user: req.user });
 });
 
 router.get('/resources', async (req, res) => {
@@ -67,20 +79,28 @@ router.get('/resources', async (req, res) => {
         });
     }
 
-    res.render('resources', { resources, departments, department, resourceName });
+    res.render('resources', { resources, departments, department, resourceName, user: req.user });
 });
 
 router.get('/department', async (req, res) => {
     const departments = await Department.find();
-    res.render('departments', { departments });
+    let listOfResourcesNumber = [];
+    for (let i = 0; i < departments.length; i++) {
+        const department = departments[i];
+        const resources = await Resource.find({
+            department: department._id
+        }, ["-resource_file", "-resource_image"]);
+        listOfResourcesNumber.push(resources.length)
+    }
+    res.render('departments', { departments, user: req.user, listOfResourcesNumber });
 })
 
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', { user: req.user });
 });
 
-router.get('/demo', (req, res) => {
-    res.render('resources');
+router.get('/donation', (req, res) => {
+    res.render('donations', { user: req.user });
 });
 
 router.get("/logout", loginChecker, (req, res) => {

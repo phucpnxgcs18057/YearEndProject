@@ -2,6 +2,7 @@
 <html>
   <head>
     <%- include("../partials/head.ejs") %>
+
   </head>
 
   <body>
@@ -37,7 +38,7 @@
             <div class="col-md-12 search-wrap">
               <!-- Search bar start -->
               <div class="search-wrap-2">
-                <form method="post" class="colorlib-form">
+                <form method="get"  action="/resources" class="colorlib-form">
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
@@ -46,8 +47,10 @@
                           <input
                             type="text"
                             id="search"
+							              name="resourceName"
                             class="form-control"
                             placeholder="Resource Name"
+							              value=""
                           />
                         </div>
                       </div>
@@ -55,17 +58,15 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <!-- <label for="search">Search Course</label> -->
-                        <div class="form-field">
-                          <input
-                            type="text"
-                            id="search"
-                            class="form-control"
-                            placeholder="Department"
-                          />
-                        </div>
+                      <select id="departmentId" name="departmentId" class="form-control custom-select">
+                        <option value="" selected>Department Names</option>
+                        <% for(var i=0; i<departments.length; i++) {%>
+                            <option value="<%= departments[i]._id %>"><%= departments[i].department_name %></option>
+                        <% } %>
+                      </select>
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <input
                         type="submit"
                         name="submit"
@@ -88,28 +89,35 @@
           <div class="row">
             <div class="col-md-12 ml-auto mr-auto">
               <div class="row row-pb-lg">
-                <div class="col-md-12 animate-box">
-                  <div
-                    class="classes class-single"
-                  >
+                <div class="col-md-12 animate-box resource-view">
+                  <div class="classes class-single">
                     <div
                       class="classes-img"
-                      style="background-image: url(images/classes-1.jpg)"
+                      bg-data="<%= resource.resource_image %>"
                     ></div>
                     <div class="desc desc2">
-                      <h3>Resource Title</h3>
-                      <p>
-                       Content Here
-                      </p>
-                      <p>
-                        <a href="#" class="btn btn-primary btn-outline btn-lg"
-                          >Save to Library</a
-                        >
-                        or
-                        <a href="#" class="btn btn-primary btn-lg"
-                          >Remove from Library</a
-                        >
-                      </p>
+                      <h3><%= resource.resource_name %></h3>
+
+                      <div class="desc desc2">
+                        <iframe
+                          src="<%=resource.resource_file%>"
+                          width="100%"
+                          height="900px"
+                        ></iframe>
+                        <p>
+                          <% if(user){ %>
+                            <% if(library){ %>
+                              <a href="/library/remove-from-library?resourceId=<%= resource._id %>&libraryId=<%= library._id %>&mode=client" type="button" class="btn btn-danger">
+                                <span>Remove from Library</span>
+                              </a>
+                            <% } else { %>  
+                              <a href="/library/add-to-library?resourceId=<%= resource._id %>&mode=client" type="button" class="btn btn-primary">
+                                <span>Save to Library</span>
+                              </a>
+                            <% } %>
+                          <% } %>
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -127,6 +135,20 @@
     </div>
 
     <!-- js start here -->
+
+    <script>
+      const resourcesItems = document.querySelectorAll(
+        ".resource-view .classes-img"
+      );
+      for (let i = 0; i < resourcesItems.length; i++) {
+        const resourcesItem = resourcesItems[i];
+        const bgImage = resourcesItem.getAttribute("bg-data");
+        resourcesItem.setAttribute(
+          "style",
+          `background-image: url(${bgImage})`
+        );
+      }
+    </script>
 
     <%- include("../partials/script.ejs") %>
 

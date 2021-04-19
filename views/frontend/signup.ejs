@@ -19,7 +19,8 @@
     <div class="colorlib-loader"></div>
 
     <div id="page">
-      <%- include("../partials/nav.ejs") %>
+      <% if(user){ %> <%- include("../partials/nav_logged.ejs") %> <% } else {
+        %> <%- include("../partials/nav.ejs") %> <% } %>
 
       <div class="form-body without-side">
         <div class="row">

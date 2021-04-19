@@ -56,12 +56,14 @@
         <!-- // END BEFORE Page Content -->
 
         <!-- Page Content -->
+        
 
         <div class="container page__container page-section">
-
+          <% if (resources.length<1) {%>
+            <h2> Library is empty, go save some resources! </h2>
+          <% } %>
           <div class="card mb-lg-32pt">
             <!-- Table Content -->
-
             <div
               class="table-responsive"
               data-toggle="lists"
@@ -141,7 +143,7 @@
                 </thead>
 
                 <tbody class="list" id="resources">
-
+                    
                     <% for(var i=0; i<resources.length; i++) {%>
 
                         <!-- Resource -->
@@ -264,7 +266,15 @@
           data-responsive-width="992px"
           data-layout="compact"
         >
-          <%- include("../modulars/navbar/rnav.ejs") %>
+            <% if(userType === "Admin"){ %> 
+              <%- include("../modulars/navbar/rnav.ejs") %>
+            <% } else if (userType === "Moderator") { %> 
+              <%- include("../modulars/navbar/rnav_mod.ejs") %>
+            <% } else if (userType === "Tutor") { %> 
+              <%- include("../modulars/navbar/rnav_tutor.ejs") %>
+            <% } else { %> 
+              <%- include("../modulars/navbar/rnav_student.ejs") %> 
+            <% } %>
         </div>
       </div>
 

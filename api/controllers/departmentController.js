@@ -1,4 +1,5 @@
 const Department = require('../models/department');
+const Resource = require('../models/resource');
 const routeName = `department`
 
 const getAllDepartmentClient = async (req, res) => {
@@ -55,7 +56,10 @@ const getDepartmentById = async (req, res) => {
     try {
         const id = req.query.departmentId;
         const department = await Department.findById(id)
-        res.render('department/detail', { department })
+        const resources = await Resource.find({
+            department: department._id
+        }, ["-resource_file", "-resource_image"])
+        res.render('department/detail', { department, resourceNumber: resources.length })
     } catch (err) {
         console.log(err);
         return res.json({

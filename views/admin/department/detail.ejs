@@ -35,19 +35,21 @@
         <!-- // END Header -->
 
         <div class="pt-32pt">
-          <div class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left">
+          <div
+            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
+          >
             <div class="flex d-flex flex-column flex-sm-row align-items-center">
               <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                <h1 class="mb-0">
-                  Department Detail
-                </h1>
+                <h1 class="mb-0">Department Detail</h1>
               </div>
             </div>
           </div>
-          <div class="container page__container d-flex flex-column flex-md-row align-items-center     text-center text-sm-left">
+          <div
+            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
+          >
             <a href="/departments/view" type="button" class="btn btn-success">
               <i class="material-icons">keyboard_return</i>
-              <span style="padding-left: 10px;">Back</span>
+              <span style="padding-left: 10px">Back</span>
             </a>
           </div>
         </div>
@@ -59,20 +61,26 @@
         <!-- Page Content -->
 
         <div class="page-section bg-white border-bottom-2">
-          <div class="container page__container d-flex flex-column flex-md-row align-items-center     text-center text-md-left">
+          <div
+            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-md-left"
+          >
             <div class="flex mb-32pt mb-md-0">
-              <h2 class="text-black mb-0">
-                <%=department.department_name%>
-              </h2>
+              <h2 class="text-black mb-0"><%=department.department_name%></h2>
               <p class="lead text-black-50 d-flex align-items-center">
+                <%=resourceNumber%> Resource(s)
+                <br />
                 Create Date: <%=department.create_date.toLocaleDateString()%>
-                <br>
-                Last Update: <%=department.last_update.toLocaleDateString()%>  
+                <br />
+                Last Update: <%=department.last_update.toLocaleDateString()%>
               </p>
             </div>
-            <a href="/departments/edit?departmentId=<%= department._id %>" type="button" class="btn btn-warning">
+            <a
+              href="/departments/edit?departmentId=<%= department._id %>"
+              type="button"
+              class="btn btn-warning"
+            >
               <i class="material-icons">build</i>
-              <span style="padding-left: 10px;">Edit</span>
+              <span style="padding-left: 10px">Edit</span>
             </a>
           </div>
         </div>
@@ -80,12 +88,8 @@
           <div class="container page__container">
             <div class="row">
               <div class="">
-                <h2>
-                  Department Description
-                </h2>
-                <p>
-                  <%-department.department_description%>
-                </p>
+                <h2>Department Description</h2>
+                <p><%-department.department_description%></p>
               </div>
             </div>
           </div>
@@ -112,7 +116,7 @@
           data-responsive-width="992px"
           data-layout="compact"
         >
-          <%- include("../modulars/navbar/rnav.ejs") %> 
+          <%- include("../modulars/navbar/rnav.ejs") %>
         </div>
       </div>
 

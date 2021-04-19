@@ -138,17 +138,29 @@ const deleteResource = async (req, res) => {
 
 const saveResource = async (req, res) => {
     const resource_id = req.query.resourceId;
+    const mode = req.query.mode;
+
     const library = await Library({
         resource: resource_id,
         user: req.user._id
     }).save();
+
+    if (mode && mode === "client") {
+        return res.redirect(`/resource-single?resourceId=${resource_id}`);
+    }
     return res.redirect(`/resources/detail?resourceId=${resource_id}`);
 };
 
 const deleteResourceLibrary = async (req, res) => {
     const libraryId = req.query.libraryId;
     const resource_id = req.query.resourceId;
+    const mode = req.query.mode;
+
     const library = await Library.findByIdAndDelete(libraryId);
+
+    if (mode && mode === "client") {
+        return res.redirect(`/resource-single?resourceId=${resource_id}`);
+    }
     return res.redirect(`/resources/detail?resourceId=${resource_id}`);
 };
 

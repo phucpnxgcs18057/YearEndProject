@@ -8,7 +8,8 @@
     <div class="colorlib-loader"></div>
 
     <div id="page">
-      <%- include("../partials/nav.ejs") %>
+      <% if(user){ %> <%- include("../partials/nav_logged.ejs") %> <% } else {
+        %> <%- include("../partials/nav.ejs") %> <% } %>
 
       <aside id="colorlib-hero">
         <div class="flexslider">
@@ -21,11 +22,7 @@
                     class="col-md-6 col-sm-12 col-md-offset-3 col-xs-12 slider-text"
                   >
                     <div class="slider-text-inner text-center">
-                      <h1>Courses</h1>
-                      <h2 class="breadcrumbs">
-                        <span><a href="index.html">Home</a></span> |
-                        <span>Courses</span>
-                      </h2>
+                      <h1>Resources</h1>
                     </div>
                   </div>
                 </div>
@@ -115,7 +112,7 @@
 							<span class="teacher">
 								User
 							</span>
-							<h3><a href="#">
+							<h3><a href="/resource-single?resourceId=<%= resources[i]._id %>">
 								<%= resources[i].resource_name %>
 							</a></h3>
 						</div>

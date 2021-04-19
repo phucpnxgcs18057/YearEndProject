@@ -11,7 +11,8 @@
 
 	<div id="page">
 
-        <%- include("../partials/nav.ejs") %>
+        <% if(user){ %> <%- include("../partials/nav_logged.ejs") %> <% } else {
+			%> <%- include("../partials/nav.ejs") %> <% } %>
 
 		<aside id="colorlib-hero">
 			<div class="flexslider">
@@ -106,6 +107,7 @@
 										<h3><a href="/resources?departmentId=<%=departments[i]._id%>">
 											<%= departments[i].department_name %>
 										</a></h3>
+										<p style="margin-bottom: -10px;"><%= listOfResourcesNumber[i] %> resource(s)</p>
 									</div>
 									<div class="pricing">
 										<p>
