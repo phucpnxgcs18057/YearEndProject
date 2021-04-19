@@ -40,60 +40,29 @@
                     better!
                   </p>
                   <form>
-                    <h4>Card Number</h4>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="user_email"
-                      placeholder="Card Number"
-                      required
-                    />
-                    <h4>Security Code</h4>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="user_password"
-                      placeholder="CVV"
-                      required
-                    />
-                    <h4>Expiry Date</h4>
-                  <select
-                    id="expire_month"
-                    class="form-control select"
-                    style="width: 110px"
-                  >
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                  </select>
-                  <select
-                    id="expire_year"
-                    class="form-control select"
-                    style="width: 100px"
-                  >
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                  </select>
+                    <div class="form-group">
+                      <label class="form-label" for="user_password"
+                        >Amount ($)</label
+                      >
+
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="amount"
+                        name="amount"
+                        placeholder="Amount ($)"
+                        required
+                      />
+
+                      <div class="invalid-feedback">
+                        Please provide a valid amount
+                      </div>
+
+                      <div class="valid-feedback">Looks good!</div>
+                    </div>
+
                     <div class="form-button">
-                      <button id="submit" type="submit" class="ibtn">
-                        Donate
-                      </button>
-                      <button id="submit" type="submit" class="ibtn">
-                        Paypal
-                      </button>
+                      <div id="paypal-button"></div>
                     </div>
                   </form>
                 </div>
@@ -113,6 +82,63 @@
 
     <!-- Popper -->
     <script src="js/popper.min.js"></script>
+
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+    <script>
+      paypal.Button.render(
+        {
+          style: {
+            size: "responsive",
+            shape: "rect",
+            color: "blue",
+          },
+          env: "sandbox", // Or 'production'
+          // Set up the payment:
+          // 1. Add a payment callback
+          payment: function (data, actions) {
+            const amount = document.querySelector("#amount").value;
+            if (!amount) {
+              alert("Please specify an amount");
+              return window.location.reload();
+            }
+            // 2. Make a request to your server
+            return actions.request
+              .post(`/paypal/my-api/create-payment?amount=${amount}`)
+              .then(function (res) {
+                // 3. Return res.id from the response
+                return res.id;
+              });
+          },
+          // Execute the payment:
+          // 1. Add an onAuthorize callback
+          onAuthorize: function (data, actions) {
+            const amount = document.querySelector("#amount").value;
+            if (!amount) {
+              alert("Please specify an amount");
+              return window.location.reload();
+            }
+            // 2. Make a request to your server
+            return actions.request
+              .post("/paypal/my-api/execute-payment/", {
+                paymentID: data.paymentID,
+                payerID: data.payerID,
+                amount,
+              })
+              .then(function (res) {
+                // 3. Show the buyer a confirmation message.
+                if (res.status === "success") {
+                  return (window.location.href = "/");
+                } else {
+                  alert("Failed to perform payment");
+                  return window.location.reload();
+                }
+              });
+          },
+        },
+        "#paypal-button"
+      );
+    </script>
 
     <!-- js end here -->
   </body>

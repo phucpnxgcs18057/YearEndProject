@@ -9,6 +9,7 @@ const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 require("./api/other/passport");
+const payPalRouter = require("./scratch/paypal");
 
 // const dotenv = require('dotenv');
 // dotenv.config({ path: path.join(__dirname, 'other', "config.env") });
@@ -76,6 +77,9 @@ app.use(passport.session());
 
 //client routes
 app.use('/', clientRoutes);
+
+//paypal routes
+app.use('/paypal', payPalRouter);
 
 //resource routes
 app.use('/resources', resourceRoutes);
