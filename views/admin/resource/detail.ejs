@@ -70,12 +70,17 @@
               </div>
               <div class="d-flex align-items-center">
                 <div class="mr-16pt">
-                  <a href="#" class="card-title">
-                    User name
-                  </a>
+                    <p class="card-title">
+                      <%=resource.user.user_name%>
+                    </p> 
                   <div class="d-flex align-items-center">
                     <small class="text-50 mr-2">
                       Upload Date: <%=resource.create_date.toLocaleDateString()%>
+                    </small>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <small class="text-50 mr-2">
+                      Updated: <%=resource.last_update.toLocaleDateString()%>
                     </small>
                   </div>
                 </div>
@@ -150,7 +155,17 @@
           data-responsive-width="992px"
           data-layout="compact"
         >
-          <%- include("../modulars/navbar/rnav.ejs") %> 
+
+        <% if(userType === "Admin"){ %> 
+          <%- include("../modulars/navbar/rnav.ejs") %>
+        <% } else if (userType === "Moderator") { %> 
+          <%- include("../modulars/navbar/rnav_mod.ejs") %>
+        <% } else if (userType === "Tutor") { %> 
+          <%- include("../modulars/navbar/rnav_tutor.ejs") %>
+        <% } else { %> 
+          <%- include("../modulars/navbar/rnav_student.ejs") %> 
+        <% } %>
+
         </div>
       </div>
 

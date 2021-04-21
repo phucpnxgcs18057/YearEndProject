@@ -35,23 +35,23 @@
         <!-- // END Header -->
 
         <div class="pt-32pt">
-          <div
-            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
-          >
-            <div class="flex d-flex flex-column flex-sm-row align-items-center">
-              <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                <h2 class="mb-0">Create a New User</h2>
-              </div>
+            <div
+                class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
+            >
+                <div class="flex d-flex flex-column flex-sm-row align-items-center">
+                    <div class="mb-24pt mb-sm-0 mr-sm-24pt">
+                        <h2 class="mb-0">Edit the User</h2>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div
-            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
-          >
-            <a href="/users/view" type="button" class="btn btn-success">
-              <i class="material-icons">keyboard_return</i>
-                <span style="padding-left: 10px">Back</span>
-            </a>
-          </div>
+            <div
+                class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left"
+            >
+                <a href="/library/view" type="button" class="btn btn-success">
+                    <i class="material-icons">keyboard_return</i>
+                        <span style="padding-left: 10px">Back</span>
+                </a>
+            </div>
         </div>
 
         <!-- BEFORE Page Content -->
@@ -64,7 +64,7 @@
           <div class="row mb-32pt">
             <div class="col-lg-8 d-flex align-items-center">
               <div class="flex" style="max-width: 100%">
-                <form action="add" method="POST">
+                <form action="edit/<%=userID%>" method="POST">
                   <div class="was-validated">
                     <div class="form-group">
                       <label class="form-label" for="user_name">Username</label>
@@ -75,6 +75,7 @@
                         id="username"
                         name="user_name"
                         placeholder="Username"
+                        value="<%=user.user_name%>"
                         required
                       />
 
@@ -94,6 +95,7 @@
                           id="username"
                           name="user_full_name"
                           placeholder="Username"
+                          value="<%=user.user_full_name%>"
                           required
                         />
   
@@ -113,6 +115,7 @@
                         id="useremail"
                         name="user_email"
                         placeholder="Email"
+                        value="<%=user.user_email%>"
                         required
                       />
 
@@ -133,15 +136,8 @@
                         class="form-control"
                         id="userpassword"
                         name="user_password"
-                        placeholder="Password"
-                        required
+                        placeholder="Leave Empty if you do not want to change"
                       />
-
-                      <div class="invalid-feedback">
-                        Please provide a valid Password.
-                      </div>
-
-                      <div class="valid-feedback">Looks good!</div>
                     </div>
 
                     <div class="form-group">
@@ -154,28 +150,30 @@
                         class="form-control"
                         id="userpassword"
                         name="confirm_user_password"
-                        placeholder="Password"
-                        required="Password"
+                        placeholder="Leave Empty if you do not want to change"
                       />
-
-                      <div class="invalid-feedback">
-                        Please provide a valid Password.
-                      </div>
-
-                      <div class="valid-feedback">Looks good!</div>
                     </div>
                   </div>
 
+                  <% if(types){ %>
                   <div class="form-group">
-                    <label class="form-label" for="type">User Type</label>
-
-                    <select id="type" name="type" class="form-control custom-select">
-                        <option selected>User Types </option>
+                    <div class="form-group">
+                      <label class="form-label" for="type">
+                        User Type
+                      </label>
+                      <select id="type" name="type" class="form-control custom-select">
+                        <option>User Types</option>
                         <% for(var i=0; i<types.length; i++) {%>
-                        <option value="<%= types[i]._id %>"><%= types[i].user_type %></option>
+                            <% if(user.type.user_type === types[i].user_type){ %>
+                              <option selected value="<%= types[i]._id %>"><%= types[i].user_type %></option>
+                            <% } else { %>  
+                              <option value="<%= types[i]._id %>"><%= types[i].user_type %></option>
+                            <% } %>
                         <% } %>
                       </select>
+                    </div>
                   </div>
+                  <% } %>
 
                   <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
@@ -206,7 +204,17 @@
           data-responsive-width="992px"
           data-layout="compact"
         >
+
+        <% if(userType === "Admin"){ %> 
           <%- include("../modulars/navbar/rnav.ejs") %>
+        <% } else if (userType === "Moderator") { %> 
+          <%- include("../modulars/navbar/rnav_mod.ejs") %>
+        <% } else if (userType === "Tutor") { %> 
+          <%- include("../modulars/navbar/rnav_tutor.ejs") %>
+        <% } else { %> 
+          <%- include("../modulars/navbar/rnav_student.ejs") %> 
+        <% } %>
+
         </div>
       </div>
 

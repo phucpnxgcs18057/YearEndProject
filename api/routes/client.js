@@ -29,18 +29,66 @@ router.get('/view', departmentController.getAllDepartmentClient);
 
 router.get('/edit', userController.editSelfPage);
 
-router.post('/edit', userController.editSelf);
+router.post('/edit/:userId', userController.editSelf);
 
-router.get('/', (req, res) => {
-    res.render('index', { user: req.user });
+router.get('/', async (req, res) => {
+    let { departmentId, resourceName } = req.query;
+    let departments = await Department.find();
+    let department = null;
+
+    if (departmentId) {
+        department = await Department.findById(departmentId);
+        resources = resources.filter(resource => {
+            return resource.department.department_name === department.department_name;
+        });
+    }
+
+    if (resourceName) {
+        resources = resources.filter(resource => {
+            return resource.resource_name.toLowerCase().includes(resourceName.toLowerCase());
+        });
+    }
+    res.render('index', { departments, department, resourceName, user: req.user });
 });
 
-router.get('/about', (req, res) => {
-    res.render('about', { user: req.user });
+router.get('/about', async (req, res) => {
+    let { departmentId, resourceName } = req.query;
+    let departments = await Department.find();
+    let department = null;
+
+    if (departmentId) {
+        department = await Department.findById(departmentId);
+        resources = resources.filter(resource => {
+            return resource.department.department_name === department.department_name;
+        });
+    }
+
+    if (resourceName) {
+        resources = resources.filter(resource => {
+            return resource.resource_name.toLowerCase().includes(resourceName.toLowerCase());
+        });
+    }
+    res.render('about', { departments, department, resourceName, user: req.user });
 });
 
-router.get('/contact', (req, res) => {
-    res.render('contact', { user: req.user });
+router.get('/contact', async (req, res) => {
+    let { departmentId, resourceName } = req.query;
+    let departments = await Department.find();
+    let department = null;
+
+    if (departmentId) {
+        department = await Department.findById(departmentId);
+        resources = resources.filter(resource => {
+            return resource.department.department_name === department.department_name;
+        });
+    }
+
+    if (resourceName) {
+        resources = resources.filter(resource => {
+            return resource.resource_name.toLowerCase().includes(resourceName.toLowerCase());
+        });
+    }
+    res.render('contact', { departments, department, resourceName, user: req.user });
 });
 
 router.get('/resource-single', async (req, res) => {
@@ -49,6 +97,7 @@ router.get('/resource-single', async (req, res) => {
 
     let resource = await Resource.findById(resourceId)
         .populate("department")
+        .populate("user")
         .exec();
 
     const library = await Library.findOne({
@@ -63,6 +112,7 @@ router.get('/resources', async (req, res) => {
     let departments = await Department.find();
     let resources = await Resource.find({}, ["-resource_file"])
         .populate("department")
+        .populate("user")
         .exec();
     let department = null;
 
@@ -83,6 +133,7 @@ router.get('/resources', async (req, res) => {
 });
 
 router.get('/department', async (req, res) => {
+    let { departmentId, resourceName } = req.query;
     const departments = await Department.find();
     let listOfResourcesNumber = [];
     for (let i = 0; i < departments.length; i++) {
@@ -92,7 +143,23 @@ router.get('/department', async (req, res) => {
         }, ["-resource_file", "-resource_image"]);
         listOfResourcesNumber.push(resources.length)
     }
-    res.render('departments', { departments, user: req.user, listOfResourcesNumber });
+
+    let department = null;
+
+    if (departmentId) {
+        department = await Department.findById(departmentId);
+        resources = resources.filter(resource => {
+            return resource.department.department_name === department.department_name;
+        });
+    }
+
+    if (resourceName) {
+        resources = resources.filter(resource => {
+            return resource.resource_name.toLowerCase().includes(resourceName.toLowerCase());
+        });
+    }
+
+    res.render('departments', { departments, department, resourceName, user: req.user, listOfResourcesNumber });
 })
 
 router.get('/login', (req, res) => {

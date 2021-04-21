@@ -23,8 +23,7 @@
 			   			<div class="row">
 				   			<div class="col-md-6 col-sm-12 col-md-offset-3 col-xs-12 slider-text">
 				   				<div class="slider-text-inner text-center">
-				   					<h1>Our Instructors</h1>
-				   					<h2 class="breadcrumbs"><span><a href="index.html">Home</a></span> | <span>Instructor</span></h2>
+				   					<h1>About Us</h1>
 				   				</div>
 				   			</div>
 				   		</div>
@@ -36,58 +35,59 @@
 
 		<div class="colorlib-search">
 			<div class="container">
-				<div class="row">
-					<div class="col-md-12 search-wrap">
-						<div class="search-wrap-2">
-							<form method="post" class="colorlib-form">
-			              	<div class="row">
-			                <div class="col-md-3">
-			                  <div class="form-group">
-			                    <!-- <label for="search">Search Course</label> -->
-			                    <div class="form-field">
-			                      <input type="text" id="search" class="form-control" placeholder="Keyword search">
-			                    </div>
-			                  </div>
-			                </div>
-			                <div class="col-md-3">
-			                  <div class="form-group">
-			                    <!-- <label for="course">Category Course</label> -->
-			                    <div class="form-field">
-			                      <i class="icon icon-arrow-down3"></i>
-			                      <select name="people" id="people" class="form-control">
-			                        <option value="#">WordPress</option>
-			                        <option value="#">HTML/CSS</option>
-			                        <option value="#">PHP</option>
-			                        <option value="#">JavaScript</option>
-			                        <option value="#">Python</option>
-			                      </select>
-			                    </div>
-			                  </div>
-			                </div>
-			                <div class="col-md-3">
-			                  <div class="form-group">
-			                    <!-- <label for="difficulty">Difficulty</label> -->
-			                    <div class="form-field">
-			                      <i class="icon icon-arrow-down3"></i>
-			                      <select name="people" id="people" class="form-control">
-			                        <option value="#">Difficulty</option>
-			                        <option value="#">Beginner</option>
-			                        <option value="#">Intermediate</option>
-			                        <option value="#">Advance</option>
-			                      </select>
-			                    </div>
-			                  </div>
-			                </div>
-			                <div class="col-md-3">
-			                  <input type="submit" name="submit" id="submit" value="Search course" class="btn btn-primary btn-block">
-			                </div>
-			              </div>
-			            </form>
-		            </div>
-					</div>
+			  <div class="row">
+				<div class="col-md-12 search-wrap">
+				  <!-- Search bar start -->
+				  <div class="search-wrap-2">
+					<form method="get"  action="/resources" class="colorlib-form">
+					  <div class="row">
+						<div class="col-md-4">
+						  <div class="form-group">
+							<!-- <label for="search">Search Course</label> -->
+							<div class="form-field">
+							  <input
+								type="text"
+								id="search"
+								name="resourceName"
+								class="form-control"
+								placeholder="Resource Name"
+								value="<%= resourceName %>"
+							  />
+							</div>
+						  </div>
+						</div>
+						<div class="col-md-4">
+						  <div class="form-group">
+							<!-- <label for="search">Search Course</label> -->
+								<select id="departmentId" name="departmentId" class="form-control custom-select">
+									<option value="">Department Names</option>
+									<% for(var i=0; i<departments.length; i++) {%>
+										<% if(department && department.department_name === departments[i].department_name){ %>
+											<option selected value="<%= departments[i]._id %>"><%= departments[i].department_name %></option>
+										<% } else { %>  
+											<option value="<%= departments[i]._id %>"><%= departments[i].department_name %></option>
+										<% } %>
+									<% } %>
+								</select>
+						  </div>
+						</div>
+						<div class="col-md-4">
+						  <input
+							type="submit"
+							name="submit"
+							id="submit"
+							value="Search"
+							class="btn btn-primary btn-block"
+						  />
+						</div>
+					  </div>
+					</form>
+				  </div>
+				  <!-- Search bar end -->
 				</div>
+			  </div>
 			</div>
-		</div>
+		  </div>
 		
 		<div id="colorlib-counter" class="colorlib-counters">
 			<div class="container">
@@ -215,39 +215,6 @@
 			</div>
 		</div>
 
-	
-		<div id="colorlib-subscribe" class="subs-img" style="background-image: url(images/img_bg_2.jpg);" data-stellar-background-ratio="0.5">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center colorlib-heading animate-box">
-						<h2>Subscribe Newsletter</h2>
-						<p>Subscribe our newsletter and get latest update</p>
-					</div>
-				</div>
-				<div class="row animate-box">
-					<div class="col-md-6 col-md-offset-3">
-						<div class="row">
-							<div class="col-md-12">
-							<form class="form-inline qbstp-header-subscribe">
-								<div class="col-three-forth">
-									<div class="form-group">
-										<input type="text" class="form-control" id="email" placeholder="Enter your email">
-									</div>
-								</div>
-								<div class="col-one-third">
-									<div class="form-group">
-										<button type="submit" class="btn btn-primary">Subscribe Now</button>
-									</div>
-								</div>
-							</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-        
 		<%- include("../partials/footer.ejs") %>
 
 	</div>

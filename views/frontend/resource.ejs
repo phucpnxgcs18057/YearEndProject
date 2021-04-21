@@ -2,14 +2,14 @@
 <html>
   <head>
     <%- include("../partials/head.ejs") %>
-
   </head>
 
   <body>
     <div class="colorlib-loader"></div>
 
     <div id="page">
-      <%- include("../partials/nav.ejs") %>
+      <% if(user){ %> <%- include("../partials/nav_logged.ejs") %> <% } else {
+      %> <%- include("../partials/nav.ejs") %> <% } %>
 
       <aside id="colorlib-hero">
         <div class="flexslider">
@@ -32,58 +32,6 @@
         </div>
       </aside>
 
-      <div class="colorlib-search">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 search-wrap">
-              <!-- Search bar start -->
-              <div class="search-wrap-2">
-                <form method="get"  action="/resources" class="colorlib-form">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <!-- <label for="search">Search Course</label> -->
-                        <div class="form-field">
-                          <input
-                            type="text"
-                            id="search"
-							              name="resourceName"
-                            class="form-control"
-                            placeholder="Resource Name"
-							              value=""
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <!-- <label for="search">Search Course</label> -->
-                      <select id="departmentId" name="departmentId" class="form-control custom-select">
-                        <option value="" selected>Department Names</option>
-                        <% for(var i=0; i<departments.length; i++) {%>
-                            <option value="<%= departments[i]._id %>"><%= departments[i].department_name %></option>
-                        <% } %>
-                      </select>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <input
-                        type="submit"
-                        name="submit"
-                        id="submit"
-                        value="Search"
-                        class="btn btn-primary btn-block"
-                      />
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- Search bar end -->
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="colorlib-classes">
         <div class="container">
           <div class="row">
@@ -96,7 +44,28 @@
                       bg-data="<%= resource.resource_image %>"
                     ></div>
                     <div class="desc desc2">
-                      <h3><%= resource.resource_name %></h3>
+                      <h1><%= resource.resource_name %></h1>
+                      <h4>Created by: <%= resource.user.user_name %></h4>
+
+                      <p>
+                        <% if(user){ %> <% if(library){ %>
+                        <a
+                          href="/library/remove-from-library?resourceId=<%= resource._id %>&libraryId=<%= library._id %>&mode=client"
+                          type="button"
+                          class="btn btn-danger"
+                        >
+                          <span>Remove from Library</span>
+                        </a>
+                        <% } else { %>
+                        <a
+                          href="/library/add-to-library?resourceId=<%= resource._id %>&mode=client"
+                          type="button"
+                          class="btn btn-primary"
+                        >
+                          <span>Save to Library</span>
+                        </a>
+                        <% } %> <% } %>
+                      </p>
 
                       <div class="desc desc2">
                         <iframe
@@ -104,19 +73,6 @@
                           width="100%"
                           height="900px"
                         ></iframe>
-                        <p>
-                          <% if(user){ %>
-                            <% if(library){ %>
-                              <a href="/library/remove-from-library?resourceId=<%= resource._id %>&libraryId=<%= library._id %>&mode=client" type="button" class="btn btn-danger">
-                                <span>Remove from Library</span>
-                              </a>
-                            <% } else { %>  
-                              <a href="/library/add-to-library?resourceId=<%= resource._id %>&mode=client" type="button" class="btn btn-primary">
-                                <span>Save to Library</span>
-                              </a>
-                            <% } %>
-                          <% } %>
-                        </p>
                       </div>
                     </div>
                   </div>
@@ -145,7 +101,7 @@
         const bgImage = resourcesItem.getAttribute("bg-data");
         resourcesItem.setAttribute(
           "style",
-          `background-image: url(${bgImage})`
+          `background-image: url(${bgImage});  border: 3px solid #000;`
         );
       }
     </script>

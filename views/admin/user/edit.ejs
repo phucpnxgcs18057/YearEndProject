@@ -136,15 +136,8 @@
                         class="form-control"
                         id="userpassword"
                         name="user_password"
-                        placeholder="Password"
-                        required
+                        placeholder="Leave Empty if you do not want to change"
                       />
-
-                      <div class="invalid-feedback">
-                        Please provide a valid Password.
-                      </div>
-
-                      <div class="valid-feedback">Looks good!</div>
                     </div>
 
                     <div class="form-group">
@@ -157,15 +150,8 @@
                         class="form-control"
                         id="userpassword"
                         name="confirm_user_password"
-                        placeholder="Password"
-                        required="Password"
+                        placeholder="Leave Empty if you do not want to change"
                       />
-
-                      <div class="invalid-feedback">
-                        Please provide a valid Password.
-                      </div>
-
-                      <div class="valid-feedback">Looks good!</div>
                     </div>
                   </div>
 
@@ -218,7 +204,17 @@
           data-responsive-width="992px"
           data-layout="compact"
         >
+
+        <% if(userType === "Admin"){ %> 
           <%- include("../modulars/navbar/rnav.ejs") %>
+        <% } else if (userType === "Moderator") { %> 
+          <%- include("../modulars/navbar/rnav_mod.ejs") %>
+        <% } else if (userType === "Tutor") { %> 
+          <%- include("../modulars/navbar/rnav_tutor.ejs") %>
+        <% } else { %> 
+          <%- include("../modulars/navbar/rnav_student.ejs") %> 
+        <% } %>
+
         </div>
       </div>
 

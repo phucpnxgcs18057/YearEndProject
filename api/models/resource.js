@@ -19,6 +19,11 @@ const resourceSchema = new Schema({
         ref: 'department',
         require: true
     },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        require: true
+    },
     create_date: {
         type: Date,
         default: Date.now()

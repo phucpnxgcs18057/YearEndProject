@@ -4,13 +4,69 @@ const User = require('../models/user');
 const Library = require('../models/library');
 const routeName = `resource`;
 
-const getAllResources = async (req, res) => {
+const reformResources = async (req, res) => {
     try {
-        const resources = await Resource.find({}, ['-resource_file', '-resource_image'])
+        let resources = await Resource.find({}, ['-resource_file', '-resource_image'])
             .populate('department')
             .exec();
+        const users = await User.find();
+
+        for (let i = 0; i < resources.length; i++) {
+            let resource = resources[i];
+            const user = users[Math.floor(Math.random() * users.length)];
+            resource = await Resource.findByIdAndUpdate(resource._id, {
+                user: user._id
+            });
+            console.log(resource);
+        }
+
+        resources = await Resource.find({}, ['-resource_file', '-resource_image'])
+            .populate('department')
+            .populate('user')
+            .exec();
+
+        res.json({
+            resources
+        })
+    } catch (err) {
+        console.log(err);
+        return res.json({
+            status: 500,
+            success: false,
+            data: null,
+            message: `Internal Server Error`
+        })
+    }
+}
+
+const getAllResources = async (req, res) => {
+    try {
+        const userType = req.user.type.user_type;
+        let resources = [];
+
+
+        switch (userType) {
+            case "Admin":
+            case "Moderator":
+                resources = await Resource.find({}, ['-resource_file', '-resource_image'])
+                    .populate('department')
+                    .populate('user')
+                    .exec();
+                break;
+            case "Tutor":
+                const userID = req.user._id;
+                resources = await Resource.find({ user: userID }, ['-resource_file', '-resource_image'])
+                    .populate('department')
+                    .populate('user')
+                    .exec();
+                break;
+            default:
+                break;
+        }
+
+
         const departments = await Department.find();
-        res.render('resource/view', { resources, departments });
+        res.render('resource/view', { resources, departments, userType });
     } catch (err) {
         console.log(err);
         return res.json({
@@ -24,7 +80,8 @@ const getAllResources = async (req, res) => {
 
 const addNewResourcePage = async (req, res) => {
     const departments = await Department.find();
-    res.render('resource/create', { departments });
+    const userType = req.user.type.user_type;
+    res.render('resource/create', { departments, userType });
 };
 
 const addNewResource = async (req, res) => {
@@ -37,7 +94,8 @@ const addNewResource = async (req, res) => {
             resource_name: resource_name,
             resource_file: resource_file_base64,
             resource_image: resource_image_base64,
-            department: department
+            department: department,
+            user: req.user._id
         }).save();
 
         return res.redirect("/resources/view");
@@ -55,11 +113,15 @@ const addNewResource = async (req, res) => {
 const getResourceById = async (req, res) => {
     try {
         const id = req.query.resourceId;
-        const resource = await Resource.findById(id).populate('department').exec();
+        const userType = req.user.type.user_type;
+        const resource = await Resource.findById(id)
+            .populate('department')
+            .populate('user')
+            .exec();
         const library = await Library.findOne({
             resource: id
         })
-        res.render('resource/detail', { resource, library });
+        res.render('resource/detail', { resource, library, userType });
     } catch (err) {
         console.log(err);
         return res.json({
@@ -73,10 +135,14 @@ const getResourceById = async (req, res) => {
 
 const editResourcePage = async (req, res) => {
     const id = req.query.resourceId;
-    const resource = await Resource.findById(id).populate('department').exec();
+    const userType = req.user.type.user_type;
+    const resource = await Resource.findById(id)
+        .populate('user')
+        .populate('department')
+        .exec();
     const departments = await Department.find();
     console.log(departments);
-    res.render('resource/edit', { resourceID: id, resource, departments });
+    res.render('resource/edit', { resourceID: id, resource, departments, userType });
 };
 
 const editResource = async (req, res) => {
@@ -173,5 +239,6 @@ module.exports = {
     editResource,
     deleteResource,
     saveResource,
-    deleteResourceLibrary
+    deleteResourceLibrary,
+    reformResources
 }

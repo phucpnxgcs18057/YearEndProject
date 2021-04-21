@@ -4,9 +4,13 @@ const Resource = require('../models/resource');
 
 const getLibrary = async (req, res) => {
     try {
-
+        let { resourceId } = req.query;
         const userType = req.user.type.user_type;
-        console.log(req.user)
+        let resource = await Resource.findById(resourceId)
+        .populate("department")
+        .exec();
+
+        console.log(resource)
 
         /*
         switch (userType) {
@@ -44,7 +48,7 @@ const getLibrary = async (req, res) => {
             resources.push(resource);
         }
 
-        res.render('library/view', { resources, libraries, userType });
+        res.render('library/view', {resource, resources, libraries, userType });
     } catch (err) {
         console.log(err);
         return res.json({

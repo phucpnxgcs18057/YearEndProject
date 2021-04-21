@@ -41,7 +41,7 @@
             <div class="col-md-12 search-wrap">
               <!-- Search bar start -->
               <div class="search-wrap-2">
-                <form method="post" class="colorlib-form">
+                <form method="get"  action="/resources" class="colorlib-form">
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
@@ -50,8 +50,10 @@
                           <input
                             type="text"
                             id="search"
+							name="resourceName"
                             class="form-control"
                             placeholder="Resource Name"
+							value="<%= resourceName %>"
                           />
                         </div>
                       </div>
@@ -59,14 +61,16 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <!-- <label for="search">Search Course</label> -->
-                        <div class="form-field">
-                          <input
-                            type="text"
-                            id="search"
-                            class="form-control"
-                            placeholder="Department"
-                          />
-                        </div>
+							<select id="departmentId" name="departmentId" class="form-control custom-select">
+								<option value="">Department Names</option>
+								<% for(var i=0; i<departments.length; i++) {%>
+									<% if(department && department.department_name === departments[i].department_name){ %>
+										<option selected value="<%= departments[i]._id %>"><%= departments[i].department_name %></option>
+									<% } else { %>  
+										<option value="<%= departments[i]._id %>"><%= departments[i].department_name %></option>
+									<% } %>
+								<% } %>
+							</select>
                       </div>
                     </div>
                     <div class="col-md-4">

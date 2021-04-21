@@ -133,7 +133,8 @@ const signUp = async (req, res) => {
 
 const editSelfPage = async (req, res) => {
     const id = req.user._id;
-    res.render('user/edit', { userID: id, user: req.user, types: null});
+    const userType = req.user.type.user_type;
+    res.render('user/edit_self', { userID: id, user: req.user, types: null, userType});
 };
 
 const editSelf = async (req, res) => {

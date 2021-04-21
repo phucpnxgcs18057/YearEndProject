@@ -98,6 +98,14 @@
               <h2>Available Resources</h2>
             </div>
           </div>
+
+          <div></div>
+          <% if (resources.length<1) {%>
+            <div class=" text-center">
+              <h2> No Resource with required attributes available! </h2>
+            </div>
+          <% } %>
+
           <div class="row">
 
 			<% for(var i=0; i<resources.length; i++) {%>
@@ -110,7 +118,7 @@
 						<div class="wrap">
 						<div class="desc">
 							<span class="teacher">
-								User
+								<%= resources[i].user.user_name %>
 							</span>
 							<h3><a href="/resource-single?resourceId=<%= resources[i]._id %>">
 								<%= resources[i].resource_name %>

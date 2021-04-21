@@ -19,8 +19,9 @@ const getAllDepartmentClient = async (req, res) => {
 
 const getAllDepartment = async (req, res) => {
     try {
+        const userType = req.user.type.user_type;
         const departments = await Department.find()
-        res.render('department/view', { departments });
+        res.render('department/view', { departments, user:req.user, userType });
     } catch (err) {
         console.log(err);
         return res.json({
@@ -32,8 +33,9 @@ const getAllDepartment = async (req, res) => {
     }
 };
 
-const addNewDepartmentPage = (req, res) => {
-    res.render('department/create');
+const addNewDepartmentPage =  async(req, res) => {
+    const userType = req.user.type.user_type;
+    res.render('department/create', {userType});
 };
 
 const addNewDepartment = async (req, res) => {
@@ -55,11 +57,12 @@ const addNewDepartment = async (req, res) => {
 const getDepartmentById = async (req, res) => {
     try {
         const id = req.query.departmentId;
+        const userType = req.user.type.user_type
         const department = await Department.findById(id)
         const resources = await Resource.find({
             department: department._id
         }, ["-resource_file", "-resource_image"])
-        res.render('department/detail', { department, resourceNumber: resources.length })
+        res.render('department/detail', {userType, department, resourceNumber: resources.length })
     } catch (err) {
         console.log(err);
         return res.json({
@@ -74,8 +77,9 @@ const getDepartmentById = async (req, res) => {
 const getDepartmentByIdClient = async (req, res) => {
     try {
         const id = req.params.departmentId;
+        const userType = req.user.type.user_type;
         const department = await Department.findById(id)
-        res.render('department/detail', { department })
+        res.render('department/detail', { department, userType })
     } catch (err) {
         console.log(err);
         return res.json({
@@ -89,8 +93,9 @@ const getDepartmentByIdClient = async (req, res) => {
 
 const editDepartmentPage = async (req, res) => {
     const id = req.query.departmentId;
+    const userType = req.user.type.user_type
     const department = await Department.findById(id);
-    res.render('department/edit', { departmentID: id, department });
+    res.render('department/edit', { departmentID: id, department, userType });
 };
 
 const editDepartment = async (req, res) => {
