@@ -34,8 +34,19 @@ router.post('/edit/:userId', userController.editSelf);
 router.get('/', async (req, res) => {
     let { departmentId, resourceName } = req.query;
     let departments = await Department.find();
+    let resources = await Resource.find({}, ["-resource_file"]).limit(3);
     let department = null;
 
+    let listOfResourcesNumber = [];
+    for (let i = 0; i < departments.length; i++) {
+        const department = departments[i];
+        const norwayResources = await Resource.find({
+            department: department._id
+        }, ["-resource_file", "-resource_image"]);
+        listOfResourcesNumber.push(norwayResources.length)
+    }
+
+    /*
     if (departmentId) {
         department = await Department.findById(departmentId);
         resources = resources.filter(resource => {
@@ -48,7 +59,9 @@ router.get('/', async (req, res) => {
             return resource.resource_name.toLowerCase().includes(resourceName.toLowerCase());
         });
     }
-    res.render('index', { departments, department, resourceName, user: req.user });
+    */
+
+    res.render('index', { departments, department, resourceName, user: req.user, categories: departments.slice(0, 3), listOfResourcesNumber, resources });
 });
 
 router.get('/about', async (req, res) => {
