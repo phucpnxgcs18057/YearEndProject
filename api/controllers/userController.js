@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Type = require('../models/usertype');
 const { encrypt, compare } = require('../other/bcrypt');
+const Alert = require('alert');
 const routeName = `user`;
 
 const getAllUsers = async (req, res) => {
@@ -47,7 +48,7 @@ const addNewUserPage = async (req, res) => {
 
 const addNewUser = async (req, res) => {
     try {
-
+        const alert = Alert
         const { user_name, user_password, user_full_name, user_email, type } = req.body;
 
         const checkUser = await User.findOne({ user_email });
@@ -71,7 +72,7 @@ const addNewUser = async (req, res) => {
             type: type,
         });
         await user.save()
-
+        alert("Add Success!");
         return res.redirect("/users/view");
     } catch (err) {
         console.log(err);
@@ -139,14 +140,15 @@ const editSelfPage = async (req, res) => {
 
 const editSelf = async (req, res) => {
     try {
+        const alert = Alert;
         const id = req.params.userId;
         const userUpdate = req.body;
         const refresh = { new: true };
-
         const encryptPassword = encrypt(req.body.user_password)
         await User.findByIdAndUpdate(id,
             { ...userUpdate, user_password: encryptPassword, last_update: Date.now() },
             refresh);
+        alert('Edit Success!');
         return res.redirect("/library/view");
     } catch (err) {
         console.log(err);
@@ -168,14 +170,15 @@ const editUserPage = async (req, res) => {
 
 const editUser = async (req, res) => {
     try {
+        const alert = Alert
         const id = req.params.userId;
         const userUpdate = req.body;
         const refresh = { new: true };
-
         const encryptPassword = encrypt(req.body.user_password)
         await User.findByIdAndUpdate(id,
             { ...userUpdate, user_password: encryptPassword, last_update: Date.now() },
             refresh);
+        alert ("Edit Success!");
         return res.redirect("/users/view");
     } catch (err) {
         console.log(err);
@@ -190,8 +193,10 @@ const editUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     try {
+        const alert = Alert
         const id = req.params.userId;
         const user = await User.findByIdAndDelete(id)
+        alert ("Delete Success!");
         res.redirect("back");
     } catch (err) {
         console.log(err);

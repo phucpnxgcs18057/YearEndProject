@@ -1,5 +1,6 @@
 const Department = require('../models/department');
 const Resource = require('../models/resource');
+const Alert = require('alert');
 const routeName = `department`
 
 const getAllDepartmentClient = async (req, res) => {
@@ -40,8 +41,10 @@ const addNewDepartmentPage =  async(req, res) => {
 
 const addNewDepartment = async (req, res) => {
     try {
+        const alert = Alert;
         const department = await new Department(req.body);
         await department.save()
+        alert("Add Success!");
         return res.redirect("/departments/view");
     } catch (err) {
         console.log(err);
@@ -100,6 +103,7 @@ const editDepartmentPage = async (req, res) => {
 
 const editDepartment = async (req, res) => {
     try {
+        const alert = Alert;
         const id = req.params.departmentId;
         const departmentUpdate = req.body;
         const refresh = { new: true };
@@ -108,7 +112,7 @@ const editDepartment = async (req, res) => {
             { ...departmentUpdate, last_update: Date.now() },
             refresh);
         await Department.find();
-
+        alert("Edit Success!");
         return res.redirect("/departments/view");
 
     } catch (err) {
@@ -124,8 +128,10 @@ const editDepartment = async (req, res) => {
 
 const deleteDepartment = async (req, res) => {
     try {
+        const alert = Alert
         const id = req.params.departmentId;
         await Department.findByIdAndDelete(id)
+        alert("Delete Success!");
         res.redirect("back");
     } catch (err) {
         console.log(err);

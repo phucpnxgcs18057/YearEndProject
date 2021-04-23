@@ -2,6 +2,7 @@ const Resource = require('../models/resource');
 const Department = require('../models/department');
 const User = require('../models/user');
 const Library = require('../models/library');
+const Alert = require('alert');
 const routeName = `resource`;
 
 const reformResources = async (req, res) => {
@@ -86,6 +87,7 @@ const addNewResourcePage = async (req, res) => {
 
 const addNewResource = async (req, res) => {
     try {
+        const alert = Alert
         const {
             resource_name
             , resource_file_base64, resource_image_base64, department
@@ -97,7 +99,7 @@ const addNewResource = async (req, res) => {
             department: department,
             user: req.user._id
         }).save();
-
+        alert("Add Success!");
         return res.redirect("/resources/view");
     } catch (err) {
         console.log(err);
@@ -147,6 +149,7 @@ const editResourcePage = async (req, res) => {
 
 const editResource = async (req, res) => {
     try {
+        const alert = Alert
         const id = req.params.resourceId;
 
         const resourceUpdate = req.body;
@@ -172,7 +175,7 @@ const editResource = async (req, res) => {
             { ...updatedResourceObj, last_update: Date.now() },
             refresh);
         await Resource.find();
-
+        alert("Edit Success!");
         return res.redirect("/resources/view");
 
     } catch (err) {
@@ -188,8 +191,10 @@ const editResource = async (req, res) => {
 
 const deleteResource = async (req, res) => {
     try {
+        const alert = Alert
         const id = req.params.resourceId;
         await Resource.findByIdAndDelete(id);
+        alert("Delete Success!");
         res.redirect("back");
     } catch (err) {
         console.log(err);
