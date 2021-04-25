@@ -2,6 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('../models/user');
 const UserType = require('../models/usertype');
+const { compare } = require("./bcrypt");
 
 passport.serializeUser(function (user, done) {
     done(null, user.id);
@@ -29,6 +30,10 @@ passport.use(new LocalStrategy({
                 user_email
             })
 
+            if (!compare(user_password, existedUser.user_password)) {
+                console.log("Wrong password")
+                return done(null, false)
+            }
 
             if (existedUser) {
                 return done(null, existedUser)

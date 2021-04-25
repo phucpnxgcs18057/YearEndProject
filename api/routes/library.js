@@ -6,8 +6,6 @@ const resourceController = require('../controllers/resourceController');
 //library routes
 router.get('/view', libraryController.getLibrary);
 
-router.get('/view-library', libraryController.viewLibrary);
-
 router.get("/add-to-library", resourceController.saveResource);
 
 router.get("/remove-from-library", resourceController.deleteResourceLibrary);

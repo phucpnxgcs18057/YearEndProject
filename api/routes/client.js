@@ -20,7 +20,6 @@ router.post('/login', passport.authenticate('local', {
     successRedirect: "/library/view"
 }),
     function (req, res) {
-        console.log(req.user);
         res.redirect('/');
     },
     userController.loginClient);
