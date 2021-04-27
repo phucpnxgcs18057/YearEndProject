@@ -43,10 +43,16 @@
                 <div
                   class="col-md-12 colorlib-heading center-heading text-center animate-box"
                 >
-                  <h1 class="heading-big">Popular Categories</h1>
-                  <h2>Popular Categories</h2>
+                  <h1 class="heading-big">Popular Departments</h1>
+                  <h2>Popular Departments</h2>
                 </div>
               </div>
+
+              <% if (departments.length<1) {%>
+                <div class=" text-center">
+                  <h2> No Department with required attributes available! </h2>
+                </div>
+              <% } %>
 
               <div class="row">
 
