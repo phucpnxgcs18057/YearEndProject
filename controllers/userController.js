@@ -195,7 +195,26 @@ const deleteUser = async (req, res) => {
     try {
         const alert = Alert
         const id = req.params.userId;
-        const user = await User.findByIdAndDelete(id)
+        const user = await User.findByIdAndDelete(id);
+
+        const resources = await Resource.find({
+            user: id
+        });
+
+        for (let i = 0; i < resources.length; i++) {
+            const resource = resources[i];
+            await Resource.findByIdAndDelete(resource._id);
+        }
+
+        const libraries = await Resource.find({
+            user: id
+        });
+        
+        for (let i = 0; i < libraries.length; i++) {
+            const library = libraries[i];
+            await Library.findByIdAndDelete(library._id);
+        }
+
         alert ("Delete Success!");
         res.redirect("back");
     } catch (err) {

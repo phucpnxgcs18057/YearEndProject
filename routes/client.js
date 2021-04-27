@@ -9,7 +9,6 @@ const loginChecker = require('../other/loginCheck');
 const Resource = require('../models/resource');
 const Department = require('../models/department');
 const Library = require('../models/library');
-const nodemailer = require('nodemailer');
 
 //client routes
 router.get('/', async (req, res) => {
@@ -135,36 +134,6 @@ router.get('/contact', async (req, res) => {
         });
     }
     res.render('contact', { departments, department, resourceName, user: req.user });
-});
-
-router.post('/send-mail', async (req, res) => {
-    const {
-        email
-        , subject, message} = req.body;
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'dummytestphucer@gmail.com',
-                pass: 'Cooljoez123',
-            }
-        });
-        
-        let mailOptions = {
-            from: email,
-            to: 'dummytestphucer@gmail.com',
-            subject: subject,
-            text: message,
-        };
-        
-        transporter.sendMail(mailOptions, function(err, data){
-            if(err){
-                console.log(err)
-                console.log('Error Occurs!')
-            } else {
-                console.log('Email Sent!')
-            }
-        });
-    res.redirect('/contact');
 });
 
 router.get('/resource-single', async (req, res) => {

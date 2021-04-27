@@ -1,6 +1,7 @@
 const Department = require('../models/department');
 const Resource = require('../models/resource');
 const Alert = require('alert');
+const Library = require('../models/library');
 const routeName = `department`
 
 const getAllDepartmentClient = async (req, res) => {
@@ -130,7 +131,24 @@ const deleteDepartment = async (req, res) => {
     try {
         const alert = Alert
         const id = req.params.departmentId;
-        await Department.findByIdAndDelete(id)
+        await Department.findByIdAndDelete(id);
+
+        const resources = await Resource.find({
+            department: id
+        });
+
+        for (let i = 0; i < resources.length; i++) {
+            const resource = resources[i];
+            await Resource.findByIdAndDelete(resource._id);
+            const libraries = await Resource.find({
+                resource: resource._id
+            });
+            for (let i = 0; i < libraries.length; i++) {
+                const library = libraries[i];
+                await Library.findByIdAndDelete(library._id);
+            }
+        }
+        
         alert("Delete Success!");
         res.redirect("back");
     } catch (err) {

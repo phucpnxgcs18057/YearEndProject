@@ -194,6 +194,11 @@ const deleteResource = async (req, res) => {
         const alert = Alert
         const id = req.params.resourceId;
         await Resource.findByIdAndDelete(id);
+        const libraries = await Library.find({resource: id});
+        for (let i = 0; i < libraries.length; i++) {
+            const library = libraries[i];
+            await Library.findByIdAndDelete(library._id);
+        }
         alert("Delete Success!");
         res.redirect("back");
     } catch (err) {
