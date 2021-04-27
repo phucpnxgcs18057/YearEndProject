@@ -131,27 +131,7 @@
               <h2>Message Us</h2>
             </div>
             <div class="col-md-6">
-              <form action="#">
-                <div class="row form-group">
-                  <div class="col-md-6">
-                    <!-- <label for="fname">First Name</label> -->
-                    <input
-                      type="text"
-                      id="fname"
-                      class="form-control"
-                      placeholder="Your firstname"
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <!-- <label for="lname">Last Name</label> -->
-                    <input
-                      type="text"
-                      id="lname"
-                      class="form-control"
-                      placeholder="Your lastname"
-                    />
-                  </div>
-                </div>
+              <form action="/send-mail" method="POST">
 
                 <div class="row form-group">
                   <div class="col-md-12">
@@ -159,6 +139,7 @@
                     <input
                       type="text"
                       id="email"
+                      name="email"            
                       class="form-control"
                       placeholder="Your email address"
                     />
@@ -171,6 +152,7 @@
                     <input
                       type="text"
                       id="subject"
+                      name="subject"
                       class="form-control"
                       placeholder="Your subject of this message"
                     />
@@ -183,6 +165,7 @@
                     <textarea
                       name="message"
                       id="message"
+                      name="message"
                       cols="30"
                       rows="10"
                       class="form-control"
