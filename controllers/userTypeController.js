@@ -1,4 +1,4 @@
-const Type = require('../../api/models/usertype');
+const Type = require('../models/usertype');
 
 const getAllTypes = async (req, res) => {
     try {

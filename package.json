@@ -7,10 +7,8 @@
   "description": "yes",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "build": "node app.js"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -46,10 +44,8 @@
     "mongoose": "^5.12.1",
     "morgan": "^1.10.0",
     "node-localstorage": "^2.1.6",
-    "nodemailer": "^6.5.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "popper": "^1.0.1",
     "string-strip-html": "^8.2.9"
   }
 }

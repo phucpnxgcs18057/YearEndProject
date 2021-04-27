@@ -3,6 +3,8 @@ const router = express.Router();
 const resourceController = require('../controllers/resourceController');
 
 //resource routes
+//router.get('/reform', resourceController.reformResources);
+
 router.get('/view', resourceController.getAllResources);
 
 router.get('/add', resourceController.addNewResourcePage);

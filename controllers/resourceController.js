@@ -5,6 +5,41 @@ const Library = require('../models/library');
 const Alert = require('alert');
 const routeName = `resource`;
 
+// const reformResources = async (req, res) => {
+//     try {
+//         let resources = await Resource.find({}, ['-resource_file', '-resource_image'])
+//             .populate('department')
+//             .exec();
+//         const users = await User.find();
+
+//         for (let i = 0; i < resources.length; i++) {
+//             let resource = resources[i];
+//             const user = users[Math.floor(Math.random() * users.length)];
+//             resource = await Resource.findByIdAndUpdate(resource._id, {
+//                 user: user._id
+//             });
+//             console.log(resource);
+//         }
+
+//         resources = await Resource.find({}, ['-resource_file', '-resource_image'])
+//             .populate('department')
+//             .populate('user')
+//             .exec();
+
+//         res.json({
+//             resources
+//         })
+//     } catch (err) {
+//         console.log(err);
+//         return res.json({
+//             status: 500,
+//             success: false,
+//             data: null,
+//             message: `Internal Server Error`
+//         })
+//     }
+// }
+
 const getAllResources = async (req, res) => {
     try {
         const userType = req.user.type.user_type;
@@ -210,4 +245,5 @@ module.exports = {
     deleteResource,
     saveResource,
     deleteResourceLibrary,
+    // reformResources
 }
