@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const Type = require('../models/usertype');
+const Resource = require('../models/resource');
+const Library = require('../models/library');
 const { encrypt, compare } = require('../other/bcrypt');
 const Alert = require('alert');
 const routeName = `user`;
@@ -165,7 +167,8 @@ const editUserPage = async (req, res) => {
     const id = req.query.userId;
     const user = await User.findById(id).populate('type').exec();
     const types = await Type.find();
-    res.render('user/edit', { userID: id, user, types });
+    const userType = req.user.type.user_type;
+    res.render('user/edit', { userID: id, user, types, userType });
 };
 
 const editUser = async (req, res) => {
@@ -206,7 +209,7 @@ const deleteUser = async (req, res) => {
             await Resource.findByIdAndDelete(resource._id);
         }
 
-        const libraries = await Resource.find({
+        const libraries = await Library.find({
             user: id
         });
         

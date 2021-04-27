@@ -5,12 +5,12 @@ const UserType = require('../models/usertype');
 const { compare } = require("./bcrypt");
 
 passport.serializeUser(function (user, done) {
-    done(null, user.id);
+   return done(null, user.id);
 });
 
-passport.deserializeUser(function (id, done) {
-    User.findById(id, function (err, user) {
-        done(err, user);
+passport.deserializeUser( async function (id, done) {
+    return await User.findById(id, function (err, user) {
+    return done(err, user);
     })
         .populate("type")
         .exec()
@@ -29,6 +29,9 @@ passport.use(new LocalStrategy({
             const existedUser = await User.findOne({
                 user_email
             })
+            .populate("type")
+            .exec()
+            ;
 
             if (!compare(user_password, existedUser.user_password)) {
                 console.log("Wrong password")

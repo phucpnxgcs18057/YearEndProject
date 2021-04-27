@@ -5,6 +5,9 @@ const Resource = require('../models/resource');
 const getLibrary = async (req, res) => {
     try {
         let { resourceId } = req.query;
+        if (!req.user) {
+            return res.redirect("/library/view");
+        };
         const userType = req.user.type.user_type;
         let resource = await Resource.findById(resourceId)
         .populate("department")
@@ -42,10 +45,10 @@ const getLibrary = async (req, res) => {
         let resources = [];
         for (let i = 0; i < libraries.length; i++) {
             const library = libraries[i];
-            const resource = await Resource.findById(library.resource._id, ['-resource_file', '-resource_image'])
+            const localResource = await Resource.findById(library.resource._id, ['-resource_file', '-resource_image'])
                 .populate('department')
                 .exec();
-            resources.push(resource);
+            resources.push(localResource);
         }
 
         res.render('library/view', {resource, resources, libraries, userType });

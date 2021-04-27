@@ -140,11 +140,11 @@ const deleteDepartment = async (req, res) => {
         for (let i = 0; i < resources.length; i++) {
             const resource = resources[i];
             await Resource.findByIdAndDelete(resource._id);
-            const libraries = await Resource.find({
+            const libraries = await Library.find({
                 resource: resource._id
             });
-            for (let i = 0; i < libraries.length; i++) {
-                const library = libraries[i];
+            for (let j = 0; j < libraries.length; j++) {
+                const library = libraries[j];
                 await Library.findByIdAndDelete(library._id);
             }
         }
